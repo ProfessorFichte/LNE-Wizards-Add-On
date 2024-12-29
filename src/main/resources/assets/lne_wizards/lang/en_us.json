@@ -1,0 +1,9 @@
+{
+  "item.lne_wizards.staff_everfrost": "Everfrost Staff",
+  "passive.lne_wizards.everfrost_staff": "Rimefrost",
+  "passive.lne_wizards.everfrost_staff_1": "Applies the Freezing effect and stacks freezing ticks after dealing damage.",
+  "passive.lne_wizards.everfrost_staff_2": "Also applies these effects to close targets.",
+
+  "item.lne_wizards.staff_netherflame": "Netherflame Staff",
+  "item.lne_wizards.staff_arcane_dragon": "Arcane Dragon Staff"
+}

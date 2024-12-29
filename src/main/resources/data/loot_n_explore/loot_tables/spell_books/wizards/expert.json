@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+
+{
+  "rolls": 1,
+  "entries": [
+    {
+      "type": "minecraft:loot_table",
+      "name": "loot_n_explore:spell_books/wizards/expert_arcane",
+      "weight": 1
+    },
+    {
+      "type": "minecraft:loot_table",
+      "name": "loot_n_explore:spell_books/wizards/expert_fire",
+      "weight": 1
+    },
+    {
+      "type": "minecraft:loot_table",
+      "name": "loot_n_explore:spell_books/wizards/expert_frost",
+      "weight": 1
+    }
+  ]
+    }
+  ]
+}

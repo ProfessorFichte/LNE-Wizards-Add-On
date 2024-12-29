@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:jigsaw",
+  "step": "underground_decoration",
+  "biomes": "#loot_n_explore:has_structure/wizards_amethyst_monolith",
+  "start_pool": "loot_n_explore:arcane_monolith",
+  "terrain_adaptation": "beard_box",
+  "size": 1,
+  "max_distance_from_center": 116,
+  "start_height": {
+    "type": "minecraft:uniform",
+    "max_inclusive": {
+      "absolute": -27
+    },
+    "min_inclusive": {
+      "absolute": -40
+    }
+  },
+  "spawn_overrides": {},
+  "use_expansion_hack": false
+}

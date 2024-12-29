@@ -1,0 +1,46 @@
+{
+  "structures": [
+    {
+      "structure": "loot_n_explore:wizards_small_tower_1",
+      "weight": 5
+    },
+    {
+      "structure": "loot_n_explore:wizards_small_tower_2",
+      "weight": 5
+    },
+    {
+      "structure": "loot_n_explore:wizards_caravan",
+      "weight": 5
+    },
+    {
+      "structure": "loot_n_explore:frost_monolith",
+      "weight": 4
+    },
+    {
+      "structure": "loot_n_explore:fire_monolith",
+      "weight": 4
+    },
+    {
+      "structure": "loot_n_explore:arcane_monolith",
+      "weight": 4
+    },
+    {
+      "structure": "loot_n_explore:wizards_frost_tower",
+      "weight": 3
+    }
+  ],
+  "placement": {
+    "exclusion_zone": {
+      "other_set": [
+        "minecraft:villages",
+        "loot_n_explore:archers_structures",
+        "loot_n_explore:wizards_structures"
+      ],
+      "chunk_count": 5
+    },
+    "type": "minecraft:random_spread",
+    "separation": 8,
+    "spacing": 25,
+    "salt": 1597775083
+  }
+}
