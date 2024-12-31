@@ -1,6 +1,7 @@
 package com.lne_wizards;
 
 import com.lne_wizards.config.Default;
+import com.lne_wizards.effect.Effects;
 import com.lne_wizards.item.WeaponRegister;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -30,6 +31,7 @@ public class LNE_Wizards_Mod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		tweaksConfig.refresh();
+		Effects.register();
 		if(FabricLoader.getInstance().isModLoaded("loot_n_explore")) {
 			itemConfig.refresh();
 			WeaponRegister.register(itemConfig.value.weapons);

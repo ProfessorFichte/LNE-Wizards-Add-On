@@ -3,7 +3,6 @@
   "package": "com.lne_wizards.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ExampleMixin",
     "LivingEntityMixin"
   ],
   "injectors": {

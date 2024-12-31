@@ -5,7 +5,14 @@
   "passive.lne_wizards.everfrost_staff_2": "Also applies these effects to close targets.",
 
   "item.lne_wizards.staff_netherflame": "Netherflame Staff",
-  "passive.lne_wizards.netherflame_staff": "",
+  "passive.lne_wizards.netherflame_staff": "Pyromancer's Training",
+  "passive.lne_wizards.netherflame_staff_1": "You gain Spell Haste when attacking burning foes.",
+  "passive.lne_wizards.netherflame_staff_2": "The damage on burning foes is increased by 10%.",
 
-  "item.lne_wizards.staff_arcane_dragon": "Arcane Dragon Staff"
+  "item.lne_wizards.staff_arcane_dragon": "Arcane Dragon Staff",
+  "passive.lne_wizards.dragon_staff": "Arcane Precision",
+  "passive.lne_wizards.dragon_staff_1": "With each damaging spell, you get stronger on the actual target.",
+  "passive.lne_wizards.dragon_staff_2": "Increasing the Crit Chance & Crit Damage of Arcane Spell Damage.",
+  "effect.lne_wizards.arcane_precision": "Arcane Precision",
+  "effect.lne_wizards.arcane_precision.description": "Increasing the Crit Chance & Damage on Arcane Spells the target."
 }
