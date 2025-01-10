@@ -1,6 +1,5 @@
 package com.lne_wizards.mixin;
 
-import com.lne_wizards.LNE_Wizards_Mod;
 import com.lne_wizards.item.weapons.DragonStaff;
 import com.lne_wizards.item.weapons.EverfrostStaff;
 import com.lne_wizards.item.weapons.NetherflameStaff;
@@ -16,16 +15,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.more_rpg_classes.effect.MRPGCEffects;
 import net.spell_engine.api.spell.ParticleBatch;
-import net.spell_engine.internals.casting.SpellCast;
 import net.spell_engine.particle.ParticleHelper;
 import net.spell_engine.utils.TargetHelper;
-import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellPowerMechanics;
 import net.spell_power.api.SpellPowerTags;
-import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,7 +32,6 @@ import static com.lne_wizards.LNE_Wizards_Mod.tweaksConfig;
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
     @Shadow @Nullable private LivingEntity attacker;
-    @Shadow @Final private static Logger LOGGER;
     private static final ParticleBatch particlesEverfrostStaff = new ParticleBatch(
             "loot_n_explore:freezing_snowflake",
             ParticleBatch.Shape.CIRCLE,

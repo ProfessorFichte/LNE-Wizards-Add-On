@@ -7,17 +7,6 @@
         {
           "type": "item",
           "name": "wizards:fire_spell_book",
-          "weight": 3,
-          "functions": [
-            {
-              "function": "set_nbt",
-              "tag": "{spell_container:{pool:\"wizards:fire\",spell_ids:[\"wizards:fireball\"],spell_container:\"MAGIC\"}}"
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "wizards:fire_spell_book",
           "weight": 2,
           "functions": [
             {

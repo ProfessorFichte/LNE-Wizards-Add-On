@@ -33,14 +33,16 @@
     "exclusion_zone": {
       "other_set": [
         "minecraft:villages",
+        "loot_n_explore:dungeons",
+        "loot_n_explore:overworld_inns",
         "loot_n_explore:archers_structures",
-        "loot_n_explore:wizards_structures"
+        "loot_n_explore:paladins_structures"
       ],
-      "chunk_count": 5
+      "chunk_count": 10
     },
     "type": "minecraft:random_spread",
-    "separation": 8,
-    "spacing": 25,
+    "separation": 10,
+    "spacing": 30,
     "salt": 1597775083
   }
 }

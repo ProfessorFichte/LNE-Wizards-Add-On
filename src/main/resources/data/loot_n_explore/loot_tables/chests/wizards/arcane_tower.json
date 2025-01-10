@@ -11,31 +11,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "wizards:wand_arcane",
-          "weight": 2,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": 1
-            },
-            {
-              "function": "enchant_with_levels",
-              "treasure": false,
-              "levels": {
-                "min": 0,
-                "max": 20
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.4
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "wizards:staff_arcane",
           "weight": 1,
           "functions": [
@@ -53,7 +28,7 @@
               "conditions": [
                 {
                   "condition": "random_chance",
-                  "chance": 0.4
+                  "chance": 0.5
                 }
               ]
             }
@@ -138,7 +113,7 @@
               "conditions": [
                 {
                   "condition": "random_chance",
-                  "chance": 0.4
+                  "chance": 0.5
                 }
               ]
             }
@@ -163,7 +138,7 @@
               "conditions": [
                 {
                   "condition": "random_chance",
-                  "chance": 0.4
+                  "chance": 0.5
                 }
               ]
             }
@@ -188,7 +163,7 @@
               "conditions": [
                 {
                   "condition": "random_chance",
-                  "chance": 0.4
+                  "chance": 0.5
                 }
               ]
             }
@@ -213,7 +188,7 @@
               "conditions": [
                 {
                   "condition": "random_chance",
-                  "chance": 0.4
+                  "chance": 0.5
                 }
               ]
             }
