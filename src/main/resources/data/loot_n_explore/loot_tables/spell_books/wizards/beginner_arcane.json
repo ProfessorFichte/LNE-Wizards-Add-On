@@ -6,6 +6,11 @@
       "rolls": 1,
       "entries": [
         {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "minecraft:book"
+        },
+        {
           "type": "item",
           "name": "wizards:arcane_spell_book",
           "weight": 2,
