@@ -7,7 +7,7 @@
   "item.lne_wizards.staff_netherflame": "Netherflame Staff",
   "passive.lne_wizards.netherflame_staff": "Passive: Pyromancer's Training",
   "passive.lne_wizards.netherflame_staff_1": "You gain Spell Haste when attacking burning foes.",
-  "passive.lne_wizards.netherflame_staff_2": "The damage on burning foes is increased by 10%.",
+  "passive.lne_wizards.netherflame_staff_2": "Also applies fire ticks to close targets.",
 
   "item.lne_wizards.staff_arcane_dragon": "Arcane Dragon Staff",
   "passive.lne_wizards.dragon_staff": "Passive: Arcane Precision",
