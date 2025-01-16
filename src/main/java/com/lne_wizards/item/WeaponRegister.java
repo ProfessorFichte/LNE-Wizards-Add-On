@@ -11,6 +11,7 @@ import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.spell_engine.api.item.ItemConfig;
 import net.spell_engine.api.item.weapon.Weapon;
 import net.spell_power.api.SpellSchools;
@@ -58,6 +59,7 @@ public class WeaponRegister {
     }
     private static Weapon.Entry staffDragon(String requiredMod, String name, Weapon.CustomMaterial material) {
         var settings = new Item.Settings();
+        settings = settings.rarity(Rarity.EPIC).fireproof();
         var item = new DragonStaff(material, settings);
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(staffAttackDamage, staffAttackSpeed));
     }
@@ -66,6 +68,7 @@ public class WeaponRegister {
     }
     private static Weapon.Entry staffEverfrost(String requiredMod, String name, Weapon.CustomMaterial material) {
         var settings = new Item.Settings();
+        settings = settings.rarity(Rarity.EPIC).fireproof();
         var item = new EverfrostStaff(material, settings);
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(staffAttackDamage, staffAttackSpeed));
     }
@@ -74,6 +77,7 @@ public class WeaponRegister {
     }
     private static Weapon.Entry staffNetherflame(String requiredMod, String name, Weapon.CustomMaterial material) {
         var settings = new Item.Settings();
+        settings = settings.rarity(Rarity.EPIC).fireproof();
         var item = new NetherflameStaff(material, settings);
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(staffAttackDamage, staffAttackSpeed));
     }
