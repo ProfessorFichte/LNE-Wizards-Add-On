@@ -8,7 +8,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "loot_n_explore:wizards_small_tower_1",
         "projection": "rigid",
-        "processors": "loot_n_explore:stone_brick_randomizer"
+        "processors": "loot_n_explore:wizard_stonebrick"
       }
     }
   ]

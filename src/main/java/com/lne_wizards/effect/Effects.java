@@ -14,7 +14,7 @@ import static com.lne_wizards.LNE_Wizards_Mod.MOD_ID;
 public class Effects {
 
     public static StatusEffect ARCANE_PRECISION = new ArcanePrecisionEffect(StatusEffectCategory.HARMFUL, 0xff4bdd)
-            .setVulnerability(SpellSchools.ARCANE, new SpellPower.Vulnerability(0, 0.05F, 0.1F));
+            .setVulnerability(SpellSchools.ARCANE, new SpellPower.Vulnerability(0.05F, 0.05F, 0.1F));
 
     public static void register() {
         Synchronized.configure(ARCANE_PRECISION, true);

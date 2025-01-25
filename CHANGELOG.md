@@ -1,3 +1,7 @@
+# 0.1.2 - 1.20.1 BETA
+- LivingEntityMixin: fix LNE HelperMethod if LNE is not installed
+- Arcane Precision now also increases the Arcane Spell power Damage overall
+
 # 0.1.1 - 1.20.1 BETA
 - update for LNE API Changes
 - fix crash if Loot & Explore was not present
