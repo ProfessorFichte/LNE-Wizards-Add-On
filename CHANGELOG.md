@@ -1,3 +1,8 @@
+# 0.1.1 - 1.20.1 BETA
+- update for LNE API Changes
+- fix crash if Loot & Explore was not present
+- buffed the staff spell power
+
 # 0.1.0 - 1.20.1 BETA
 ## First Beta of the LNE x Wizards (RPG Series Add On)
 ### **Structures**

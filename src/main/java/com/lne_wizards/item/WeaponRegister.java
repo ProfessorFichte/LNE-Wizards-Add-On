@@ -53,6 +53,7 @@ public class WeaponRegister {
 
     private static final float staffAttackDamage = 4;
     private static final float staffAttackSpeed = -3F;
+    private static final float staffSpellPower = 7F;
 
     private static Weapon.Entry staffDragon(String name, Weapon.CustomMaterial material) {
         return staffDragon(null, name, material);
@@ -94,13 +95,13 @@ public class WeaponRegister {
 
             staffEverfrost("staff_everfrost",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, frostMonarchRepair))
-                    .attribute(ItemConfig.Attribute.bonus(SpellSchools.FROST.id, 6));
+                    .attribute(ItemConfig.Attribute.bonus(SpellSchools.FROST.id, staffSpellPower));
             staffNetherflame("staff_netherflame",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, witherRepair))
-                    .attribute(ItemConfig.Attribute.bonus(SpellSchools.FIRE.id, 6));
+                    .attribute(ItemConfig.Attribute.bonus(SpellSchools.FIRE.id, staffSpellPower));
             staffDragon("staff_arcane_dragon",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, dragonRepair))
-                    .attribute(ItemConfig.Attribute.bonus(SpellSchools.ARCANE.id, 6));
+                    .attribute(ItemConfig.Attribute.bonus(SpellSchools.ARCANE.id, staffSpellPower));
         }
 
         Weapon.register(configs, entries, Group.RPG_LOOT_KEY);
