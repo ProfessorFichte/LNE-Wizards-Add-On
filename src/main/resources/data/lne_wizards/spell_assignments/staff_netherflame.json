@@ -1,4 +1,4 @@
 {
   "is_proxy": true,
-  "spell_ids": [ "wizards:fire_scorch" ]
+  "spell_ids": [ "wizards:fire_scorch", "lne_wizards:flamerush_cloud"]
 }

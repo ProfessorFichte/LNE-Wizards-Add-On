@@ -3,6 +3,7 @@ package com.lne_wizards;
 import com.lne_wizards.config.Default;
 import com.lne_wizards.effect.Effects;
 import com.lne_wizards.item.WeaponRegister;
+import com.lne_wizards.client.particle.Particles;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.spell_engine.api.item.ItemConfig;
@@ -31,6 +32,7 @@ public class LNE_Wizards_Mod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		tweaksConfig.refresh();
+		Particles.register();
 		Effects.register();
 		if(FabricLoader.getInstance().isModLoaded("loot_n_explore")) {
 			itemConfig.refresh();
