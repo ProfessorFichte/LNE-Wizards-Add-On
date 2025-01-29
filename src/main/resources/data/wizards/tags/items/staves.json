@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "lne_wizards:staff_arcane_dragon",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:staff_netherflame",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:staff_everfrost",
+      "required": false
+    }
+  ]
+}

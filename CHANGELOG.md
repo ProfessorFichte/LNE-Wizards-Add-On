@@ -1,3 +1,9 @@
+# 0.1.3 - 1.20.1 BETA
+- added the staves to the wizards stave item tag, so they can be enchanted
+- added 3 new simple wizard spells: ARCANE:Starfall FROST:Ray of Frost FIRE:Flamerush
+- these additional wizard spells can be found in wizard related loot chests
+- they will be bound to the spell books as an additional spell
+
 # 0.1.2 - 1.20.1 BETA
 - LivingEntityMixin: fix LNE HelperMethod if LNE is not installed
 - Arcane Precision now also increases the Arcane Spell power Damage overall
