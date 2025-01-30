@@ -33,7 +33,7 @@ public class FlameRushEffect extends StatusEffect {
             ParticleBatch.Shape.PILLAR,
             ParticleBatch.Origin.FEET,
             null,
-            5,
+            7,
             0.05F,
             0.2F,
             0);
@@ -45,7 +45,7 @@ public class FlameRushEffect extends StatusEffect {
                 return (TargetHelper.actionAllowed(TargetHelper.TargetingMode.DIRECT, TargetHelper.Intent.HARMFUL, playerEntity, target2)
                 );
             };
-            List<Entity> list = playerEntity.getWorld().getOtherEntities(playerEntity, playerEntity.getBoundingBox().expand(1.5F),
+            List<Entity> list = playerEntity.getWorld().getOtherEntities(playerEntity, playerEntity.getBoundingBox().expand(2.0F),
                     selectionPredicate);
             for (Entity entity : list) {
                 if(entity instanceof LivingEntity && !isProtected(entity,playerEntity)){

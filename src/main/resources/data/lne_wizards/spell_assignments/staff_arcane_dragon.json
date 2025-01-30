@@ -1,4 +1,4 @@
 {
   "is_proxy": true,
-  "spell_ids": [ "wizards:arcane_bolt", "lne_wizards:arcane_starfall"]
+  "spell_ids": [ "wizards:arcane_bolt"]
 }

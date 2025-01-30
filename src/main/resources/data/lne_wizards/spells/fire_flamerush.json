@@ -5,8 +5,8 @@
     "tier": 3
   },
   "cast": {
-    "duration": 1,
-    "animation": "spell_engine:one_handed_sky_charge",
+    "duration": 0.5,
+    "animation": "spell_engine:one_handed_area_charge",
     "particles": [
       {
         "particle_id": "spell_engine:flame",
@@ -19,7 +19,7 @@
     ]
   },
   "release": {
-    "animation": "spell_engine:one_handed_area_release_ground_left_to_right",
+    "animation": "spell_engine:dual_handed_ground_release",
     "particles": [
       {
         "particle_id": "spell_engine:flame_ground",
@@ -36,7 +36,7 @@
         "shape": "PILLAR",
         "origin": "FEET",
         "count": 2.0,
-        "extent": 0,
+        "extent": 1,
         "min_speed": 0.02,
         "max_speed": 0.30
       },
@@ -46,7 +46,7 @@
         "shape": "PILLAR",
         "origin": "FEET",
         "count": 2.0,
-        "extent": 0,
+        "extent": 3,
         "min_speed": 0.05,
         "max_speed": 0.35
       }
@@ -107,6 +107,7 @@
     }
   ],
   "cost": {
+    "item_id": "runes:fire_stone",
     "exhaust": 0.5,
     "cooldown_duration": 28,
     "cooldown_haste_affected": false

@@ -1,6 +1,6 @@
 # 0.1.3 - 1.20.1 BETA
 - added the staves to the wizards stave item tag, so they can be enchanted
-- added 3 new simple wizard spells: ARCANE:Starfall FROST:Ray of Frost FIRE:Flamerush
+- added 3 new simple wizard spells: ARCANE:Falling Star FROST:Ray of Frost FIRE:Flamerush
 - these additional wizard spells can be found in wizard related loot chests
 - they will be bound to the spell books as an additional spell
 

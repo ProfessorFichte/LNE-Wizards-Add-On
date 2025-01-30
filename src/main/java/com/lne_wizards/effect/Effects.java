@@ -21,7 +21,7 @@ public class Effects {
 
     public static void register() {
         FLAME_RUSH.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "5e58808d-6042-45c6-bb4d-f5fcd82f485e",
-                0.5F, EntityAttributeModifier.Operation.MULTIPLY_BASE);
+                0.75F, EntityAttributeModifier.Operation.MULTIPLY_BASE);
 
         Synchronized.configure(ARCANE_PRECISION, true);
         Synchronized.configure(FLAME_RUSH, true);

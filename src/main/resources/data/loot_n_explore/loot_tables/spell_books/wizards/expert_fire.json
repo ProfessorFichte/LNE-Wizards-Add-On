@@ -11,7 +11,7 @@
           "functions": [
             {
               "function": "set_nbt",
-              "tag": "{spell_container:{pool:\"wizards:fire\",spell_ids:[\"wizards:fireball\",\"wizards:fire_breath\"],spell_container:\"MAGIC\"}}"
+              "tag": "{spell_container:{pool:\"wizards:fire\",spell_ids:[\"wizards:fireball\",\"wizards:fire_breath\",\"wizards:fire_meteor\"],spell_container:\"MAGIC\"}}"
             }
           ]
         },
@@ -22,7 +22,7 @@
           "functions": [
             {
               "function": "set_nbt",
-              "tag": "{spell_container:{pool:\"wizards:fire\",spell_ids:[\"wizards:fireball\",\"wizards:fire_breath\",\"wizards:fire_meteor\"],spell_container:\"MAGIC\"}}"
+              "tag": "{spell_container:{pool:\"wizards:fire\",spell_ids:[\"wizards:fireball\",\"wizards:fire_breath\",\"wizards:fire_meteor\",\"lne_wizards:fire_flamerush\"],spell_container:\"MAGIC\"}}"
             }
           ]
         }

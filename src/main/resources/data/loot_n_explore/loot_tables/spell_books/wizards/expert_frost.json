@@ -11,7 +11,7 @@
           "functions": [
             {
               "function": "set_nbt",
-              "tag": "{spell_container:{pool:\"wizards:frost\",spell_ids:[\"wizards:frostbolt\",\"wizards:frost_nova\"],spell_container:\"MAGIC\"}}"
+              "tag": "{spell_container:{pool:\"wizards:frost\",spell_ids:[\"wizards:frostbolt\",\"wizards:frost_nova\",\"wizards:frost_shield\"],spell_container:\"MAGIC\"}}"
             }
           ]
         },
@@ -22,7 +22,7 @@
           "functions": [
             {
               "function": "set_nbt",
-              "tag": "{spell_container:{pool:\"wizards:frost\",spell_ids:[\"wizards:frostbolt\",\"wizards:frost_nova\",\"wizards:frost_shield\"],spell_container:\"MAGIC\"}}"
+              "tag": "{spell_container:{pool:\"wizards:frost\",spell_ids:[\"wizards:frostbolt\",\"wizards:frost_nova\",\"wizards:frost_shield\",\"lne_wizards:frost_ray\"],spell_container:\"MAGIC\"}}"
             }
           ]
         }

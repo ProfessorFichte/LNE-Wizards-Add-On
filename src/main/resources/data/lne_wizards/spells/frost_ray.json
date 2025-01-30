@@ -9,7 +9,6 @@
     "animation": "lne_wizards:frost_ray_charge",
     "sound": {
       "id": "spell_engine:generic_frost_casting",
-      "randomness": 0,
       "volume": 1.0
     },
     "particles": [
@@ -63,7 +62,7 @@
           "particle_id": "lne_wizards:frost_ray",
           "shape": "SPHERE",
           "origin": "CENTER",
-          "count": 50.0,
+          "count": 40.0,
           "min_speed": 0.2,
           "max_speed": 0.7
         },
@@ -71,7 +70,7 @@
           "particle_id": "spell_engine:snowflake",
           "shape": "SPHERE",
           "origin": "CENTER",
-          "count": 25.0,
+          "count": 20.0,
           "min_speed": 0.1,
           "max_speed": 0.4
         }
@@ -88,7 +87,7 @@
           "effect_id": "wizards:frost_slowness",
           "duration": 10,
           "apply_mode": "SET",
-          "amplifier": 0,
+          "amplifier": 1,
           "show_particles": false
         }
       }
@@ -96,8 +95,8 @@
   ],
   "cost": {
     "item_id": "runes:frost_stone",
-    "exhaust" : 0.4,
-    "cooldown_duration": 4,
+    "exhaust" : 0.3,
+    "cooldown_duration": 14,
     "cooldown_proportional": true
   }
 }
