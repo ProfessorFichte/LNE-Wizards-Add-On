@@ -37,6 +37,15 @@ public class FlameRushEffect extends StatusEffect {
             0.05F,
             0.2F,
             0);
+    private static final ParticleBatch particles1 = new ParticleBatch(
+            "lava",
+            ParticleBatch.Shape.CIRCLE,
+            ParticleBatch.Origin.CENTER,
+            null,
+            1,
+            0.1F,
+            0.5F,
+            0);
     @Override
     public void applyUpdateEffect(LivingEntity livingEntity, int pAmplifier) {
         if(livingEntity instanceof PlayerEntity playerEntity && !playerEntity.getWorld().isClient()) {
@@ -49,6 +58,7 @@ public class FlameRushEffect extends StatusEffect {
                     selectionPredicate);
             for (Entity entity : list) {
                 if(entity instanceof LivingEntity && !isProtected(entity,playerEntity)){
+                    ParticleHelper.sendBatches(entity, new ParticleBatch[]{particles1});
                     entity.setFireTicks(40);
                 }
             }
