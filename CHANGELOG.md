@@ -1,3 +1,8 @@
+# 0.1.4 - 1.20.1 BETA
+- added Flamerush Status Effect description and name (forgot it)
+- Enhances Flamerush particles a bit
+- the treasure spells names are now displayed in dark purple color
+
 # 0.1.3 - 1.20.1 BETA
 - added the staves to the wizards stave item tag, so they can be enchanted
 - added 3 new simple wizard spells: ARCANE:Falling Star FROST:Ray of Frost FIRE:Flamerush

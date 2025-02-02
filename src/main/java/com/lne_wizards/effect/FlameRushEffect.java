@@ -30,22 +30,12 @@ public class FlameRushEffect extends StatusEffect {
     }
     private static final ParticleBatch particles = new ParticleBatch(
             "spell_engine:flame_ground",
-            ParticleBatch.Shape.PILLAR,
-            ParticleBatch.Origin.FEET,
-            null,
-            7,
-            0.05F,
-            0.2F,
-            0);
+            ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET, null,
+            7, 0.05F, 0.2F, 1.5F, 0);
     private static final ParticleBatch particles1 = new ParticleBatch(
             "lava",
-            ParticleBatch.Shape.CIRCLE,
-            ParticleBatch.Origin.CENTER,
-            null,
-            1,
-            0.1F,
-            0.5F,
-            0);
+            ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER, null,
+            1, 0.1F, 0.5F, 0);
     @Override
     public void applyUpdateEffect(LivingEntity livingEntity, int pAmplifier) {
         if(livingEntity instanceof PlayerEntity playerEntity && !playerEntity.getWorld().isClient()) {
