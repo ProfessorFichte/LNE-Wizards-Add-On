@@ -1,6 +1,6 @@
 {
   "school": "FIRE",
-  "range": 5,
+  "range": 0,
   "learn": {
     "tier": 3
   },
@@ -52,10 +52,7 @@
       }
     ],
     "target": {
-      "type": "AREA",
-      "area": {
-        "angle_degrees": 360
-      }
+      "type": "SELF"
     },
     "sound": {
       "id": "spell_engine:generic_fire_release"
@@ -64,45 +61,14 @@
   "impact": [
     {
       "action": {
-        "type": "DAMAGE",
-        "damage": {
-          "spell_power_coefficient": 0.5,
-          "knockback": 0
-        }
-      },
-      "particles": [
-        {
-          "particle_id": "lava",
-          "shape": "CIRCLE",
-          "origin": "CENTER",
-          "count": 3.0,
-          "min_speed": 0.5,
-          "max_speed": 3.0
-        },
-        {
-          "particle_id": "smoke",
-          "shape": "SPHERE",
-          "origin": "CENTER",
-          "count": 15.0,
-          "min_speed": 0.01,
-          "max_speed": 0.1
-        }
-      ],
-      "sound": {
-        "id": "wizards:fire_scorch_impact"
-      }
-    },
-    {
-      "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "lne_wizards:flame_rush",
           "amplifier": 0,
-          "duration": 4,
+          "duration": 5,
           "apply_mode": "SET",
           "show_particles": false
-        },
-        "apply_to_caster": true
+        }
       }
     }
   ],

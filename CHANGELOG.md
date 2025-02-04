@@ -1,3 +1,6 @@
+# 0.1.5 - 1.20.1 BETA
+- made Flamerush now only a selfbuff spell, removed the AoE Damage on Release, because it required targets to proc the selfbuff on the caster
+
 # 0.1.4 - 1.20.1 BETA
 - added Flamerush Status Effect description and name (forgot it)
 - Enhances Flamerush particles a bit
