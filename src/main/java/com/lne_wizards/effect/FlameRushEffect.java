@@ -31,7 +31,7 @@ public class FlameRushEffect extends StatusEffect {
     private static final ParticleBatch particles = new ParticleBatch(
             "spell_engine:flame_ground",
             ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET, null,
-            7, 0.05F, 0.2F, 1.5F, 0);
+            7, 0.05F, 0.2F, 0, 1.5F);
     private static final ParticleBatch particles1 = new ParticleBatch(
             "lava",
             ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER, null,
@@ -48,7 +48,9 @@ public class FlameRushEffect extends StatusEffect {
                     selectionPredicate);
             for (Entity entity : list) {
                 if(entity instanceof LivingEntity && !isProtected(entity,playerEntity)){
-                    ParticleHelper.sendBatches(entity, new ParticleBatch[]{particles1});
+                    if(!entity.getWorld().isClient()){
+                        ParticleHelper.sendBatches(entity, new ParticleBatch[]{particles1});
+                    }
                     entity.setFireTicks(40);
                 }
             }

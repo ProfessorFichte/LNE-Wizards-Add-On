@@ -35,31 +35,16 @@ public class LneWizardsPassives {
     }
     private static final ParticleBatch particlesEverfrostStaff = new ParticleBatch(
             "loot_n_explore:freezing_snowflake",
-            ParticleBatch.Shape.CIRCLE,
-            ParticleBatch.Origin.FEET,
-            null,
-            50,
-            0.1F,
-            0.3F,
-            0);
+            ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET, null,
+            50, 0.1F, 0.3F, 0);
     private static final ParticleBatch particlesNetherflameStaff = new ParticleBatch(
             "spell_engine:flame_spark",
-            ParticleBatch.Shape.PILLAR,
-            ParticleBatch.Origin.FEET,
-            null,
-            15,
-            0.1F,
-            0.4F,
-            0);
+            ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET, null,
+            15, 0.1F, 0.4F, 0,1);
     private static final ParticleBatch particlesDragonStaff = new ParticleBatch(
             "dragon_breath",
-            ParticleBatch.Shape.SPHERE,
-            ParticleBatch.Origin.LAUNCH_POINT,
-            null,
-            5,
-            0.01F,
-            0.1F,
-            0);
+            ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.LAUNCH_POINT, null,
+            5, 0.01F, 0.1F, 0,1.5F);
 
     public static void netherFlameStaffPassive(LivingEntity attacker, LivingEntity target, int max_amplifier, int duration, DamageSource source){
         if(attacker instanceof PlayerEntity player && source.isIn(SpellPowerTags.DamageType.ALL) && !target.isSpectator()
@@ -69,7 +54,9 @@ public class LneWizardsPassives {
             if(item instanceof NetherflameStaff){
                 HelperMethods.applyStatusEffect(player,0,duration, SpellPowerMechanics.HASTE.boostEffect,
                         max_amplifier,true,true,true,0);
-                ParticleHelper.sendBatches(player, new ParticleBatch[]{particlesNetherflameStaff});
+                if (!player.getWorld().isClient()) {
+                    ParticleHelper.sendBatches(player, new ParticleBatch[]{particlesNetherflameStaff});
+                }
                 float range = 2.0F;
                 Box radius = new Box(target.getX() + range,
                         target.getY() + (float) range / 3,
@@ -108,7 +95,9 @@ public class LneWizardsPassives {
                             HelperMethods.stackFreezeStacks(targets,freeze_ticks);
                             HelperMethods.applyStatusEffect(targets,0,freeze_duration,Effects.FREEZING,
                                     0,true,true,false,0);
-                            ParticleHelper.sendBatches(target, new ParticleBatch[]{particlesEverfrostStaff});
+                            if (!target.getWorld().isClient()) {
+                                ParticleHelper.sendBatches(target, new ParticleBatch[]{particlesEverfrostStaff});
+                            }
                         }
                     }
                 }
@@ -121,7 +110,9 @@ public class LneWizardsPassives {
             ItemStack stack = attacker.getEquippedStack(EquipmentSlot.MAINHAND);
             Item item = stack.getItem();
             if(item instanceof DragonStaff){
-                ParticleHelper.sendBatches(target, new ParticleBatch[]{particlesDragonStaff});
+                if (!target.getWorld().isClient()) {
+                    ParticleHelper.sendBatches(target, new ParticleBatch[]{particlesDragonStaff});
+                }
                 HelperMethods.applyStatusEffect(target,0,duration, com.lne_wizards.effect.Effects.ARCANE_PRECISION,
                         max_amplifier,true,true,true,0);
             }
