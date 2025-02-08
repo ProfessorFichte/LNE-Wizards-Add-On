@@ -1,8 +1,6 @@
 package com.lne_wizards.item;
 
-import com.lne_wizards.item.weapons.DragonStaff;
-import com.lne_wizards.item.weapons.EverfrostStaff;
-import com.lne_wizards.item.weapons.NetherflameStaff;
+import com.lne_wizards.item.weapons.*;
 import more_rpg_loot.item.Group;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
@@ -12,6 +10,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.api.item.ItemConfig;
 import net.spell_engine.api.item.weapon.Weapon;
 import net.spell_power.api.SpellSchools;
@@ -55,6 +54,7 @@ public class WeaponRegister {
     private static final float staffAttackSpeed = -3F;
     private static final float staffSpellPower = 7F;
 
+    ///WIZARDS
     private static Weapon.Entry staffDragon(String name, Weapon.CustomMaterial material) {
         return staffDragon(null, name, material);
     }
@@ -82,6 +82,34 @@ public class WeaponRegister {
         var item = new NetherflameStaff(material, settings);
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(staffAttackDamage, staffAttackSpeed));
     }
+    ///ELEMENTAL WIZARDS
+    private static Weapon.Entry staffTidecaller(String name, Weapon.CustomMaterial material) {
+        return staffTidecaller(null, name, material);
+    }
+    private static Weapon.Entry staffTidecaller(String requiredMod, String name, Weapon.CustomMaterial material) {
+        var settings = new Item.Settings();
+        settings = settings.rarity(Rarity.EPIC).fireproof();
+        var item = new TidecallerStaff(material, settings);
+        return entry(requiredMod, name, material, item, new ItemConfig.Weapon(staffAttackDamage, staffAttackSpeed));
+    }
+    private static Weapon.Entry staffSeismic(String name, Weapon.CustomMaterial material) {
+        return staffSeismic(null, name, material);
+    }
+    private static Weapon.Entry staffSeismic(String requiredMod, String name, Weapon.CustomMaterial material) {
+        var settings = new Item.Settings();
+        settings = settings.rarity(Rarity.EPIC).fireproof();
+        var item = new SeismicStaff(material, settings);
+        return entry(requiredMod, name, material, item, new ItemConfig.Weapon(staffAttackDamage, staffAttackSpeed));
+    }
+    private static Weapon.Entry staffZephyrwing(String name, Weapon.CustomMaterial material) {
+        return staffZephyrwing(null, name, material);
+    }
+    private static Weapon.Entry staffZephyrwing(String requiredMod, String name, Weapon.CustomMaterial material) {
+        var settings = new Item.Settings();
+        settings = settings.rarity(Rarity.EPIC).fireproof();
+        var item = new ZephyrwingStaff(material, settings);
+        return entry(requiredMod, name, material, item, new ItemConfig.Weapon(staffAttackDamage, staffAttackSpeed));
+    }
 
 
     public static void register(Map<String, ItemConfig.Weapon> configs) {
@@ -102,6 +130,24 @@ public class WeaponRegister {
             staffDragon("staff_arcane_dragon",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, dragonRepair))
                     .attribute(ItemConfig.Attribute.bonus(SpellSchools.ARCANE.id, staffSpellPower));
+        }
+        if (!tweaksConfig.value.disable_special_lne_weapons && FabricLoader.getInstance().isModLoaded("elemental_wizards_rpg")) {
+            var dragonRepair = ingredient("loot_n_explore:ender_dragon_scales",
+                    FabricLoader.getInstance().isModLoaded("loot_n_explore"), Items.NETHERITE_INGOT);
+            var witherRepair = ingredient("minecraft:nether_star",
+                    FabricLoader.getInstance().isModLoaded("loot_n_explore"), Items.NETHERITE_INGOT);
+            var elderGuardianRepair = ingredient("loot_n_explore:elder_guardian_eye",
+                    FabricLoader.getInstance().isModLoaded("loot_n_explore"), Items.NETHERITE_INGOT);
+
+            staffTidecaller("staff_tidecaller",
+                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, elderGuardianRepair))
+                    .attribute(ItemConfig.Attribute.bonus(MoreSpellSchools.WATER.id, staffSpellPower));
+            staffSeismic("staff_seismic",
+                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, witherRepair))
+                    .attribute(ItemConfig.Attribute.bonus(MoreSpellSchools.EARTH.id, staffSpellPower));
+            staffZephyrwing("staff_zephyrwing",
+                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, dragonRepair))
+                    .attribute(ItemConfig.Attribute.bonus(MoreSpellSchools.AIR.id, staffSpellPower));
         }
 
         Weapon.register(configs, entries, Group.RPG_LOOT_KEY);
