@@ -6,10 +6,11 @@
   },
   "cast": {
     "duration": 5,
-    "animation": "lne_wizards:frost_ray_charge",
+    "animation": "more_rpg_classes:left_handed_channeling",
     "sound": {
-      "id": "spell_engine:generic_frost_casting",
-      "volume": 1.0
+    "id": "more_rpg_classes:frost_crackle_long",
+      "randomness": 0,
+      "volume": 1.2
     },
     "particles": [
       {
@@ -44,9 +45,6 @@
           }
         ]
       }
-    },
-    "sound": {
-      "id": "wizards:frost_nova_release"
     }
   },
   "impact": [
@@ -76,8 +74,9 @@
         }
       ],
       "sound": {
-        "id": "wizards:frost_nova_effect_impact",
-        "volume": 0.4
+        "id": "more_rpg_classes:frost_crackle",
+        "volume": 0.4,
+        "random": 0.7
       }
     },
     {
