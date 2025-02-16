@@ -1,3 +1,11 @@
+# 0.1.6 - 1.20.1 BETA
+- fix fire wizard tower loot chest
+- Add optional compatibility for the Elemental Wizard Mod
+- New Dependency -> More RPG Library, moved all particles, animations and sounds to the lib
+- Add 3 new elemental Staves:
+- Wind: Zephyrwing Staff (Ender Dragon Variant) Water: Tidecallers Staff (Elder Guardian Variant) Seismic Staff (Wither Variant)
+- Changed Frost Ray Sounds & Arcane Starfall Sounds
+
 # 0.1.5 - 1.20.1 BETA
 - made Flamerush now only a selfbuff spell, removed the AoE Damage on Release, because it required targets to proc the selfbuff on the caster
 - added ServerWorld-Checks on ParticleSpawner methods

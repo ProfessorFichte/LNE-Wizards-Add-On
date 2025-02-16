@@ -12,6 +12,18 @@
     {
       "id": "lne_wizards:staff_everfrost",
       "required": false
+    },
+    {
+      "id": "lne_wizards:seismic",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:staff_tidecaller",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:staff_zephyrwing",
+      "required": false
     }
   ]
 }

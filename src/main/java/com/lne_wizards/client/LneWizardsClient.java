@@ -1,9 +1,12 @@
 package com.lne_wizards.client;
 
+import com.lne_wizards.client.effect.ObsidianShardsRenderer;
+import com.lne_wizards.effect.Effects;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.Identifier;
+import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.render.CustomModels;
 
 import java.util.List;
@@ -16,7 +19,10 @@ public class LneWizardsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         CustomModels.registerModelIds(List.of(
+                ObsidianShardsRenderer.modelId_base,
                 new Identifier(MOD_ID, "projectile/starfall")
         ));
+
+        CustomModelStatusEffect.register(Effects.OBSIDIAN_SHARDS, new ObsidianShardsRenderer());
     }
 }

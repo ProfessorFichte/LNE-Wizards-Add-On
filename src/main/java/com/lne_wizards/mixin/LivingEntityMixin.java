@@ -54,4 +54,38 @@ public class LivingEntityMixin {
             }
         }
     }
+    @Inject(method = "damage", at = @At(value = "TAIL", target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"))
+    private void damage$zeyphyrWingStaff(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        Entity attacker = source.getAttacker();
+        LivingEntity entity = (LivingEntity)(Object)this;
+        int max_amplifier = tweaksConfig.value.zephyrwing_staff_zephyrs_speed_max_amplifier  -1;
+        int duration = 5;
+        if(FabricLoader.getInstance().isModLoaded("loot_n_explore") && FabricLoader.getInstance().isModLoaded("elemental_wizards_rpg")) {
+            if(attacker instanceof PlayerEntity player){
+                LneWizardsPassives.zephyrwingStaffPassive(player,entity,duration,max_amplifier,source);
+            }
+        }
+    }
+    @Inject(method = "damage", at = @At(value = "TAIL", target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"))
+    private void damage$seismicStaff(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        Entity attacker = source.getAttacker();
+        LivingEntity entity = (LivingEntity)(Object)this;
+        int max_amplifier = tweaksConfig.value.seismic_staff_obsidian_shards_max_amplifier  -1;
+        int duration = 8;
+        if(FabricLoader.getInstance().isModLoaded("loot_n_explore") && FabricLoader.getInstance().isModLoaded("elemental_wizards_rpg")) {
+            if(attacker instanceof PlayerEntity player){
+                LneWizardsPassives.seismicStaffPassive(player,entity,duration,max_amplifier,source);
+            }
+        }
+    }
+    @Inject(method = "damage", at = @At(value = "TAIL", target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"))
+    private void damage$tidecallerStaff(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        Entity attacker = source.getAttacker();
+        LivingEntity entity = (LivingEntity)(Object)this;
+        if(FabricLoader.getInstance().isModLoaded("loot_n_explore") && FabricLoader.getInstance().isModLoaded("elemental_wizards_rpg")) {
+            if(attacker instanceof PlayerEntity player){
+                LneWizardsPassives.tidecallerStaffPassive(player,entity,0,0,source);
+            }
+        }
+    }
 }

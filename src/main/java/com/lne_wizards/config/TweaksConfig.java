@@ -8,4 +8,6 @@ public class TweaksConfig {
     public int netherflame_staff_haste_duration = 8;
     public int dragon_staff_arcane_precision_max_amplifier = 5;
     public int dragon_staff_arcane_precision_duration = 10;
+    public int zephyrwing_staff_zephyrs_speed_max_amplifier = 3;
+    public int seismic_staff_obsidian_shards_max_amplifier = 3;
 }
