@@ -27,6 +27,10 @@
     {
       "structure": "loot_n_explore:wizards_frost_tower",
       "weight": 3
+    },
+    {
+      "structure": "loot_n_explore:wizards_earth_tower",
+      "weight": 3
     }
   ],
   "placement": {
