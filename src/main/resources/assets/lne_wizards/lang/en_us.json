@@ -17,9 +17,9 @@
   "effect.lne_wizards.arcane_precision.description": "Increasing the Crit Chance & Damage on Arcane Spells the target.",
 
   "item.lne_wizards.staff_tidecaller": "Tidecaller's Staff",
-  "passive.lne_wizards.tidecaller_staff": "Passive: ",
-  "passive.lne_wizards.tidecaller_staff_1": "",
-  "passive.lne_wizards.tidecaller_staff_2": "",
+  "passive.lne_wizards.tidecaller_staff": "Passive: Flow like Water",
+  "passive.lne_wizards.tidecaller_staff_1": "Heals nearby allies, while casting spells on targets.",
+  "passive.lne_wizards.tidecaller_staff_2": "If the caster drops under 20% health, the caster gains water spell power on damaging.",
 
   "item.lne_wizards.staff_seismic": "Seismic Staff",
   "passive.lne_wizards.seismic_staff": "Passive: Obsidian Shards",

@@ -84,7 +84,7 @@ public class LivingEntityMixin {
         LivingEntity entity = (LivingEntity)(Object)this;
         if(FabricLoader.getInstance().isModLoaded("loot_n_explore") && FabricLoader.getInstance().isModLoaded("elemental_wizards_rpg")) {
             if(attacker instanceof PlayerEntity player){
-                LneWizardsPassives.tidecallerStaffPassive(player,entity,0,0,source);
+                LneWizardsPassives.tidecallerStaffPassive(player,entity,10,4,source);
             }
         }
     }

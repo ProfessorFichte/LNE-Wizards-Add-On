@@ -56,9 +56,9 @@ public class LneWizardsPassives {
             ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET, null,
             50, 0.5F, 0.8F, 0,1.5F);
     private static final ParticleBatch particlesTideCallerStaff2 = new ParticleBatch(
-            "more_rpg_classes:big_splash",
-            ParticleBatch.Shape.PIPE, ParticleBatch.Origin.FEET, null,
-            40, 0.05F, 0.2F, 0,0);
+            "more_rpg_classes:water_heal",
+            ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET, null,
+            10, 0.05F, 0.2F, 0,0.2F);
 
     public static void netherFlameStaffPassive(LivingEntity attacker, LivingEntity target, int max_amplifier, int duration, DamageSource source){
         if(attacker instanceof PlayerEntity player && source.isIn(SpellPowerTags.DamageType.ALL) && !target.isSpectator()
@@ -163,25 +163,31 @@ public class LneWizardsPassives {
             ItemStack stack = attacker.getEquippedStack(EquipmentSlot.MAINHAND);
             Item item = stack.getItem();
             if(item instanceof TidecallerStaff){
-                float damage = (float) attacker.getAttributeBaseValue(MoreSpellSchools.WATER.attribute) * 0.2F;
+                float actual_health = attacker.getHealth() / attacker.getMaxHealth();
+                if(actual_health <= 0.2F){
+                    HelperMethods.applyStatusEffect(attacker,0,duration, MoreSpellSchools.WATER.boostEffect,
+                            max_amplifier,true,true,true,0);
+                }
+
+                float heal = (float) attacker.getAttributeBaseValue(MoreSpellSchools.WATER.attribute) * 0.2F;
                 if (!target.getWorld().isClient()) {
                     ParticleHelper.sendBatches(target, new ParticleBatch[]{particlesTideCallerStaff1});
                 }
                 float range = 5.0F;
-                Box radius = new Box(target.getX() + range,
-                        target.getY() + (float) range / 3,
-                        target.getZ() + range,
-                        target.getX() - range,
-                        target.getY() - (float) range / 3,
-                        target.getZ() - range);
-                for(Entity entities : target.getEntityWorld().getOtherEntities(target, radius, EntityPredicates.VALID_LIVING_ENTITY)){
+                Box radius = new Box(attacker.getX() + range,
+                        attacker.getY() + (float) range / 3,
+                        attacker.getZ() + range,
+                        attacker.getX() - range,
+                        attacker.getY() - (float) range / 3,
+                        attacker.getZ() - range);
+                for(Entity entities : attacker.getEntityWorld().getOtherEntities(attacker, radius, EntityPredicates.VALID_LIVING_ENTITY)){
                     if (entities != null) {
-                        if(entities instanceof LivingEntity targets && !isProtected(targets,attacker)){
+                        if(entities instanceof LivingEntity targets && isProtected(targets,attacker)){
                             if (!target.getWorld().isClient()) {
                                 if (!target.getWorld().isClient()) {
                                     ParticleHelper.sendBatches(targets, new ParticleBatch[]{particlesTideCallerStaff2});
                                 }
-                                targets.damage(targets.getDamageSources().magic(), damage);
+                                targets.heal(heal);
                             }
                         }
                     }
