@@ -25,11 +25,23 @@
       "weight": 4
     },
     {
+      "structure": "loot_n_explore:earth_monolith",
+      "weight": 4
+    },
+    {
+      "structure": "loot_n_explore:wind_monolith",
+      "weight": 4
+    },
+    {
       "structure": "loot_n_explore:wizards_frost_tower",
       "weight": 3
     },
     {
       "structure": "loot_n_explore:wizards_earth_tower",
+      "weight": 3
+    },
+    {
+      "structure": "loot_n_explore:wizards_wind_tower",
       "weight": 3
     }
   ],

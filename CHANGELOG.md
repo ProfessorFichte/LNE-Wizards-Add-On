@@ -5,6 +5,7 @@
 - Add 3 new elemental Staves:
 - Wind: Zephyrwing Staff (Ender Dragon Variant) Water: Tidecallers Staff (Elder Guardian Variant) Seismic Staff (Wither Variant)
 - Changed Frost Ray Sounds & Arcane Starfall Sounds
+- Add Structures for the Elemental Wizards
 
 # 0.1.5 - 1.20.1 BETA
 - made Flamerush now only a selfbuff spell, removed the AoE Damage on Release, because it required targets to proc the selfbuff on the caster

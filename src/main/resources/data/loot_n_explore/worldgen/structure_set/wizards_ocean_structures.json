@@ -3,6 +3,10 @@
     {
       "structure": "loot_n_explore:wizards_water_tower",
       "weight": 3
+    },
+    {
+      "structure": "loot_n_explore:water_monolith",
+      "weight": 2
     }
   ],
   "placement": {
