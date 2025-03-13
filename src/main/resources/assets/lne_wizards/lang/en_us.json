@@ -39,7 +39,7 @@
   "spell.lne_wizards.arcane_starfall.description": "Calls a falling astral star, causing {damage} arcane spell damage. Consumes all Arcane Charges.",
 
   "spell.lne_wizards.fire_flamerush.name": "§5Flamerush",
-  "spell.lne_wizards.fire_flamerush.description": "Charges up heat, causing up to {damage} fire spell damage, gaining movement speed and burning nearby targets.",
+  "spell.lne_wizards.fire_flamerush.description": "Charges up heat, gaining movement speed and burning nearby targets.",
   "effect.lne_wizards.flame_rush": "Flamerush",
   "effect.lne_wizards.flame_rush.description": "Increases movement speed, burns nearby entities.",
 
