@@ -1,3 +1,9 @@
+# 0.1.8 - 1.20.1 BETA
+- Fix Flamerush translation
+
+# 0.1.7 - 1.20.1 BETA
+- forgot the recipes for the new Elemental Staves
+
 # 0.1.6 - 1.20.1 BETA
 - fix fire wizard tower loot chest
 - Add optional compatibility for the Elemental Wizard Mod
