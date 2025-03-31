@@ -1,3 +1,6 @@
+# 0.1.9 - 1.20.1 BETA
+- Update Everfrost Staff Texture
+
 # 0.1.8 - 1.20.1 BETA
 - Fix Flamerush translation
 
