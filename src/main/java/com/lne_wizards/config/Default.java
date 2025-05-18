@@ -1,12 +1,13 @@
 package com.lne_wizards.config;
 
 import com.lne_wizards.item.WeaponRegister;
-import net.spell_engine.api.item.ItemConfig;
+import net.spell_engine.api.config.ConfigFile;
 
 public class Default {
-    public final static ItemConfig itemConfig;
+    public static final ConfigFile.Equipment itemConfig;
+
     static {
-        itemConfig = new ItemConfig();
+        itemConfig = new ConfigFile.Equipment();
         for (var weapon: WeaponRegister.entries) {
             itemConfig.weapons.put(weapon.name(), weapon.defaults());
         }

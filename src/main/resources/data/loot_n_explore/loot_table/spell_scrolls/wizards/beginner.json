@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+
+{
+  "rolls": 1,
+  "entries": [
+    {
+      "type": "minecraft:loot_table",
+      "value": "loot_n_explore:spell_scrolls/wizards/beginner_arcane",
+      "weight": 1
+    },
+    {
+      "type": "minecraft:loot_table",
+      "value": "loot_n_explore:spell_scrolls/wizards/beginner_fire",
+      "weight": 1
+    },
+    {
+      "type": "minecraft:loot_table",
+      "value": "loot_n_explore:spell_scrolls/wizards/beginner_frost",
+      "weight": 1
+    }
+  ]
+    }
+  ]
+}

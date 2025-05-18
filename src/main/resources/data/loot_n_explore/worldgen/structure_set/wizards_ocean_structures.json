@@ -11,12 +11,8 @@
   ],
   "placement": {
     "exclusion_zone": {
-      "other_set": [
-        "minecraft:shipwrecks",
-        "minecraft:ocean_ruins",
-        "minecraft:ocean_monuments"
-      ],
-      "chunk_count": 20
+      "other_set": "minecraft:ocean_monuments",
+      "chunk_count": 15
     },
     "type": "minecraft:random_spread",
     "spacing": 40,

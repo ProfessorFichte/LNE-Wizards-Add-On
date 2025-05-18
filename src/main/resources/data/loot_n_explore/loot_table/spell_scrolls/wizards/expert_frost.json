@@ -1,0 +1,78 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spell_engine:scroll",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "spell_engine:spell_container": {
+                  "spell_ids": ["wizards:frost_shield"],
+                  "max_spell_count": 1
+                },
+                "minecraft:custom_model_data": 3,
+                "minecraft:item_name": "{translate:item.wizards.frost.spell_scroll}",
+                "minecraft:rarity": "rare"
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spell_engine:scroll",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "spell_engine:spell_container": {
+                  "spell_ids": ["wizards:frost_blizzard"],
+                  "max_spell_count": 1
+                },
+                "minecraft:custom_model_data": 3,
+                "minecraft:item_name": "{translate:item.wizards.frost.spell_scroll}",
+                "minecraft:rarity": "epic"
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spell_engine:scroll",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "spell_engine:spell_container": {
+                  "spell_ids": ["lne_wizards:frost_ray"],
+                  "max_spell_count": 1
+                },
+                "minecraft:custom_model_data": 3,
+                "minecraft:item_name": "{translate:item.wizards.frost.treasure_spell_scroll}",
+                "minecraft:rarity": "epic"
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

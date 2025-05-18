@@ -5,7 +5,7 @@ import com.lne_wizards.effect.Effects;
 import com.lne_wizards.item.WeaponRegister;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
-import net.spell_engine.api.item.ItemConfig;
+import net.spell_engine.api.config.ConfigFile;
 import com.lne_wizards.config.TweaksConfig;
 import net.tinyconfig.ConfigManager;
 import org.slf4j.Logger;
@@ -15,14 +15,14 @@ public class LNE_Wizards_Mod implements ModInitializer {
 	public static final String MOD_ID = "lne_wizards";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static ConfigManager<ItemConfig> itemConfig = new ConfigManager<>
-			("items_v1", Default.itemConfig)
+	public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
+			("items", Default.itemConfig)
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
 			.build();
 	public static ConfigManager<TweaksConfig> tweaksConfig = new ConfigManager<>
-			("tweaks_v1", new TweaksConfig())
+			("tweaks", new TweaksConfig())
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)

@@ -1,6 +1,21 @@
 {
   "values": [
-    "#c:icy",
-    "#c:snowy"
+    "minecraft:ice_spikes",
+    "minecraft:snowy_slopes",
+    "minecraft:snowy_plains",
+    "minecraft:snowy_taiga",
+    "minecraft:frozen_peaks",
+    {
+      "id": "#c:climate_cold",
+      "required": false
+    },
+    {
+      "id": "#c:icy",
+      "required": false
+    },
+    {
+      "id":     "#c:snowy",
+      "required": false
+    }
   ]
 }

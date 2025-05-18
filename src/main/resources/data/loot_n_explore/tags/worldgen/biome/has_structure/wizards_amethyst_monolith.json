@@ -1,5 +1,18 @@
 {
   "values": [
-    "#c:caves"
+    "minecraft:plains",
+    "minecraft:sunflower_plains",
+    "minecraft:forest",
+    "minecraft:dripstone_caves",
+    "minecraft:lush_caves",
+    "minecraft:deep_dark",
+    {
+      "id": "#c:caves",
+      "required": false
+    },
+    {
+      "id": "#c:is_underground",
+      "required": false
+    }
   ]
 }
