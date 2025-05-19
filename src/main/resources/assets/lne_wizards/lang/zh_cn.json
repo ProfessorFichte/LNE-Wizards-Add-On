@@ -1,0 +1,48 @@
+{
+    "item.lne_wizards.staff_everfrost": "永霜法杖",
+    "passive.lne_wizards.everfrost_staff": "被动：寒霜之息",
+    "passive.lne_wizards.everfrost_staff_1": "造成伤害后施加冻结效果并叠加冻结层数",
+    "passive.lne_wizards.everfrost_staff_2": "同时影响附近目标",
+  
+    "item.lne_wizards.staff_netherflame": "狱炎法杖",
+    "passive.lne_wizards.netherflame_staff": "被动：烈焰掌控",
+    "passive.lne_wizards.netherflame_staff_1": "攻击燃烧目标时获得施法加速",
+    "passive.lne_wizards.netherflame_staff_2": "同时引燃周围目标",
+  
+    "item.lne_wizards.staff_arcane_dragon": "奥术龙晶法杖",
+    "passive.lne_wizards.dragon_staff": "被动：奥术精准",
+    "passive.lne_wizards.dragon_staff_1": "每次造成法术伤害都会强化当前目标",
+    "passive.lne_wizards.dragon_staff_2": "提升奥术法术的暴击率与暴击伤害",
+    "effect.lne_wizards.arcane_precision": "奥术精准",
+    "effect.lne_wizards.arcane_precision.description": "提升对目标奥术法术的暴击率与伤害",
+  
+    "item.lne_wizards.staff_tidecaller": "潮汐召唤者法杖",
+    "passive.lne_wizards.tidecaller_staff": "被动：流水之势",
+    "passive.lne_wizards.tidecaller_staff_1": "施法时治疗附近盟友",
+    "passive.lne_wizards.tidecaller_staff_2": "当生命低于20%时，水系法术伤害提升",
+  
+    "item.lne_wizards.staff_seismic": "地脉法杖",
+    "passive.lne_wizards.seismic_staff": "被动：黑曜石碎片",
+    "passive.lne_wizards.seismic_staff_1": "召唤环绕施法者的尖锐黑曜石碎片，攻击附近目标。",
+    "passive.lne_wizards.seismic_staff_2": "略微提升护甲值",
+    "effect.lne_wizards.obsidian_shards": "黑曜石碎片",
+    "effect.lne_wizards.obsidian_shards.description": "召唤环绕的黑曜石碎片伤害附近目标并提升护甲",
+  
+    "item.lne_wizards.staff_zephyrwing": "和风之翼法杖",
+    "passive.lne_wizards.zephyrwing_staff": "被动：和风迅捷",
+    "passive.lne_wizards.zephyrwing_staff_1": "施法时提升暴击率",
+    "passive.lne_wizards.zephyrwing_staff_2": "同时增加移动速度",
+    "effect.lne_wizards.zephyrs_speed": "和风迅捷",
+    "effect.lne_wizards.zephyrs_speed.description": "提升施法者的暴击率与移动速度",
+  
+    "spell.lne_wizards.arcane_starfall.name": "§5星陨术",
+    "spell.lne_wizards.arcane_starfall.description": "召唤坠落星体，造成{damage}点奥术伤害，消耗所有奥术充能",
+  
+    "spell.lne_wizards.fire_flamerush.name": "§5烈焰冲锋",
+    "spell.lne_wizards.fire_flamerush.description": "积蓄热量提升移速，灼烧周围目标",
+    "effect.lne_wizards.flame_rush": "烈焰冲锋",
+    "effect.lne_wizards.flame_rush.description": "提升移动速度，灼烧周围实体",
+  
+    "spell.lne_wizards.frost_ray.name": "§5寒霜射线",
+    "spell.lne_wizards.frost_ray.description": "释放寒冷光束，造成{damage}点冰霜伤害并减速目标"
+}
