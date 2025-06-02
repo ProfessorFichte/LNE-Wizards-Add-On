@@ -8,10 +8,10 @@
     "triggers": [
       {
         "type": "SPELL_IMPACT_SPECIFIC",
-        "chance": 0.4,
+        "chance": 0.2,
         "target_conditions": [
           {
-            "health_percent_below": 0.0
+            "entity_predicate_id": "spell_engine:is_on_fire"
           }
         ],
         "impact": {
@@ -31,7 +31,7 @@
         "type": "COOLDOWN",
         "cooldown": {
           "actives": {
-            "duration_multiplier": 0.3,
+            "duration_multiplier": 0.7,
             "school": "spell_power:fire"
           }
         },
@@ -46,10 +46,18 @@
           "min_speed": 0.75,
           "max_speed": 0.75,
           "color_rgba": 4282850047,
-          "scale": 0.8,
+          "scale": 1.2,
           "follow_entity": true
         }
       ]
+    },
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.3
+        }
+      }
     }
   ],
 

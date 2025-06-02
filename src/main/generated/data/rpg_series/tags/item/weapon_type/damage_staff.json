@@ -1,0 +1,28 @@
+{
+  "values": [
+    {
+      "id": "lne_wizards:glacial_staff_frost",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:wither_staff_fire",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:ender_dragon_staff_arcane",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:ender_dragon_staff_wind",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:wither_staff_terra",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:elder_guardian_staff_aqua",
+      "required": false
+    }
+  ]
+}

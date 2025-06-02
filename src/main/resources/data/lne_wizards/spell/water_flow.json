@@ -8,7 +8,7 @@
     "triggers": [
       {
         "type": "SPELL_CAST",
-        "chance": 1.0,
+        "chance": 0.25,
         "chance_batching": true,
         "equipment_condition": "MAINHAND"
       }
@@ -67,7 +67,7 @@
       "action": {
         "type": "DAMAGE",
         "damage": {
-          "spell_power_coefficient": 0.02
+          "spell_power_coefficient": 0.2
         }
       },
       "particles": [

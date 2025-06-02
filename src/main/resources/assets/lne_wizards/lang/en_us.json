@@ -4,8 +4,8 @@
   "spell.lne_wizards.rimefrost.description": "On spell hit: {trigger_chance} chance to create a freezing area inflicting freezing ticks.",
 
   "item.lne_wizards.wither_staff_fire": "Netherflame Staff",
-  "spell.lne_wizards.pyromancers_training.name": "Pyromancer's Training",
-  "spell.lne_wizards.pyromancers_training.description": " When defeating enemies there is a {trigger_chance} to reduce spell cooldowns of fire spells.",
+  "spell.lne_wizards.pyromaniac.name": "Pyromaniac",
+  "spell.lne_wizards.pyromaniac.description": "On spell hitting burning targets: {trigger_chance} chance to reduce cooldowns of fire spells and deal additional {damage} damage.",
 
   "item.lne_wizards.ender_dragon_staff_arcane": "Arcane Dragon Staff",
   "spell.lne_wizards.arcane_precision.name": "Arcane Precision",
@@ -15,9 +15,7 @@
 
   "item.lne_wizards.elder_guardian_staff_aqua": "Tidecaller's Staff",
   "spell.lne_wizards.water_flow.name": "Flow like Water",
-  "spell.lne_wizards.water_flow.description": "On spell cast: {range} range {trigger_chance} chance to damage enemies for {damage} and healing allies for {heal} hearts.",
-  "passive.lne_wizards.tidecaller_staff_1": "Heals nearby allies, while casting spells on targets.",
-  "passive.lne_wizards.tidecaller_staff_2": "If the caster drops under 20% health, the caster gains water spell power on damaging.",
+  "spell.lne_wizards.water_flow.description": "On spell cast: {trigger_chance} chance to damage enemies for {damage} and healing allies for {heal} hearts around the caster.",
 
   "item.lne_wizards.wither_staff_terra": "Seismic Staff",
   "spell.lne_wizards.obsidian_shards.name": "Obsidian Shards",
@@ -33,7 +31,7 @@
   "spell.lne_wizards.arcane_starfall.description": "Calls a falling astral star, causing {damage} arcane spell damage. Consumes all Arcane Charges.",
 
   "spell.lne_wizards.fire_flamerush.name": "Flamerush",
-  "spell.lne_wizards.fire_flamerush.description": "Charges up heat, increasing movement speed and fire spell power and burning nearby targets.",
+  "spell.lne_wizards.fire_flamerush.description": "Charges up heat, increasing movement speed and fire spell power. Burning and damages nearby targets for {damage} damage.",
   "effect.lne_wizards.flame_rush": "Flamerush",
   "effect.lne_wizards.flame_rush.description": "Increases movement speed, burns nearby entities.",
 

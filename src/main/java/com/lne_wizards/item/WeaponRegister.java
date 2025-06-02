@@ -58,7 +58,7 @@ public class WeaponRegister {
     private static final float staffSpellPower = 7F;
 
     public static Identifier rimefrost = Identifier.of("lne_wizards", "rimefrost");
-    public static Identifier pyromancers_training = Identifier.of("lne_wizards", "pyromancers_training");
+    public static Identifier pyromaniac = Identifier.of("lne_wizards", "pyromaniac");
     public static Identifier arcane_precision = Identifier.of("lne_wizards", "arcane_precision");
     public static Identifier water_flow = Identifier.of("lne_wizards", "water_flow");
     public static Identifier obsidian_shards = Identifier.of("lne_wizards", "obsidian_shards");
@@ -73,7 +73,7 @@ public class WeaponRegister {
             staff("wither_staff_fire",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.BONE)))
                     .attribute(AttributeModifier.bonus(SpellSchools.FIRE.id, staffSpellPower))
-                    .spell(pyromancers_training);
+                    .spell(pyromaniac);
             staff("ender_dragon_staff_arcane",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.AMETHYST_SHARD)))
                     .attribute(AttributeModifier.bonus(SpellSchools.ARCANE.id, staffSpellPower))

@@ -36,6 +36,7 @@
 		"more_rpg_classes": "*"
 	},
 	"suggests": {
-		"loot_n_explore": ">=1.0.2-1.21.1"
+		"loot_n_explore": ">=1.0.2-1.21.1",
+		"elemental_wizards_rpg": "*"
 	}
 }

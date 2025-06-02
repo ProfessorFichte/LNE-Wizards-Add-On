@@ -32,7 +32,7 @@ public class FlameRushStatusEffect extends StatusEffect {
     private static final ParticleBatch particles = new ParticleBatch(
             "spell_engine:flame_ground",
             ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET, null,
-            20, 0.05F, 0.2F, 0, 2.5F);
+            20, 0.05F, 0.2F, 0, 0.5F);
     public static final ParticleBatch smoke = new ParticleBatch(
             "smoke",
             ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
@@ -42,7 +42,6 @@ public class FlameRushStatusEffect extends StatusEffect {
         if(entity instanceof PlayerEntity playerEntity && !playerEntity.getWorld().isClient()) {
             ParticleHelper.sendBatches(playerEntity, new ParticleBatch[]{particles});
             float range = 2.5F;
-
             Box radius = new Box(entity.getX() + range,
                     entity.getY() + (float) range / 3,
                     entity.getZ() + range,
@@ -61,6 +60,7 @@ public class FlameRushStatusEffect extends StatusEffect {
                     }
                 }
             }
+
         }
         return true;
     }
