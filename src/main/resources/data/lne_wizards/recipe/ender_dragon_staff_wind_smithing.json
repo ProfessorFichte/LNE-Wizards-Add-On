@@ -16,7 +16,7 @@
     "item": "elemental_wizards_rpg:staff_netherite_wind"
   },
   "result": {
-    "item": "lne_wizards:ender_dragon_staff_wind"
+    "id": "lne_wizards:ender_dragon_staff_wind"
   },
   "template": {
     "item": "loot_n_explore:dragon_upgrade_smithing_template"
