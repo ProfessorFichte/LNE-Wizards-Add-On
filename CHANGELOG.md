@@ -1,3 +1,7 @@
+### 1.0.2 - 1.21.1
+- Update License
+- Update Mod Icon
+
 ### 1.0.1 - 1.21.1
 - fix some recipes
 - pyromancers training Passive was renamed to Pyromaniac
