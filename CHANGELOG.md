@@ -1,3 +1,8 @@
+# 0.1.10 - 1.20.1 BETA
+- Update Mod Icon
+- Update License
+- Add zh_cn lang file (Thx Ansurfen)
+
 # 0.1.9 - 1.20.1 BETA
 - Update Everfrost Staff Texture
 

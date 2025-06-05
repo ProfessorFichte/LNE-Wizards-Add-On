@@ -10,7 +10,7 @@
 	"contact": {
 		"sources": "https://github.com/ProfessorFichte/LNE-Wizards-Add-On"
 	},
-	"license": "MIT",
+	"license": "ARR",
 	"icon": "assets/lne_wizards/icon.png",
 	"environment": "*",
 	"entrypoints": {
