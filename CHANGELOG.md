@@ -1,3 +1,7 @@
+### 1.0.3 - 1.21.1
+- Spell Engine 1.7
+- Flame Rush Effect now does not burn nearby enemies (was too unbalanced)
+
 ### 1.0.2 - 1.21.1
 - Update License
 - Update Mod Icon
