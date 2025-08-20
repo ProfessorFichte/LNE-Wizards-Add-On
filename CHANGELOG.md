@@ -1,3 +1,7 @@
+### 1.0.4 - 1.21.1
+- Flame Rush, Ray of Frost & Starfall are now a T4 spell
+- they can now also be looted outside the classes structure
+
 ### 1.0.3 - 1.21.1
 - Spell Engine 1.7
 - Flame Rush Effect now does not burn nearby enemies (was too unbalanced)
