@@ -5,9 +5,18 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:loot_table",
-          "value": "loot_n_explore:spell_scrolls/wizards/beginner",
-          "weight": 1
+          "type": "minecraft:item",
+          "name": "spell_engine:scroll",
+          "functions": [
+            {
+              "function": "more_rpg_classes:specific_spell_scroll_pool",
+              "spell_pools": ["#wizards:frost", "#wizards:fire", "#wizards:arcane",
+              "#elemental_wizards_rpg:aqua", "#elemental_wizards_rpg:terra","#elemental_wizards_rpg:wind"],
+              "spell_tier_min": 1,
+              "spell_tier_max": 3,
+              "count": 1
+            }
+          ]
         }
       ]
     },

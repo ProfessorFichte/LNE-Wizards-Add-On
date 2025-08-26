@@ -5,8 +5,17 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:loot_table",
-          "value": "loot_n_explore:spell_scrolls/wizards/expert_frost"
+          "type": "minecraft:item",
+          "name": "spell_engine:scroll",
+          "functions": [
+            {
+              "function": "more_rpg_classes:specific_spell_scroll_pool",
+              "spell_pools": ["#wizards:frost"],
+              "spell_tier_min": 3,
+              "spell_tier_max": 4,
+              "count": 1
+            }
+          ]
         }
       ]
     },
