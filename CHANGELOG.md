@@ -1,3 +1,12 @@
+### 1.0.5 - 1.21.1
+- Add Spell Datagen
+- Change Flame Rush Spell
+- it's now a small dash that leaves a damaging flame cloud trail, also you still receive the buff
+- improved Flame Rush's Spell Texture
+- use new loot function for loot chests: "more_rpg_classes:specific_spell_scroll_pool"
+- Ray of Frost now can stack the Frosted until the target is Frozen Solid 
+- Increase Arcane Starfall Area Impact Range & slightly increase damage
+
 ### 1.0.4 - 1.21.1
 - Flame Rush, Ray of Frost & Starfall are now a T4 spell
 - they can now also be looted outside the classes structure

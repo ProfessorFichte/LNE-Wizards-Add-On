@@ -3,8 +3,11 @@ package com.lne_wizards;
 import com.lne_wizards.config.Default;
 import com.lne_wizards.effect.Effects;
 import com.lne_wizards.item.WeaponRegister;
+import com.lne_wizards.spell.CustomSpellImpacts;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.spell_engine.api.config.ConfigFile;
 import com.lne_wizards.config.TweaksConfig;
 import net.tinyconfig.ConfigManager;
@@ -31,6 +34,7 @@ public class LNE_Wizards_Mod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		tweaksConfig.refresh();
+		CustomSpellImpacts.registerCustomImpacts();
 		Effects.register();
 		if(FabricLoader.getInstance().isModLoaded("loot_n_explore")) {
 			itemConfig.refresh();

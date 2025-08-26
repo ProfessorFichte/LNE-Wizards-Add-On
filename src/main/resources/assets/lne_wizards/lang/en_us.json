@@ -31,7 +31,7 @@
   "spell.lne_wizards.arcane_starfall.description": "Calls a falling astral star, causing {damage} arcane spell damage. Consumes all Arcane Charges.",
 
   "spell.lne_wizards.fire_flamerush.name": "Flamerush",
-  "spell.lne_wizards.fire_flamerush.description": "Charges up heat, increasing movement speed and fire spell power. Burning and damages nearby targets for {damage} damage.",
+  "spell.lne_wizards.fire_flamerush.description": "Rushes forward and leaves flame clouds on the trail. Increasing movement speed & fire spell power for {effect_duration}.",
   "effect.lne_wizards.flame_rush": "Flamerush",
   "effect.lne_wizards.flame_rush.description": "Increases movement speed and fire spell power.",
 
@@ -39,6 +39,6 @@
   "spell.lne_wizards.frost_ray.description": "Casts a cold beam, causing {damage} frost spell damage and slowing the target.",
 
   "item.wizards.arcane.treasure_spell_scroll": "Treasure Arcane Spell Scroll",
-  "item.wizards.fire.treasure_spell_scroll": "TreasureFire Spell Scroll",
+  "item.wizards.fire.treasure_spell_scroll": "Treasure Fire Spell Scroll",
   "item.wizards.frost.treasure_spell_scroll": "Treasure Frost Spell Scroll"
 }
