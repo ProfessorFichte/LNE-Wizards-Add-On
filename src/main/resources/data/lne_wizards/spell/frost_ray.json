@@ -25,7 +25,7 @@
           "max_speed": 3
         }
       ],
-      "channel_ticks": 4
+      "channel_ticks": 8
     }
   },
 
@@ -110,9 +110,10 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "wizards:frost_slowness",
-          "duration": 10,
-          "apply_mode": "SET",
+          "effect_id": "more_rpg_classes:frosted",
+          "duration": 5,
+          "apply_mode": "ADD",
+          "amplifier_cap": 5,
           "amplifier": 1,
           "show_particles": false
         }
