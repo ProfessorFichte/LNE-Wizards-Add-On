@@ -6,15 +6,16 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.fx.ParticleHelper;
+import net.spell_engine.fx.SpellEngineParticles;
 
 public class FlameRushStatusEffect extends StatusEffect {
     protected FlameRushStatusEffect(StatusEffectCategory category, int color) {
         super(category, color);
     }
     private static final ParticleBatch particles = new ParticleBatch(
-            "spell_engine:flame_ground",
-            ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET, null,
-            20, 0.05F, 0.2F, 0, 0.5F);
+            SpellEngineParticles.flame.id().toString(),
+            ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET, null,
+            20, 0.05F, 0.1F, 0, 0.25F);
 
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         if(entity instanceof PlayerEntity playerEntity && !playerEntity.getWorld().isClient()) {
