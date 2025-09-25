@@ -1,3 +1,6 @@
+# 0.1.11 - 1.20.1 BETA
+- fix seismic staff Wizard Item Tag
+
 # 0.1.10 - 1.20.1 BETA
 - Update Mod Icon
 - Update License
