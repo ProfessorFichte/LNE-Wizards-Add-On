@@ -1,3 +1,7 @@
+### 1.0.6 - 1.21.1
+- Fix Seismic Staff Wizard Item Staff tag
+- Add LNE Staves to LNE Weapon Theme Item Tag
+
 ### 1.0.5 - 1.21.1
 - Add Spell Datagen
 - Change Flame Rush Spell

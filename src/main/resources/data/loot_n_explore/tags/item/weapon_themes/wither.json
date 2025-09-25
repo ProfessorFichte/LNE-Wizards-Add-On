@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "lne_wizards:wither_staff_fire",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:wither_staff_terra",
+      "required": false
+    }
+  ]
+}

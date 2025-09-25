@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "lne_wizards:ender_dragon_staff_arcane",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:ender_dragon_staff_wind",
+      "required": false
+    }
+  ]
+}
