@@ -1,3 +1,10 @@
+### 1.0.7 - 1.21.1
+- Move to Architectury Enviroment for Multiloader
+- NeoForge Beta!
+- Add 1 new Earth Wizard Tower Variant (Builder: Maxi - Thanks!)
+- Air Wizard Tower is no longer a structure that spawns in the air
+- moved the air wizard tower to the Jungle Biome and let it spawn on the ground
+
 ### 1.0.6 - 1.21.1
 - Fix Seismic Staff Wizard Item Staff tag
 - Add LNE Staves to LNE Weapon Theme Item Tag

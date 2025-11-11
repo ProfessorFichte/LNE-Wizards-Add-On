@@ -4,17 +4,14 @@ import com.lne_wizards.config.Default;
 import com.lne_wizards.effect.Effects;
 import com.lne_wizards.item.WeaponRegister;
 import com.lne_wizards.spell.CustomSpellImpacts;
-import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.spell_engine.api.config.ConfigFile;
 import com.lne_wizards.config.TweaksConfig;
-import net.tinyconfig.ConfigManager;
+import net.tiny_config.ConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LNE_Wizards_Mod implements ModInitializer {
+public class LNE_Wizards_Mod {
 	public static final String MOD_ID = "lne_wizards";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
@@ -31,16 +28,18 @@ public class LNE_Wizards_Mod implements ModInitializer {
 			.sanitize(true)
 			.build();
 
-	@Override
-	public void onInitialize() {
+	public static void init() {
 		tweaksConfig.refresh();
 		CustomSpellImpacts.registerCustomImpacts();
-		Effects.register();
+	}
+	public static void registerItems(){
 		if(FabricLoader.getInstance().isModLoaded("loot_n_explore")) {
 			itemConfig.refresh();
 			WeaponRegister.register(itemConfig.value.weapons);
 			itemConfig.save();
 		}
-
+	}
+	public static void registerEffects(){
+		Effects.register();
 	}
 }

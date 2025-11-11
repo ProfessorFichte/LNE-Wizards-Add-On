@@ -1,0 +1,38 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+#issueTrackerURL = ""
+license = "ARR"
+
+[[mods]]
+modId = "lne_wizards"
+version = "${version}"
+displayName = "LNE Wizards"
+authors = "Fichte"
+description = '''
+Loot & Explore Add-On with Wizards RPG-Series Content.
+'''
+logoFile = "icon.png"
+
+[[dependencies.lne_wizards]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lne_wizards]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lne_wizards]]
+modId = "wizards"
+type = "required"
+versionRange = "[${wizards_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[mixins]]
+config = "lne_wizards.mixins.json"

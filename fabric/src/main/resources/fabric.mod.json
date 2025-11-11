@@ -11,14 +11,14 @@
 		"sources": "https://github.com/ProfessorFichte/LNE-Wizards-Add-On"
 	},
 	"license": "ARR",
-	"icon": "assets/lne_wizards/icon.png",
+	"icon": "icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"client": [
-			"com.lne_wizards.client.LneWizardsClient"
+			"com.lne_wizards.fabric.client.FabricClient"
 		],
 		"main": [
-          "com.lne_wizards.LNE_Wizards_Mod"
+          "com.lne_wizards.fabric.FabricMod"
 		],
 		"fabric-datagen": [
 			"com.lne_wizards.Lne_wizardsDataGenerator"
