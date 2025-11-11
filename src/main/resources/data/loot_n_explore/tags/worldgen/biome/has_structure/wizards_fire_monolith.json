@@ -1,6 +1,10 @@
 {
   "values": [
     "#minecraft:is_savanna",
-    "#minecraft:is_badlands"
+    "#minecraft:is_badlands",
+    {
+      "id": "#c:is_savanna",
+      "required": false
+    }
   ]
 }
