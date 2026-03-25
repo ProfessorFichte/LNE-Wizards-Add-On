@@ -18,6 +18,7 @@ public final class NeoForgeMod {
     public static void register(RegisterEvent event) {
         event.register(RegistryKeys.ITEM, reg -> {
             LNE_Wizards_Mod.registerItems();
+            LNE_Wizards_Mod.registerSpawnEggs();
         });
         event.register(RegistryKeys.STATUS_EFFECT, reg -> {
             LNE_Wizards_Mod.registerEffects();

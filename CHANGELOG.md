@@ -4,7 +4,7 @@
 - Ray of Frost, Flamerush & Falling Star are now Tier 5 Spells, they got slightly buffed
 - These Spells can now also be learned in the Spell Binding Table
 - Moved the Spells Aeroblast & Explosive Bubbles from Elemental Wizards to this Mod
-- Reworked Explosive Bubbles, it now spawns Entities that Explode on Impact
+- Reworked Explosive Bubbles, its now a channeled spell, that spawns Bubble Entities that Explode on Impact
 - Moved all the structures from loot_n_explore to lne_wizards, so it's clearer that these structures come from this add-on
 **New Content**
 - Added a new T5 Extra Spell for the Earth Wizard: Rock Crash (A Giant Meteor Projectile that crashes in the ground)

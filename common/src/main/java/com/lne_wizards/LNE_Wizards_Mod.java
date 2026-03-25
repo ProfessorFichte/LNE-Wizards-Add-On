@@ -37,8 +37,6 @@ public class LNE_Wizards_Mod {
 		tweaksConfig.refresh();
 		effectConfig.refresh();
 		CustomSpellImpacts.registerCustomImpacts();
-		registerEntities();
-		registerEntityAttributes();
 	}
 
 	public static void registerItems(){
