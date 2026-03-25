@@ -67,7 +67,7 @@ public abstract class ElementalEvokerEntity extends EvokerEntity implements ISpe
     }
 
     @Override
-    public boolean isSpellcasting() {
+    public boolean isCastingSpell() {
         return this.getSpell() != net.minecraft.entity.mob.SpellcastingIllagerEntity.Spell.NONE;
     }
 

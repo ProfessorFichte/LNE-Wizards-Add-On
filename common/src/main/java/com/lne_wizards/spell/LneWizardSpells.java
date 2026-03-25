@@ -348,7 +348,7 @@ public class LneWizardSpells {
     private static Entry wind_aeroburst() {
         var id = Identifier.of(MOD_ID, "wind_aeroburst");
         var title = "Aeroburst";
-        var description = "Release an explosive burst of air in all directions, knocking back all nearby enemies with tremendous force.";
+        var description = "Release an explosive burst of air in all directions, knocking back all nearby enemies with tremendous force and dealing {damage} damage.";
 
         var spell = SpellBuilder.createSpellActive();
         spell.school = MoreSpellSchools.AIR;

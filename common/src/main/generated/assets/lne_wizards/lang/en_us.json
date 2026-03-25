@@ -43,7 +43,7 @@
   "spell.lne_wizards.terra_rock_crash.name": "Rock Crash",
   "spell.lne_wizards.water_flow.description": "When casting a spell, deal water damage and heal nearby allies in a small area.",
   "spell.lne_wizards.water_flow.name": "Water Flow",
-  "spell.lne_wizards.wind_aeroburst.description": "Release an explosive burst of air in all directions, knocking back all nearby enemies with tremendous force.",
+  "spell.lne_wizards.wind_aeroburst.description": "Release an explosive burst of air in all directions, knocking back all nearby enemies with tremendous force and dealing {damage} damage.",
   "spell.lne_wizards.wind_aeroburst.name": "Aeroburst",
   "spell.lne_wizards.zephyrs_speed.description": "On dealing damage with an active spell, gain a stack of Zephyr's Speed for {effect_duration} seconds. Increasing spell crit chance by {bonus} and movement speed by {bonus2}.",
   "spell.lne_wizards.zephyrs_speed.name": "Zephyr's Speed"
