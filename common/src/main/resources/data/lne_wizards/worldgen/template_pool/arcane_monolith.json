@@ -1,0 +1,15 @@
+{
+  "name": "lne_wizards:arcane_monolith",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "lne_wizards:wizards_amethyst_monolith",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}

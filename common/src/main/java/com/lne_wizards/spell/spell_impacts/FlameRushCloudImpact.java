@@ -23,7 +23,7 @@ public class FlameRushCloudImpact implements SpellHandlers.CustomImpact {
             Entity target,
             SpellHelper.ImpactContext context
     ) {
-        RegistryEntry<Spell> flamerush_cloud = SpellRegistry.from(caster.getWorld()).getEntry(Identifier.of(MOD_ID, "functional/flamerush_cloud")).get();
+        RegistryEntry<Spell> flamerush_cloud = SpellRegistry.from(caster.getWorld()).getEntry(Identifier.of(MOD_ID, "helper/flamerush_cloud")).get();
         SpellHelper.placeCloud(caster.getWorld(), caster, null, caster.getPos(), flamerush_cloud , new SpellHelper.ImpactContext().power(SpellPower.getSpellPower(SpellSchools.FIRE, caster)).position(caster.getPos()));
 
         return new SpellHandlers.ImpactResult(true, false);

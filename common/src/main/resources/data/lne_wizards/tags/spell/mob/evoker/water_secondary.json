@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "elemental_wizards_rpg:aqua_bubble_beam",
+      "required": false
+    },
+    {
+      "id": "elemental_wizards_rpg:aqua_waterball",
+      "required": false
+    }
+  ]
+}

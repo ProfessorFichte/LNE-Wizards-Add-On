@@ -2,6 +2,8 @@ package com.lne_wizards.item;
 
 import more_rpg_loot.item.Group;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.render.entity.EvokerEntityRenderer;
+import net.minecraft.entity.mob.EvokerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterials;
@@ -12,8 +14,9 @@ import net.minecraft.util.Rarity;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.WeaponConfig;
-import net.spell_engine.api.item.Equipment;
-import net.spell_engine.api.item.weapon.Weapon;
+import net.spell_engine.api.spell.container.SpellContainers;
+import net.spell_engine.rpg_series.item.Equipment;
+import net.spell_engine.rpg_series.item.Weapon;
 import net.spell_power.api.SpellSchools;
 import net.spell_engine.api.item.weapon.StaffItem;
 
@@ -29,7 +32,7 @@ public class WeaponRegister {
 
     private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Weapon.Factory factory, WeaponConfig defaults, Equipment.WeaponType type) {
         var entry = new Weapon.Entry(MOD_ID, name, material, factory, defaults, type);
-        entry.castSpell();
+        entry.spellContainer(SpellContainers.forMagicWeapon());
         entries.add(entry);
         return entry;
     }
@@ -55,7 +58,7 @@ public class WeaponRegister {
 
     private static final float staffAttackDamage = 4;
     private static final float staffAttackSpeed = -3F;
-    private static final float staffSpellPower = 7F;
+    private static final float staffSpellPower = 8F;
 
     public static Identifier rimefrost = Identifier.of("lne_wizards", "rimefrost");
     public static Identifier pyromaniac = Identifier.of("lne_wizards", "pyromaniac");
@@ -68,30 +71,36 @@ public class WeaponRegister {
         if (!tweaksConfig.value.disable_special_lne_weapons) {
             staff("glacial_staff_frost",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.ICE)))
+                    .translatedName("Everfrost Staff")
                     .attribute(AttributeModifier.bonus(SpellSchools.FROST.id, staffSpellPower))
-                    .spell(rimefrost);
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(rimefrost));
             staff("wither_staff_fire",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.BONE)))
+                    .translatedName("Netherflame Staff")
                     .attribute(AttributeModifier.bonus(SpellSchools.FIRE.id, staffSpellPower))
-                    .spell(pyromaniac);
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(pyromaniac));
             staff("ender_dragon_staff_arcane",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.AMETHYST_SHARD)))
+                    .translatedName("Arcane Dragon Staff")
                     .attribute(AttributeModifier.bonus(SpellSchools.ARCANE.id, staffSpellPower))
-                    .spell(arcane_precision);
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(arcane_precision));
         }
         if (!tweaksConfig.value.disable_special_lne_weapons && FabricLoader.getInstance().isModLoaded("elemental_wizards_rpg")) {
             staff("elder_guardian_staff_aqua",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.PRISMARINE_SHARD)))
+                    .translatedName("Tidecaller's Staff")
                     .attribute(AttributeModifier.bonus(MoreSpellSchools.WATER.id, staffSpellPower))
-                    .spell(water_flow);
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(water_flow));
             staff("wither_staff_terra",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.BONE)))
+                    .translatedName("Seismic Staff")
                     .attribute(AttributeModifier.bonus(MoreSpellSchools.EARTH.id, staffSpellPower))
-                    .spell(obsidian_shards);
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(obsidian_shards));
             staff("ender_dragon_staff_wind",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.AMETHYST_SHARD)))
+                    .translatedName("Zephyrwing Staff")
                     .attribute(AttributeModifier.bonus(MoreSpellSchools.AIR.id, staffSpellPower))
-                    .spell(zephyrs_speed);
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(zephyrs_speed));
         }
         entries.forEach(entry -> entry.rarity = Rarity.RARE);
         Weapon.register(configs, entries, Group.RPG_LOOT_KEY);

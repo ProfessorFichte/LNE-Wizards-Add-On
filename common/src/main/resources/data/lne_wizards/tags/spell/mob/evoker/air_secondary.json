@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "elemental_wizards_rpg:wind_updraft",
+      "required": false
+    },
+    {
+      "id": "elemental_wizards_rpg:wind_twister",
+      "required": false
+    }
+  ]
+}

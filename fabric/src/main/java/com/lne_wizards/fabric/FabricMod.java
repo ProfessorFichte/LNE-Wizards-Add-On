@@ -9,5 +9,6 @@ public final class FabricMod implements ModInitializer {
         LNE_Wizards_Mod.init();
         LNE_Wizards_Mod.registerItems();
         LNE_Wizards_Mod.registerEffects();
+        LNE_Wizards_Mod.registerSpawnEggs();
     }
 }

@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "lne_wizards:chests/arcane/tier3",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "lne_wizards:chests/earth/tier3",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "lne_wizards:chests/fire/tier3",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "lne_wizards:chests/frost/tier3",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "lne_wizards:chests/water/tier3",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "lne_wizards:chests/wind/tier3",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,10 +1,13 @@
 {
   "school": "spell_power:fire",
   "range": 10.0,
-  "tier": 4,
+  "tier": 5,
+  "learn": {},
   "active": {},
   "release": {
-    "animation": "spell_engine:dual_handed_ground_release",
+    "animation": {
+      "id": "spell_engine:dual_handed_ground_release"
+    },
     "particles": [
       {
         "particle_id": "spell_engine:flame_medium_a",

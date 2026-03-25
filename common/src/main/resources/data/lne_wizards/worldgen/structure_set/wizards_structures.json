@@ -1,0 +1,58 @@
+{
+  "structures": [
+    {
+      "structure": "lne_wizards:wizards_small_tower_1",
+      "weight": 5
+    },
+    {
+      "structure": "lne_wizards:wizards_small_tower_2",
+      "weight": 5
+    },
+    {
+      "structure": "lne_wizards:wizards_caravan",
+      "weight": 5
+    },
+    {
+      "structure": "lne_wizards:frost_monolith",
+      "weight": 4
+    },
+    {
+      "structure": "lne_wizards:fire_monolith",
+      "weight": 4
+    },
+    {
+      "structure": "lne_wizards:arcane_monolith",
+      "weight": 4
+    },
+    {
+      "structure": "lne_wizards:earth_monolith",
+      "weight": 4
+    },
+    {
+      "structure": "lne_wizards:wind_monolith",
+      "weight": 4
+    },
+    {
+      "structure": "lne_wizards:wizards_frost_tower",
+      "weight": 3
+    },
+    {
+      "structure": "lne_wizards:wizards_earth_tower",
+      "weight": 3
+    },
+    {
+      "structure": "lne_wizards:wizards_wind_tower",
+      "weight": 3
+    }
+  ],
+  "placement": {
+    "exclusion_zone": {
+      "other_set": "minecraft:villages",
+      "chunk_count": 10
+    },
+    "type": "minecraft:random_spread",
+    "separation": 8,
+    "spacing": 22,
+    "salt": 1597775083
+  }
+}

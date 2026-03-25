@@ -23,6 +23,18 @@
     {
       "id": "lne_wizards:ender_dragon_staff_wind",
       "required": false
+    },
+    {
+      "id": "lne_wizards:elder_guardian_staff_aqua",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:wither_staff_terra",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:ender_dragon_staff_wind",
+      "required": false
     }
   ]
 }

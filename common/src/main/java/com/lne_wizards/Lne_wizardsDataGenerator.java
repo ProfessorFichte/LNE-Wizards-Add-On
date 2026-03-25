@@ -1,5 +1,9 @@
 package com.lne_wizards;
 
+import com.lne_wizards.datagen.LangGenerator;
+import com.lne_wizards.datagen.WeaponAttributesGenerator;
+import com.lne_wizards.datagen.ModModelProvider;
+import com.lne_wizards.datagen.ModRecipeProvider;
 import com.lne_wizards.item.WeaponRegister;
 import com.lne_wizards.spell.LneWizardSpells;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -8,7 +12,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.datagen.SpellGenerator;
-import net.spell_engine.api.item.Equipment;
+import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
@@ -20,6 +24,10 @@ public class Lne_wizardsDataGenerator implements DataGeneratorEntrypoint {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 		pack.addProvider(ItemTagGenerator::new);
 		pack.addProvider(SpellGen::new);
+		pack.addProvider(ModRecipeProvider::new);
+		pack.addProvider(LangGenerator::new);
+		pack.addProvider(ModModelProvider::new);
+		pack.addProvider(WeaponAttributesGenerator::new);
 	}
 	public static class SpellGen extends SpellGenerator {
 		public SpellGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {

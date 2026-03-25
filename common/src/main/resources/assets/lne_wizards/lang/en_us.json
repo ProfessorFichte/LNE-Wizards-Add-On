@@ -38,7 +38,17 @@
   "spell.lne_wizards.frost_ray.name": "Ray of Frost",
   "spell.lne_wizards.frost_ray.description": "Casts a cold beam, causing {damage} frost spell damage and slowing the target.",
 
-  "item.wizards.arcane.treasure_spell_scroll": "Treasure Arcane Spell Scroll",
-  "item.wizards.fire.treasure_spell_scroll": "Treasure Fire Spell Scroll",
-  "item.wizards.frost.treasure_spell_scroll": "Treasure Frost Spell Scroll"
+  "entity.lne_wizards.air_evoker": "Air Evoker",
+  "entity.lne_wizards.arcane_evoker": "Arcane Evoker",
+  "entity.lne_wizards.earth_evoker": "Earth Evoker",
+  "entity.lne_wizards.fire_evoker": "Fire Evoker",
+  "entity.lne_wizards.frost_evoker": "Frost Evoker",
+  "entity.lne_wizards.water_evoker": "Water Evoker",
+
+  "item.lne_wizards.air_evoker_spawn_egg": "Air Evoker Spawn Egg",
+  "item.lne_wizards.arcane_evoker_spawn_egg": "Arcane Evoker Spawn Egg",
+  "item.lne_wizards.earth_evoker_spawn_egg": "Earth Evoker Spawn Egg",
+  "item.lne_wizards.fire_evoker_spawn_egg": "Fire Evoker Spawn Egg",
+  "item.lne_wizards.frost_evoker_spawn_egg": "Frost Evoker Spawn Egg",
+  "item.lne_wizards.water_evoker_spawn_egg": "Water Evoker Spawn Egg"
 }

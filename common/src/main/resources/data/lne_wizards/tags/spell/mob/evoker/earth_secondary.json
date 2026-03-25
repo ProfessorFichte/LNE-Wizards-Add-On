@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "elemental_wizards_rpg:terra_impale",
+      "required": false
+    },
+    {
+      "id": "elemental_wizards_rpg:terra_stone_flesh",
+      "required": false
+    }
+  ]
+}

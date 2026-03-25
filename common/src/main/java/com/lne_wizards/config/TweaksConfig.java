@@ -2,12 +2,6 @@ package com.lne_wizards.config;
 
 public class TweaksConfig {
     public boolean disable_special_lne_weapons = false;
-    public int everfrost_staff_freeze_ticks_on_damage = 5;
-    public int everfrost_staff_freezing_effect_seconds = 5;
-    public int netherflame_staff_haste_max_amplifier = 3;
-    public int netherflame_staff_haste_duration = 8;
-    public int dragon_staff_arcane_precision_max_amplifier = 5;
-    public int dragon_staff_arcane_precision_duration = 10;
-    public int zephyrwing_staff_zephyrs_speed_max_amplifier = 3;
-    public int seismic_staff_obsidian_shards_max_amplifier = 3;
+    public float elemental_evoker_default_spell_power = 6.0F;
+    public boolean custom_illager_variants_spawn_in_raids = true;
 }

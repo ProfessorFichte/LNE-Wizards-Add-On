@@ -1,0 +1,56 @@
+{
+  "school": "spell_power:water",
+  "range": 10.0,
+  "tier": 5,
+  "learn": {},
+  "active": {
+    "cast": {
+      "duration": 4.0,
+      "channel_ticks": 8,
+      "animation": {
+        "id": "more_rpg_classes:floating_spawn_channel"
+      },
+      "movement_speed": 1.0,
+      "sound": {
+        "id": "more_rpg_classes:water_bubbles"
+      },
+      "particles": [
+        {
+          "particle_id": "more_rpg_classes:bubble",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 1.0,
+          "min_speed": 0.001,
+          "max_speed": 0.1
+        }
+      ]
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "SPAWN",
+        "spawns": [
+          {
+            "entity_type_id": "lne_wizards:explosive_bubble",
+            "time_to_live_seconds": 8,
+            "placement": {
+              "location_offset_by_look": 2.0,
+              "location_yaw_offset": -160.0,
+              "apply_yaw": true
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.4,
+    "cooldown": {
+      "duration": 32.0
+    },
+    "item": {
+      "id": "more_rpg_classes:aqua_stone"
+    }
+  }
+}
