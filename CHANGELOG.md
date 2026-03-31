@@ -1,3 +1,7 @@
+# 1.1.2 - 1.21.1
+- Elemental Evokers stopped casting spells and ran away when they got hit, this was fixed
+- Overall improved the fleeing goals of the Elemental Evokers, to stay in safe distance from the attacker
+
 # 1.1.1 - 1.21.1
 - fixed crash due to elemental evokers ticking
 - added the damage number tooltip to the Aeroburst Spell

@@ -1,8 +1,9 @@
 package com.lne_wizards.entity.mob.elemental_evokers;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.goal.EscapeDangerGoal;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -16,11 +17,13 @@ import net.minecraft.entity.raid.RaiderEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.more_rpg_classes.entity.ISpellCasterEntity;
 import net.more_rpg_classes.entity.goal.MobSpellCastGoal;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 public abstract class ElementalEvokerEntity extends EvokerEntity implements ISpellCasterEntity {
@@ -41,6 +44,16 @@ public abstract class ElementalEvokerEntity extends EvokerEntity implements ISpe
     public abstract String getSecondarySpells();
 
     public abstract Identifier getWandItemId();
+
+    //Minimum distance from the combat target before the evoker backs away.
+    protected float getFleeDistance() {
+        return 4.0F;
+    }
+
+    //Flee radius used when health drops below 35%.
+    protected float getLowHealthFleeDistance() {
+        return 6.0F;
+    }
 
     @Override
     public void startSpellCast(int ticks) {
@@ -87,16 +100,18 @@ public abstract class ElementalEvokerEntity extends EvokerEntity implements ISpe
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.0));
+        // Flee at low health — highest priority, overrides spell casting
+        this.goalSelector.add(1, new LowHealthFleeGoal(this, getLowHealthFleeDistance()));
+        // Back away just enough when target closes in, then stop so spells can fire
+        this.goalSelector.add(2, new BackAwayGoal(getFleeDistance(), 1.2));
 
         MobSpellCastGoal primary   = new MobSpellCastGoal(this, getPrimarySpell(),   getMobCastGoals());
         MobSpellCastGoal secondary = new MobSpellCastGoal(this, getSecondarySpells(), getMobCastGoals());
-        this.goalSelector.add(2, secondary);
-        this.goalSelector.add(3, primary);
+        this.goalSelector.add(3, secondary);
+        this.goalSelector.add(4, primary);
         getMobCastGoals().add(primary);
         getMobCastGoals().add(secondary);
 
-        this.goalSelector.add(4, new FleeEntityGoal<>(this, PlayerEntity.class, 8.0F, 0.6, 1.0));
         this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
 
         this.targetSelector.add(1, new RevengeGoal(this, new Class[]{RaiderEntity.class}).setGroupRevenge());
@@ -133,10 +148,6 @@ public abstract class ElementalEvokerEntity extends EvokerEntity implements ISpe
         return SoundEvents.ENTITY_EVOKER_HURT;
     }
 
-    public boolean canParticipateInRaid() {
-        return false;
-    }
-
     private static class RevengeGoal extends net.minecraft.entity.ai.goal.RevengeGoal {
         public RevengeGoal(ElementalEvokerEntity mob, Class<?>... noRevengeTypes) {
             super(mob, noRevengeTypes);
@@ -146,6 +157,85 @@ public abstract class ElementalEvokerEntity extends EvokerEntity implements ISpe
     private static class ActiveTargetGoal<T extends net.minecraft.entity.LivingEntity> extends net.minecraft.entity.ai.goal.ActiveTargetGoal<T> {
         public ActiveTargetGoal(ElementalEvokerEntity mob, Class<T> targetClass, boolean checkVisibility) {
             super(mob, targetClass, checkVisibility);
+        }
+    }
+
+    // Backs away from the current combat target until it is >= minDistance blocks away.
+    // Stops immediately once safe — spells can fire right away after.
+    private class BackAwayGoal extends Goal {
+        private final float minDistance;
+        private final double speed;
+        private int navigationTimer;
+
+        public BackAwayGoal(float minDistance, double speed) {
+            this.minDistance = minDistance;
+            this.speed = speed;
+            this.setControls(EnumSet.of(Goal.Control.MOVE));
+        }
+
+        @Override
+        public boolean canStart() {
+            if (ElementalEvokerEntity.this.isCastingSpell()) return false;
+            LivingEntity target = ElementalEvokerEntity.this.getTarget();
+            if (target == null || !target.isAlive()) return false;
+            return ElementalEvokerEntity.this.squaredDistanceTo(target) < minDistance * minDistance;
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            if (ElementalEvokerEntity.this.isCastingSpell()) return false;
+            LivingEntity target = ElementalEvokerEntity.this.getTarget();
+            if (target == null || !target.isAlive()) return false;
+            return ElementalEvokerEntity.this.squaredDistanceTo(target) < minDistance * minDistance;
+        }
+
+        @Override
+        public void start() {
+            navigationTimer = 0;
+            updateNavigation();
+        }
+
+        @Override
+        public void tick() {
+            if (--navigationTimer <= 0) {
+                navigationTimer = 5;
+                updateNavigation();
+            }
+        }
+
+        private void updateNavigation() {
+            LivingEntity target = ElementalEvokerEntity.this.getTarget();
+            if (target == null) return;
+            Vec3d awayDir = ElementalEvokerEntity.this.getPos().subtract(target.getPos()).normalize();
+            Vec3d dest = ElementalEvokerEntity.this.getPos().add(awayDir.multiply(minDistance + 1.0));
+            ElementalEvokerEntity.this.getNavigation().startMovingTo(dest.x, dest.y, dest.z, speed);
+        }
+
+        @Override
+        public void stop() {
+            ElementalEvokerEntity.this.getNavigation().stop();
+        }
+    }
+
+    private static class LowHealthFleeGoal extends FleeEntityGoal<PlayerEntity> {
+        private static final float LOW_HEALTH_THRESHOLD = 0.35f;
+        private final ElementalEvokerEntity evoker;
+
+        public LowHealthFleeGoal(ElementalEvokerEntity evoker, float fleeDistance) {
+            super(evoker, PlayerEntity.class, fleeDistance, 1.0, 1.2);
+            this.evoker = evoker;
+        }
+
+        @Override
+        public boolean canStart() {
+            if (evoker.getHealth() > evoker.getMaxHealth() * LOW_HEALTH_THRESHOLD) return false;
+            return super.canStart();
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            if (evoker.getHealth() > evoker.getMaxHealth() * LOW_HEALTH_THRESHOLD) return false;
+            return super.shouldContinue();
         }
     }
 }
