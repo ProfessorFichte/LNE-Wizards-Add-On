@@ -16,12 +16,12 @@ public class FireEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public String getPrimarySpell() {
-        return "wizards:fireball";
+        return "#lne_wizards:mob/fire_evoker/primary";
     }
 
     @Override
     public String getSecondarySpells() {
-        return "#lne_wizards:mob/evoker/fire_secondary";
+        return "#lne_wizards:mob/fire_evoker/secondary";
     }
 
     @Override

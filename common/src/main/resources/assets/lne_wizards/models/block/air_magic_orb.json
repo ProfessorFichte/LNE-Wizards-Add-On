@@ -1,0 +1,8 @@
+{
+  "parent": "lne_wizards:block/magic_orb",
+  "textures": {
+    "0": "lne_wizards:block/magic_orb_stand",
+    "1": "lne_wizards:block/magic_orb_air",
+    "particle": "lne_wizards:block/magic_orb_stand"
+  }
+}

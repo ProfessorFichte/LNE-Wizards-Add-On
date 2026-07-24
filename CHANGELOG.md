@@ -1,3 +1,14 @@
+# 1.1.3 - 1.21.1
+- Adapt to Spell Engine 1.9.10+ API Changes
+**Balancing & Internal Changes:**
+- Elemental Evokers can now also use the Tier 2 Spell Expansion Wizard Spells
+- nerfed default spell power from elemental evokers from 6.0 -> 2.5
+- changed casting spell pool-spell tag files & structure from the elemental evokers
+- Removed Updraft and added Aeroblast to the AirEvoker's secondary spell pool
+- Added a new magical orb blocks that can be found in LNE Wizard's Structures!
+- They provide you a long-lasting buff for the according spell power
+- Add the Elemental Evokers to the "illager" Entity Type Tag
+
 # 1.1.2 - 1.21.1
 - Elemental Evokers stopped casting spells and ran away when they got hit, this was fixed
 - Overall improved the fleeing goals of the Elemental Evokers, to stay in safe distance from the attacker

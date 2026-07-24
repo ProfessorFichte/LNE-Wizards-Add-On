@@ -236,8 +236,7 @@ public class LneWizardSpells {
                         5, 0.1F, 0.3F
                 ).rotate(ParticleBatch.Rotation.LOOK)
         };
-        meteorProjectile.client_data.model = new Spell.ProjectileModel();
-        meteorProjectile.client_data.model.model_id = "lne_wizards:spell_projectile/starfall";
+        meteorProjectile.client_data.composite_model = SpellBuilder.ProjectileModels.single("lne_wizards:spell_projectile/starfall");
         spell.deliver.meteor.projectile = meteorProjectile;
 
         var damage = SpellBuilder.Impacts.damage(1.5F, 2.0F);
@@ -449,9 +448,7 @@ public class LneWizardSpells {
                         ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
                         ParticleBatch.Rotation.LOOK, 10, 0.1F, 0.0F, 0)
         };
-        projectile.client_data.model = new Spell.ProjectileModel();
-        projectile.client_data.model.model_id = "elemental_wizards_rpg:spell_projectile/meteor";
-        projectile.client_data.model.scale = 1.7F;
+        projectile.client_data.composite_model = SpellBuilder.ProjectileModels.single("elemental_wizards_rpg:spell_projectile/meteor", 1.7F);
         spell.deliver.meteor.projectile = projectile;
 
         var damage = SpellBuilder.Impacts.damage(1.0F, 3.5F);
@@ -904,10 +901,9 @@ public class LneWizardSpells {
         projectile.hitbox.width = 0.5F;
         projectile.hitbox.height = 0.5F;
         projectile.client_data = new Spell.ProjectileData.Client();
-        projectile.client_data.model = new Spell.ProjectileModel();
-        projectile.client_data.model.model_id = "lne_wizards:spell_projectile/obsidian_shards";
-        projectile.client_data.model.scale = 0.5F;
-        projectile.client_data.model.rotate_degrees_per_tick = 0.0F;
+        var obsidianShardsModel = SpellBuilder.ProjectileModels.model("lne_wizards:spell_projectile/obsidian_shards", 0.5F);
+        obsidianShardsModel.rotate_degrees_per_tick = 0.0F;
+        projectile.client_data.composite_model = SpellBuilder.ProjectileModels.composite(obsidianShardsModel);
         spell.deliver.projectile.projectile = projectile;
 
         var damage = SpellBuilder.Impacts.damage(0.25F, 0.5F);

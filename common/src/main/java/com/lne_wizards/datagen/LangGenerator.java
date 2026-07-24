@@ -1,10 +1,11 @@
 package com.lne_wizards.datagen;
 
+import com.lne_wizards.block.ModBlocks;
 import com.lne_wizards.effect.LNE_WizardsEffects;
+import com.lne_wizards.entity.ModEntities;
 import com.lne_wizards.entity.ModSpawnEggs;
 import com.lne_wizards.item.WeaponRegister;
 import com.lne_wizards.spell.LneWizardSpells;
-import net.elemental_wizards_rpg.spell.ElementalWizardSpells;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
@@ -20,6 +21,9 @@ public class LangGenerator extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder builder) {
+        // Blocks
+        ModBlocks.all.forEach(entry -> builder.add(entry.block().getTranslationKey(), entry.translation()));
+
         // Weapons
         WeaponRegister.entries.forEach(entry -> {
             if (entry.item() != null && entry.translatedName() != null && !entry.translatedName().isEmpty()) {
@@ -45,19 +49,19 @@ public class LangGenerator extends FabricLanguageProvider {
         });
 
         // Elemental Evoker entity names
-        builder.add("entity." + MOD_ID + ".air_evoker",    "Air Evoker");
+        if (ModEntities.AIR_EVOKER != null)   builder.add("entity." + MOD_ID + ".air_evoker",   "Air Evoker");
         builder.add("entity." + MOD_ID + ".arcane_evoker", "Arcane Evoker");
-        builder.add("entity." + MOD_ID + ".earth_evoker",  "Earth Evoker");
+        if (ModEntities.EARTH_EVOKER != null) builder.add("entity." + MOD_ID + ".earth_evoker", "Earth Evoker");
         builder.add("entity." + MOD_ID + ".fire_evoker",   "Fire Evoker");
         builder.add("entity." + MOD_ID + ".frost_evoker",  "Frost Evoker");
-        builder.add("entity." + MOD_ID + ".water_evoker",  "Water Evoker");
+        if (ModEntities.WATER_EVOKER != null) builder.add("entity." + MOD_ID + ".water_evoker", "Water Evoker");
 
         // Elemental Evoker spawn eggs
-        builder.add(ModSpawnEggs.AIR_EVOKER_SPAWN_EGG,    "Air Evoker Spawn Egg");
+        if (ModSpawnEggs.AIR_EVOKER_SPAWN_EGG != null)   builder.add(ModSpawnEggs.AIR_EVOKER_SPAWN_EGG,   "Air Evoker Spawn Egg");
         builder.add(ModSpawnEggs.ARCANE_EVOKER_SPAWN_EGG, "Arcane Evoker Spawn Egg");
-        builder.add(ModSpawnEggs.EARTH_EVOKER_SPAWN_EGG,  "Earth Evoker Spawn Egg");
+        if (ModSpawnEggs.EARTH_EVOKER_SPAWN_EGG != null) builder.add(ModSpawnEggs.EARTH_EVOKER_SPAWN_EGG, "Earth Evoker Spawn Egg");
         builder.add(ModSpawnEggs.FIRE_EVOKER_SPAWN_EGG,   "Fire Evoker Spawn Egg");
         builder.add(ModSpawnEggs.FROST_EVOKER_SPAWN_EGG,  "Frost Evoker Spawn Egg");
-        builder.add(ModSpawnEggs.WATER_EVOKER_SPAWN_EGG,  "Water Evoker Spawn Egg");
+        if (ModSpawnEggs.WATER_EVOKER_SPAWN_EGG != null) builder.add(ModSpawnEggs.WATER_EVOKER_SPAWN_EGG, "Water Evoker Spawn Egg");
     }
 }

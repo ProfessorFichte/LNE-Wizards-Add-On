@@ -1,5 +1,6 @@
 package com.lne_wizards;
 
+import com.lne_wizards.block.ModBlocks;
 import com.lne_wizards.config.Default;
 import com.lne_wizards.effect.LNE_WizardsEffects;
 import com.lne_wizards.entity.ModEntities;
@@ -21,7 +22,7 @@ public class LNE_Wizards_Mod {
 			.sanitize(true)
 			.build();
 	public static ConfigManager<TweaksConfig> tweaksConfig = new ConfigManager<>
-			("tweaks_v0", new TweaksConfig())
+			("tweaks_v2", new TweaksConfig())
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
@@ -49,6 +50,10 @@ public class LNE_Wizards_Mod {
 
 	public static void registerEffects(){
 		LNE_WizardsEffects.register(effectConfig.value);
+	}
+
+	public static void registerBlocks() {
+		ModBlocks.register();
 	}
 
 	public static void registerSpawnEggs() {

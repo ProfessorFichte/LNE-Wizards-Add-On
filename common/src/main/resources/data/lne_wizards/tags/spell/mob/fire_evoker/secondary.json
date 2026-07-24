@@ -3,6 +3,10 @@
     {
       "id": "wizards:fire_breath",
       "required": false
+    },
+    {
+      "id": "wizards:fire_slash",
+      "required": false
     }
   ]
 }

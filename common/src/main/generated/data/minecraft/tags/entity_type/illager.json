@@ -1,0 +1,28 @@
+{
+  "values": [
+    {
+      "id": "lne_wizards:arcane_evoker",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:fire_evoker",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:frost_evoker",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:air_evoker",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:earth_evoker",
+      "required": false
+    },
+    {
+      "id": "lne_wizards:water_evoker",
+      "required": false
+    }
+  ]
+}

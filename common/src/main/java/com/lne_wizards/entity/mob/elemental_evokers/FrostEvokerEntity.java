@@ -16,12 +16,12 @@ public class FrostEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public String getPrimarySpell() {
-        return "wizards:frostbolt";
+        return "#lne_wizards:mob/frost_evoker/primary";
     }
 
     @Override
     public String getSecondarySpells() {
-        return "#lne_wizards:mob/evoker/frost_secondary";
+        return "#lne_wizards:mob/frost_evoker/secondary";
     }
 
     @Override

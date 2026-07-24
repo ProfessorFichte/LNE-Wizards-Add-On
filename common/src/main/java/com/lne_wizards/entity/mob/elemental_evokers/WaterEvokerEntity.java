@@ -16,12 +16,12 @@ public class WaterEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public String getPrimarySpell() {
-        return "elemental_wizards_rpg:aqua_splash";
+        return "#lne_wizards:mob/water_evoker/primary";
     }
 
     @Override
     public String getSecondarySpells() {
-        return "#lne_wizards:mob/evoker/water_secondary";
+        return "#lne_wizards:mob/water_evoker/secondary";
     }
 
     @Override

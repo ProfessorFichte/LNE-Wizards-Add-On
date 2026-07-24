@@ -16,12 +16,12 @@ public class AirEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public String getPrimarySpell() {
-        return "elemental_wizards_rpg:wind_air_cutter";
+        return "#lne_wizards:mob/air_evoker/primary";
     }
 
     @Override
     public String getSecondarySpells() {
-        return "#lne_wizards:mob/evoker/air_secondary";
+        return "#lne_wizards:mob/air_evoker/secondary";
     }
 
     @Override

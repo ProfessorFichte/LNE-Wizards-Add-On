@@ -16,6 +16,9 @@ public final class NeoForgeMod {
         modBus.addListener(RegisterEvent.class, NeoForgeMod::register);
     }
     public static void register(RegisterEvent event) {
+        event.register(RegistryKeys.BLOCK, reg -> {
+            LNE_Wizards_Mod.registerBlocks();
+        });
         event.register(RegistryKeys.ITEM, reg -> {
             LNE_Wizards_Mod.registerItems();
             LNE_Wizards_Mod.registerSpawnEggs();

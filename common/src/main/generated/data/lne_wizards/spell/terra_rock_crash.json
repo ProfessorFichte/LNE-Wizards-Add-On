@@ -66,9 +66,15 @@
               "max_speed": 0.0
             }
           ],
-          "model": {
-            "model_id": "elemental_wizards_rpg:spell_projectile/meteor",
-            "scale": 1.7
+          "composite_model": {
+            "models": [
+              {
+                "fx": {
+                  "model_id": "elemental_wizards_rpg:spell_projectile/meteor",
+                  "scale": 1.7
+                }
+              }
+            ]
           }
         }
       }

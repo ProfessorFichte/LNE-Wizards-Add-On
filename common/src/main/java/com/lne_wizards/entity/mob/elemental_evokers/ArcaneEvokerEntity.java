@@ -16,12 +16,12 @@ public class ArcaneEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public String getPrimarySpell() {
-        return "wizards:arcane_bolt";
+        return "#lne_wizards:mob/arcane_evoker/primary";
     }
 
     @Override
     public String getSecondarySpells() {
-        return "#lne_wizards:mob/evoker/arcane_secondary";
+        return "#lne_wizards:mob/arcane_evoker/secondary";
     }
 
     @Override

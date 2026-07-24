@@ -27,17 +27,6 @@ public class LNE_WizardsEffects {
         return entry;
     }
 
-    public static Effects.Entry ARCANE_PRECISION = add(new Effects.Entry(Identifier.of(MOD_ID, "arcane_precision"),
-            "Arcane Precision",
-            "Makes targets more vulnerable to Arcane Spell Damage",
-            new ArcanePrecisionEffect(StatusEffectCategory.HARMFUL, SpellSchools.ARCANE.color)
-                    .setVulnerability(SpellSchools.ARCANE, new SpellPower.Vulnerability(
-                    0.025F, 0.05F, 0.1F)),
-            new EffectConfig(
-                    List.of(
-                    )
-            )
-    ));
     public static Effects.Entry FLAME_RUSH = add(new Effects.Entry(Identifier.of(MOD_ID, "flame_rush"),
             "Flamerush",
             "Increases movement speed and fire spell power.",
@@ -54,6 +43,18 @@ public class LNE_WizardsEffects {
                                     0.75F,
                                     EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                             )
+                    )
+            )
+    ));
+
+    public static Effects.Entry ARCANE_PRECISION = add(new Effects.Entry(Identifier.of(MOD_ID, "arcane_precision"),
+            "Arcane Precision",
+            "Makes targets more vulnerable to Arcane Spell Damage & Crits",
+            new ArcanePrecisionEffect(StatusEffectCategory.HARMFUL, SpellSchools.ARCANE.color)
+                    .setVulnerability(SpellSchools.ARCANE, new SpellPower.Vulnerability(
+                            0.025F, 0.05F, 0.1F)),
+            new EffectConfig(
+                    List.of(
                     )
             )
     ));

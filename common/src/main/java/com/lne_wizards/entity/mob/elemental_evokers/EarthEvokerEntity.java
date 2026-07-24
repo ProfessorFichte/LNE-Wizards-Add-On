@@ -16,12 +16,12 @@ public class EarthEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public String getPrimarySpell() {
-        return "elemental_wizards_rpg:terra_stone_spear";
+        return "#lne_wizards:mob/earth_evoker/primary";
     }
 
     @Override
     public String getSecondarySpells() {
-        return "#lne_wizards:mob/evoker/earth_secondary";
+        return "#lne_wizards:mob/earth_evoker/secondary";
     }
 
     @Override

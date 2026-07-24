@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "wizards:arcane_missile",
+      "required": false
+    },
+    {
+      "id": "wizards:arcane_explosion",
+      "required": false
+    }
+  ]
+}

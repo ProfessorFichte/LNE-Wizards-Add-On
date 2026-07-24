@@ -1,6 +1,12 @@
 {
+  "block.lne_wizards.air_magic_orb": "Air Magic Orb",
+  "block.lne_wizards.arcane_magic_orb": "Arcane Magic Orb",
+  "block.lne_wizards.earth_magic_orb": "Earth Magic Orb",
+  "block.lne_wizards.fire_magic_orb": "Fire Magic Orb",
+  "block.lne_wizards.frost_magic_orb": "Frost Magic Orb",
+  "block.lne_wizards.water_magic_orb": "Water Magic Orb",
   "effect.lne_wizards.arcane_precision": "Arcane Precision",
-  "effect.lne_wizards.arcane_precision.description": "Makes targets more vulnerable to Arcane Spell Damage",
+  "effect.lne_wizards.arcane_precision.description": "Makes targets more vulnerable to Arcane Spell Damage & Crits",
   "effect.lne_wizards.flame_rush": "Flamerush",
   "effect.lne_wizards.flame_rush.description": "Increases movement speed and fire spell power.",
   "effect.lne_wizards.zephyrs_speed": "Zephyrs Speed",
