@@ -2,7 +2,6 @@ package com.lne_wizards.entity;
 
 import com.lne_wizards.LNE_Wizards_Mod;
 import com.lne_wizards.entity.mob.elemental_evokers.*;
-import com.lne_wizards.entity.spell_spawned.ExplosiveBubbleEntity;
 import com.lne_wizards.entity.spell_spawned.IceWallEntity;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
@@ -41,13 +40,6 @@ public class ModEntities {
     );
 
     @Nullable public static EntityType<WaterEvokerEntity> WATER_EVOKER = null;
-
-    public static final EntityType<ExplosiveBubbleEntity> EXPLOSIVE_BUBBLE = registerType(
-            "explosive_bubble",
-            EntityType.Builder.create(ExplosiveBubbleEntity::new, SpawnGroup.MISC)
-                    .dimensions(1.5F, 1.5F)
-                    .maxTrackingRange(8)
-    );
 
     public static final EntityType<IceWallEntity> ICE_WALL = registerType(
             "ice_wall",

@@ -12,6 +12,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.more_rpg_classes.custom.MoreSpellSchools;
+import net.more_rpg_classes.custom.MrpgLibSpells;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.WeaponConfig;
 import net.spell_engine.api.spell.container.SpellContainers;
@@ -60,12 +61,12 @@ public class WeaponRegister {
     private static final float staffAttackSpeed = -3F;
     private static final float staffSpellPower = 8F;
 
-    public static Identifier rimefrost = Identifier.of("lne_wizards", "rimefrost");
-    public static Identifier pyromaniac = Identifier.of("lne_wizards", "pyromaniac");
-    public static Identifier arcane_precision = Identifier.of("lne_wizards", "arcane_precision");
-    public static Identifier water_flow = Identifier.of("lne_wizards", "water_flow");
-    public static Identifier obsidian_shards = Identifier.of("lne_wizards", "obsidian_shards");
-    public static Identifier zephyrs_speed = Identifier.of("lne_wizards", "zephyrs_speed");
+    public static Identifier rimefrost = MrpgLibSpells.rimefrost.id();
+    public static Identifier pyromaniac = MrpgLibSpells.pyromaniac.id();
+    public static Identifier arcane_precision = MrpgLibSpells.arcane_precision.id();
+    public static Identifier water_flow = MrpgLibSpells.water_flow.id();
+    public static Identifier obsidian_shards = MrpgLibSpells.obsidian_shards.id();
+    public static Identifier zephyrs_speed = MrpgLibSpells.zephyrs_speed.id();
 
     public static void register(Map<String, WeaponConfig> configs) {
         if (!tweaksConfig.value.disable_special_lne_weapons) {

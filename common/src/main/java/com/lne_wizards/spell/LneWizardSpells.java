@@ -1,26 +1,28 @@
 package com.lne_wizards.spell;
 
 import com.lne_wizards.effect.LNE_WizardsEffects;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.more_rpg_classes.sounds.MRPGLibSounds;
 import net.spell_engine.api.datagen.SpellBuilder;
-import net.spell_engine.api.entity.SpellEntityPredicates;
+import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.Spell;
+import net.spell_engine.api.spell.fx.ModelEffect;
+import net.spell_engine.api.spell.fx.ModelEffectBuilder;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.api.spell.fx.PlayerAnimation;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.api.util.TriState;
 import net.spell_engine.client.gui.SpellTooltip;
+import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
-import net.spell_engine.fx.SpellEngineSounds;
 import net.spell_engine.internals.SpellHelper;
 import net.spell_engine.internals.target.SpellTarget;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,58 @@ public class LneWizardSpells {
         var modifier = new Spell.Impact.TargetModifier();
         modifier.conditions = List.of(condition);
         return modifier;
+    }
+
+    private static List<Spell.Impact> explosiveBubbleImpacts() {
+        var damage = SpellBuilder.Impacts.damage(0.85F, 0.5F);
+        damage.particles = new ParticleBatch[]{
+                new ParticleBatch("more_rpg_classes:bubble_pop",
+                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
+                        10.0F, 0.05F, 0.2F),
+                new ParticleBatch("more_rpg_classes:bubble",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        10.0F, 0.001F, 0.1F)
+        };
+        damage.sound = Sound.withVolume(Identifier.of(MRPGLibSounds.WATER_BUBBLE_EXPLODE.id().toString()), 2.0F);
+
+        var soaked = SpellBuilder.Impacts.effectSet("more_rpg_classes:soaked", 4, 1);
+        soaked.action.status_effect.show_particles = false;
+        var soakedModifier = createImpactModifier("#more_rpg_classes:resistant_to_water");
+        soakedModifier.execute = TriState.DENY;
+        soaked.target_modifiers = List.of(soakedModifier);
+
+        var heal = SpellBuilder.Impacts.heal(0.5F);
+        heal.particles = new ParticleBatch[]{
+                new ParticleBatch("more_rpg_classes:water_heal",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        10, 0.05F, 0.1F)
+        };
+        heal.sound = new Sound("spell_engine:generic_healing_impact_1");
+
+        return List.of(damage, soaked, heal);
+    }
+
+    private static Spell.EntityPlacement floatingPlacement(float distance, float yawOffset, int delayTicks) {
+        var placement = SpellBuilder.Deliver.placementByLook(distance, yawOffset, delayTicks);
+        placement.force_onto_ground = false;
+        return placement;
+    }
+
+    private static void addOscillation(ModelEffect effect, String operation, float x, float y, float z,
+                                       int start, int periodTicks, int cycles, ModelEffect.Easing easing) {
+        int half = periodTicks / 2;
+        for (int i = 0; i < cycles * 2; i++) {
+            var segment = new ModelEffect.Animation();
+            segment.operation = operation;
+            var sign = (i % 2 == 0) ? 1F : -1F;
+            segment.x = x * sign;
+            segment.y = y * sign;
+            segment.z = z * sign;
+            segment.start = start + i * half;
+            segment.end = start + (i + 1) * half;
+            segment.easing = easing;
+            effect.animations.add(segment);
+        }
     }
 
     // ACTIVE SPELLS
@@ -75,12 +129,10 @@ public class LneWizardSpells {
 
         var buff = SpellBuilder.Impacts.effectSet(effect.id.toString(), 4, 0);
 
-        var custom = new Spell.Impact();
-        custom.action = new Spell.Impact.Action();
-        custom.action.custom = new Spell.Impact.Action.Custom();
-        custom.action.type = Spell.Impact.Action.Type.CUSTOM;
-        custom.action.custom.intent = SpellTarget.Intent.HELPFUL;
-        custom.action.custom.handler = "more_rpg_classes:forward_dash_range";
+        var dash = SpellBuilder.Impacts.velocity(
+                Spell.Impact.Action.Velocity.Frame.ORIGIN, new Vector3f(0, 0.3F, 2.0F));
+        dash.action.velocity.reset_velocity = true;
+        dash.action.apply_to_caster = true;
 
         var customCloud = new Spell.Impact();
         customCloud.action = new Spell.Impact.Action();
@@ -89,7 +141,7 @@ public class LneWizardSpells {
         customCloud.action.custom.intent = SpellTarget.Intent.HELPFUL;
         customCloud.action.custom.handler = "lne_wizards:flamerush_cloud";
 
-        spell.impacts = List.of(custom, customCloud, buff);
+        spell.impacts = List.of(dash, customCloud, buff);
         SpellBuilder.Cost.cooldown(spell, 30);
         SpellBuilder.Cost.item(spell, "runes:fire_stone", 1);
 
@@ -283,14 +335,14 @@ public class LneWizardSpells {
     private static Entry aqua_explosive_bubbles() {
         var id = Identifier.of(MOD_ID, "aqua_explosive_bubbles");
         var title = "Explosive Bubbles";
-        var description = "Spawns explosive Bubbles behind the caster that deal {bubb_damage} damage or heal allies by {bubb_heal} when they explode on contact.";
+        var description = "Spawns explosive Bubbles behind the caster that deal {damage} damage or heal allies by {heal} when they explode on contact.";
 
         var spell = SpellBuilder.createSpellActive();
         spell.school = MoreSpellSchools.WATER;
         spell.range = 10;
         spell.tier = 5;
 
-        SpellBuilder.Casting.channel(spell, 4, 8);
+        SpellBuilder.Casting.channel(spell, 7.5F, 15);
         spell.active.cast.animation = PlayerAnimation.of("more_rpg_classes:floating_spawn_channel");
         spell.active.cast.sound = new Sound (Identifier.of("more_rpg_classes:water_bubbles"));
         spell.active.cast.particles = new ParticleBatch[]{
@@ -302,46 +354,78 @@ public class LneWizardSpells {
 
         spell.release = new Spell.Release();
 
-        int delay = 0;
-        int toLiveSeconds = 8;
-        String entityId = "lne_wizards:explosive_bubble";
-        var spawn = new Spell.Impact();
-        spawn.action = new Spell.Impact.Action();
-        spawn.action.type = Spell.Impact.Action.Type.SPAWN;
-        var bubble = new Spell.Impact.Action.Spawn();
-        bubble.entity_type_id = entityId;
-        bubble.delay_ticks = delay;
-        bubble.time_to_live_seconds = toLiveSeconds;
-        bubble.placement.apply_yaw = true;
-        bubble.placement.location_offset_by_look = 2;
-        bubble.placement.location_yaw_offset = -160;
-        spawn.action.spawns = List.of(bubble);
+        spell.deliver.type = Spell.Delivery.Type.CLOUD;
 
-        spell.impacts = List.of(spawn);
+        var bubbleModelId = Identifier.of("elemental_wizards_rpg", "spell_projectile/big_bubble").toString();
+        var bubbleColor = Color.from(0xa7ffed).toRGBA();
+
+        var cloud = new Spell.Delivery.Cloud();
+        cloud.volume.radius = 2.0F;
+        cloud.spawn_ticks = 20;
+        cloud.despawn_ticks = 5;
+        cloud.time_to_live_seconds = 8F;
+        cloud.impact_tick_interval = 1;
+        cloud.impact_cap = 1;
+
+        var activeTicks = Math.round(cloud.time_to_live_seconds * 20F);
+        var totalTicks = cloud.spawn_ticks + activeTicks + cloud.despawn_ticks;
+
+        var bubbleHoverHeight = 0.5F;
+        var bubbleFx = ModelEffectBuilder.create(bubbleModelId).light(LightEmission.GLOW_TRANSLUCENT)
+                .scale(2.5F)
+                .duration(totalTicks)
+                .initialTranslate(0, bubbleHoverHeight, 0)
+                .scaleIn(0, cloud.spawn_ticks, ModelEffect.Easing.EASE_OUT_BACK)
+                .build();
+        addOscillation(bubbleFx, "translate", 0, 0.12F, 0,
+                cloud.spawn_ticks, 40, activeTicks / 40, ModelEffect.Easing.EASE_IN_OUT_SINE);
+        addOscillation(bubbleFx, "scale", 0.035F, 0.035F, 0.035F,
+                cloud.spawn_ticks, 32, activeTicks / 32, ModelEffect.Easing.EASE_IN_OUT_SINE);
+        cloud.client_data.model_fx = List.of(bubbleFx);
+        cloud.client_data.light_level = 8;
+        cloud.client_data.particles = new ParticleBatch[]{
+                new ParticleBatch("more_rpg_classes:bubble",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        0.4F, 0.01F, 0.15F)
+        };
+        cloud.client_data.particle_spawn_interval = 15;
+
+        var popFx = ModelEffectBuilder.create(bubbleModelId).light(LightEmission.GLOW_TRANSLUCENT)
+                .scale(2.5F)
+                .duration(cloud.despawn_ticks)
+                .initialTranslate(0, bubbleHoverHeight, 0)
+                .scaleOut(0, cloud.despawn_ticks, ModelEffect.Easing.EASE_IN_BACK)
+                .build();
+        cloud.despawn.model_fx = List.of(popFx);
+        cloud.despawn.sound = new Sound(Identifier.ofVanilla("block.bubble_column.bubble_pop").toString());
+        cloud.despawn.particles = new ParticleBatch[]{
+                new ParticleBatch("more_rpg_classes:bubble",
+                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
+                        10.0F, 0.01F, 0.2F)
+        };
+
+        cloud.impact_particles = new ParticleBatch[]{
+                new ParticleBatch(SpellEngineParticles.area_effect_293.id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.GROUND,
+                        1, 0, 0).scale(1.5F).color(bubbleColor),
+                new ParticleBatch("more_rpg_classes:bubble",
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        50.0F, 0.3F, 1.0F)
+        };
+
+        cloud.placement = floatingPlacement(2.0F, -160, 0);
+
+        spell.deliver.clouds = List.of(cloud);
+        spell.impacts = explosiveBubbleImpacts();
+        spell.area_impact = new Spell.AreaImpact();
+        spell.area_impact.radius = 2.0F;
 
         SpellBuilder.Cost.exhaust(spell, 0.4F);
         SpellBuilder.Cost.cooldown(spell, 32);
         spell.cost.cooldown.haste_affected = true;
         SpellBuilder.Cost.item(spell, "more_rpg_classes:aqua_stone", 1);
 
-        SpellTooltip.DescriptionMutator mutator = (args) -> {
-            var world = args.player().getWorld();
-            if (world == null) return args.description();
-            var optional = SpellRegistry.from(world).getEntry(Identifier.of(MOD_ID, "helper/explosive_bubbles_impact"));
-            if (optional.isEmpty()) return args.description();
-            var estimated = SpellHelper.estimate(optional.get().value(), args.player(), ItemStack.EMPTY);
-            var desc = args.description();
-            if (!estimated.damage().isEmpty()) {
-                var dmg = estimated.damage().get(0);
-                desc = desc.replace("{bubb_damage}", SpellTooltip.formattedRange(dmg.min(), dmg.max()));
-            }
-            if (!estimated.heal().isEmpty()) {
-                var heal = estimated.heal().get(0);
-                desc = desc.replace("{bubb_heal}", SpellTooltip.formattedRange(heal.min(), heal.max()));
-            }
-            return desc;
-        };
-        return new Entry(id, spell, title, description,mutator);
+        return new Entry(id, spell, title, description,null);
     }
     public static final Entry wind_aeroburst = add(wind_aeroburst());
     private static Entry wind_aeroburst() {
@@ -547,379 +631,5 @@ public class LneWizardSpells {
         SpellBuilder.Cost.cooldown(spell, 20);
 
         return new Entry(id, spell, name, description, null);
-    }
-    public static final Entry explosive_bubbles_impact = add(explosive_bubbles_impact());
-    private static Entry explosive_bubbles_impact() {
-        var id = Identifier.of(MOD_ID, "helper/explosive_bubbles_impact");
-        var title = "";
-        var description = "";
-
-        var spell = SpellBuilder.createSpellActive();
-        spell.school = MoreSpellSchools.WATER;
-        spell.range = 3;
-        spell.tier = 5;
-
-        spell.target.type = Spell.Target.Type.AREA;
-        spell.target.area = new Spell.Target.Area();
-        spell.target.area.distance_dropoff = Spell.Target.Area.DropoffCurve.NONE;
-        spell.target.area.angle_degrees = 360.0F;
-
-        spell.release = new Spell.Release();
-
-        var damage = SpellBuilder.Impacts.damage(0.85F, 0);
-        damage.particles = new ParticleBatch[]{
-                new ParticleBatch("more_rpg_classes:bubble_pop",
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                        10.0F, 0.05F, 0.2F),
-                new ParticleBatch("more_rpg_classes:bubble",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        10.0F, 0.001F, 0.1F)
-        };
-        damage.sound = Sound.withVolume(Identifier.of(MRPGLibSounds.WATER_BUBBLE_EXPLODE.id().toString()), 2.0F);
-
-        var soaked = SpellBuilder.Impacts.effectSet("more_rpg_classes:soaked", 4,1);
-        soaked.action.status_effect.show_particles = false;
-        var soakedModifier = createImpactModifier("#more_rpg_classes:resistant_to_water");
-        soakedModifier.execute = TriState.DENY;
-        soaked.target_modifiers = List.of(soakedModifier);
-
-        var heal = SpellBuilder.Impacts.heal(0.5F);
-        heal.particles = new ParticleBatch[]{
-                new ParticleBatch("more_rpg_classes:water_heal",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        10, 0.05F, 0.1F)
-        };
-        heal.sound = new Sound("spell_engine:generic_healing_impact_1");
-
-        spell.impacts = List.of(damage, soaked, heal);
-
-        return new Entry(id, spell, title, description,null);
-    }
-    // PASSIVE SPELLS
-    public static Entry arcane_precision = add(arcane_precision());
-    private static Entry arcane_precision() {
-        var id = Identifier.of(MOD_ID, "arcane_precision");
-        var title = "Arcane Precision";
-        var description = "On dealing a critical hit with an active spell, apply a stack of Arcane Precision to the target for {effect_duration} seconds.";
-
-        var spell = SpellBuilder.createSpellPassive();
-        spell.school = SpellSchools.ARCANE;
-        spell.tier = 8;
-
-        var trigger = SpellBuilder.Triggers.activeSpellCrit();
-        trigger.impact.impact_type = Spell.Impact.Action.Type.DAMAGE.toString();
-        spell.passive.triggers = List.of(trigger);
-
-        spell.target.type = Spell.Target.Type.FROM_TRIGGER;
-
-        var effect = SpellBuilder.Impacts.effectAdd(LNE_WizardsEffects.ARCANE_PRECISION.id.toString(), 10, 1, 9);
-        effect.action.status_effect.refresh_duration = true;
-        effect.action.status_effect.show_particles = false;
-        effect.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        "dragon_breath",
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                        40, 0.6F, 0.8F
-                ),
-                new ParticleBatch(
-                        "spell_engine:magic_arcane_impact_burst",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-                        10, 0.05F, 0.2F
-                ).extent(2.0F).color(4284940287L)
-        };
-
-        spell.impacts = List.of(effect);
-        SpellBuilder.Cost.cooldown(spell, 1);
-        spell.cost.cooldown.hosting_item = false;
-
-        return new Entry(id, spell, title, description, null);
-    }
-
-    public static Entry pyromaniac = add(pyromaniac());
-    private static Entry pyromaniac() {
-        var id = Identifier.of(MOD_ID, "pyromaniac");
-        var title = "Pyromaniac";
-        var description = "When dealing spell damage to a burning target, reduce fire spell cooldowns and deal bonus damage.";
-
-        var spell = SpellBuilder.createSpellPassive();
-        spell.school = SpellSchools.FIRE;
-        spell.tier = 8;
-
-        var trigger = SpellBuilder.Triggers.spellHit(0.2F, null);
-        trigger.target_conditions = List.of(
-                SpellBuilder.TargetConditions.ofPredicate(SpellEntityPredicates.IS_ON_FIRE)
-        );
-        spell.passive.triggers = List.of(trigger);
-
-        spell.target.type = Spell.Target.Type.FROM_TRIGGER;
-
-        var cooldownImpact = new Spell.Impact();
-        cooldownImpact.action = new Spell.Impact.Action();
-        cooldownImpact.action.type = Spell.Impact.Action.Type.COOLDOWN;
-        cooldownImpact.action.cooldown = new Spell.Impact.Action.Cooldown();
-        cooldownImpact.action.cooldown.actives = new Spell.Impact.Action.Cooldown.Modify();
-        cooldownImpact.action.cooldown.actives.school = SpellSchools.FIRE.id.toString();
-        cooldownImpact.action.cooldown.actives.duration_multiplier = 0.7F;
-        cooldownImpact.action.apply_to_caster = true;
-        cooldownImpact.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.sign_hourglass.id().toString(),
-                        ParticleBatch.Shape.LINE_VERTICAL, ParticleBatch.Origin.CENTER,
-                        1, 0.75F, 0.75F
-                ).scale(1.2F).color(4282850047L).followEntity(true)
-        };
-
-        var damage = SpellBuilder.Impacts.damage(0.3F);
-
-        spell.impacts = List.of(cooldownImpact, damage);
-        SpellBuilder.Cost.cooldown(spell, 10);
-        spell.cost.cooldown.hosting_item = false;
-
-        return new Entry(id, spell, title, description, null);
-    }
-    public static Entry rimefrost = add(rimefrost());
-    private static Entry rimefrost() {
-        var id = Identifier.of(MOD_ID, "rimefrost");
-        var title = "Rimefrost";
-        var description = "When dealing damage with an active frost spell, spawn a freezing cloud at the target.";
-
-        var spell = SpellBuilder.createSpellPassive();
-        spell.school = SpellSchools.FROST;
-        spell.tier = 8;
-
-        var trigger = SpellBuilder.Triggers.activeSpellHit(0.3F, SpellSchools.FROST.id.toString());
-        spell.passive.triggers = List.of(trigger);
-
-        spell.target.type = Spell.Target.Type.FROM_TRIGGER;
-
-        spell.deliver.type = Spell.Delivery.Type.CLOUD;
-
-        var cloud = new Spell.Delivery.Cloud();
-        cloud.volume.radius = 3.0F;
-        cloud.volume.area.vertical_range_multiplier = 0.5F;
-        cloud.volume.sound = new Sound("more_rpg_classes:frost_crackle_long");
-        cloud.time_to_live_seconds = 7.0F;
-        cloud.impact_tick_interval = 5;
-        cloud.client_data.light_level = 6;
-        cloud.client_data.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        "loot_n_explore:freezing_snowflake",
-                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-                        10, 0.1F, 0.12F
-                )
-        };
-        cloud.client_data.particle_spawn_interval = 12;
-        cloud.spawn.sound = new Sound(SpellEngineSounds.GENERIC_FROST_CASTING.id().toString());
-
-        spell.deliver.clouds = List.of(cloud);
-
-        var denyModifier = new Spell.Impact.TargetModifier();
-        var freezeImmuneCondition = new Spell.TargetCondition();
-        freezeImmuneCondition.entity_type = "#minecraft:freeze_immune_entity_types";
-        denyModifier.conditions = List.of(freezeImmuneCondition);
-        denyModifier.execute = TriState.DENY;
-
-        var freezing = SpellBuilder.Impacts.effectAdd("loot_n_explore:freezing", 2, 1, 4);
-        freezing.action.status_effect.refresh_duration = true;
-        freezing.action.status_effect.show_particles = false;
-        freezing.target_modifiers = List.of(denyModifier);
-        freezing.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        "loot_n_explore:freezing_snowflake",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 0.2F, 0.25F
-                )
-        };
-
-        spell.impacts = List.of(freezing);
-        SpellBuilder.Cost.cooldown(spell, 4);
-        spell.cost.cooldown.hosting_item = false;
-
-        return new Entry(id, spell, title, description, null);
-    }
-    public static Entry water_flow = add(water_flow());
-    private static Entry water_flow() {
-        var id = Identifier.of(MOD_ID, "water_flow");
-        var title = "Water Flow";
-        var description = "When casting a spell, deal water damage and heal nearby allies in a small area.";
-
-        var spell = SpellBuilder.createSpellPassive();
-        spell.school = MoreSpellSchools.WATER;
-        spell.range = 5.0F;
-        spell.tier = 8;
-
-        var trigger = new Spell.Trigger();
-        trigger.type = Spell.Trigger.Type.SPELL_CAST;
-        trigger.chance = 0.25F;
-        trigger.chance_batching = true;
-        trigger.equipment_condition = EquipmentSlot.MAINHAND;
-        spell.passive.triggers = List.of(trigger);
-
-        spell.target.type = Spell.Target.Type.AREA;
-        spell.target.area = new Spell.Target.Area();
-        spell.target.area.include_caster = true;
-        spell.target.area.vertical_range_multiplier = 1.0F;
-
-        spell.release.sound = new Sound(Identifier.ofVanilla("ambient.underwater.exit").toString());
-        spell.release.particles_scaled_with_ranged = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.area_effect_293.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.GROUND,
-                        1, 0.0F, 0.0F
-                ).scale(0.8F).color(2816865791L)
-        };
-
-        var vulnerableModifier = SpellBuilder.ImpactModifiers.create("#more_rpg_classes:vulnerable_to_water_spells");
-        vulnerableModifier.modifier = new Spell.Impact.Modifier();
-        vulnerableModifier.modifier.critical_chance_bonus = 0.3F;
-
-        var resistantModifier = SpellBuilder.ImpactModifiers.create("#more_rpg_classes:resistant_to_water_spells");
-        resistantModifier.modifier = new Spell.Impact.Modifier();
-        resistantModifier.modifier.power_multiplier = -0.3F;
-
-        var damage = SpellBuilder.Impacts.damage(0.2F);
-        damage.target_modifiers = List.of(vulnerableModifier, resistantModifier);
-        damage.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        "more_rpg_classes:splash",
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                        15, 0.05F, 0.2F
-                )
-        };
-        damage.sound = Sound.withVolume(Identifier.of("more_rpg_classes:water_magic_impact1"), 0.4F);
-
-        var heal = SpellBuilder.Impacts.heal(0.15F);
-        heal.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        "more_rpg_classes:water_heal",
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                        5, 0.01F, 0.05F
-                ),
-                new ParticleBatch(
-                        "more_rpg_classes:water_heal",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        5, 0.05F, 0.1F
-                ),
-                new ParticleBatch(
-                        "more_rpg_classes:water_circle",
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                        1, 0.2F, 1.0F
-                )
-        };
-        heal.sound = Sound.withVolume(SpellEngineSounds.GENERIC_HEALING_IMPACT_2.id(), 1.2F);
-
-        spell.impacts = List.of(damage, heal);
-        SpellBuilder.Cost.cooldown(spell, 5);
-        spell.cost.cooldown.hosting_item = false;
-
-        return new Entry(id, spell, title, description, null);
-    }
-    public static Entry zephyrs_speed = add(zephyrs_speed());
-    private static Entry zephyrs_speed() {
-        var id = Identifier.of(MOD_ID, "zephyrs_speed");
-        var title = "Zephyr's Speed";
-        var description = "On dealing damage with an active spell, gain a stack of Zephyr's Speed for {effect_duration} seconds. " +
-                "Increasing spell crit chance by {bonus} and movement speed by {bonus2}.";
-        var effect = LNE_WizardsEffects.ZEPHYRS_SPEED;
-
-        var spell = SpellBuilder.createSpellPassive();
-        spell.school = MoreSpellSchools.AIR;
-        spell.tier = 8;
-        SpellTooltip.DescriptionMutator mutator = (args) -> {
-            var modifier = effect.config().attributes().get(1);
-            var modifier2 = effect.config().attributes().get(0);
-            var bonus = SpellTooltip.bonus(modifier.value, modifier.operation);
-            var bonus2 = SpellTooltip.bonus(modifier2.value, modifier2.operation);
-            return args.description()
-                    .replace("{bonus}", bonus)
-                    .replace("{bonus2}", bonus2);
-        };
-
-        var trigger = SpellBuilder.Triggers.activeSpellHit(0.35F, null);
-        trigger.target_override = Spell.Trigger.TargetSelector.CASTER;
-        spell.passive.triggers = List.of(trigger);
-
-        spell.target.type = Spell.Target.Type.FROM_TRIGGER;
-
-        var buff = SpellBuilder.Impacts.effectAdd(effect.id.toString(), 10, 1, 9);
-        buff.action.status_effect.refresh_duration = true;
-        buff.action.status_effect.show_particles = false;
-        buff.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        "more_rpg_classes:gust",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        4, 0.5F, 0.8F
-                ).extent(1.0F)
-        };
-
-        spell.impacts = List.of(buff);
-        SpellBuilder.Cost.cooldown(spell, 5);
-        spell.cost.cooldown.hosting_item = false;
-
-        return new Entry(id, spell, title, description, mutator);
-    }
-    public static Entry obsidian_shards = add(obsidian_shards());
-    private static Entry obsidian_shards() {
-        var id = Identifier.of(MOD_ID, "obsidian_shards");
-        var title = "Obsidian Shards";
-        var description = "On dealing damage with an active spell, shoot obsidian shards outward in all directions from the target.";
-
-        var spell = SpellBuilder.createSpellPassive();
-        spell.school = MoreSpellSchools.EARTH;
-        spell.range = 20.0F;
-        spell.tier = 8;
-
-        var trigger = SpellBuilder.Triggers.activeSpellHit(0.25F, null);
-        spell.passive.triggers = List.of(trigger);
-
-        spell.target.type = Spell.Target.Type.FROM_TRIGGER;
-
-        spell.deliver.type = Spell.Delivery.Type.PROJECTILE;
-        spell.deliver.projectile = new Spell.Delivery.ShootProjectile();
-        spell.deliver.projectile.direction_offsets = new Spell.Delivery.ShootProjectile.DirectionOffset[]{
-                new Spell.Delivery.ShootProjectile.DirectionOffset(),
-                new Spell.Delivery.ShootProjectile.DirectionOffset(-360.0F, 0),
-                new Spell.Delivery.ShootProjectile.DirectionOffset(270.0F, 0),
-                new Spell.Delivery.ShootProjectile.DirectionOffset(-270.0F, 0),
-                new Spell.Delivery.ShootProjectile.DirectionOffset(180.0F, 0),
-                new Spell.Delivery.ShootProjectile.DirectionOffset(-180.0F, 0),
-                new Spell.Delivery.ShootProjectile.DirectionOffset(90.0F, 0),
-                new Spell.Delivery.ShootProjectile.DirectionOffset(-90.0F, 0)
-        };
-        spell.deliver.projectile.direct_towards_target = true;
-        spell.deliver.projectile.launch_properties.velocity = 1.3F;
-        spell.deliver.projectile.launch_properties.extra_launch_count = 7;
-        spell.deliver.projectile.launch_properties.extra_launch_delay = 0;
-        spell.deliver.projectile.launch_properties.sound =
-                Sound.withVolume(Identifier.of("more_rpg_classes:earth_magic_cast1"), 0.6F);
-
-        var projectile = new Spell.ProjectileData();
-        projectile.homing_angle = 0.0F;
-        projectile.perks = new Spell.ProjectileData.Perks();
-        projectile.perks.pierce = 999;
-        projectile.hitbox = new Spell.ProjectileData.HitBox();
-        projectile.hitbox.width = 0.5F;
-        projectile.hitbox.height = 0.5F;
-        projectile.client_data = new Spell.ProjectileData.Client();
-        var obsidianShardsModel = SpellBuilder.ProjectileModels.model("lne_wizards:spell_projectile/obsidian_shards", 0.5F);
-        obsidianShardsModel.rotate_degrees_per_tick = 0.0F;
-        projectile.client_data.composite_model = SpellBuilder.ProjectileModels.composite(obsidianShardsModel);
-        spell.deliver.projectile.projectile = projectile;
-
-        var damage = SpellBuilder.Impacts.damage(0.25F, 0.5F);
-        damage.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        "campfire_cosy_smoke",
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                        3, 0.005F, 0.008F
-                )
-        };
-        damage.sound = Sound.withVolume(Identifier.ofVanilla("block.pointed_dripstone.break"), 1.5F);
-
-        spell.impacts = List.of(damage);
-        SpellBuilder.Cost.cooldown(spell, 5);
-        spell.cost.cooldown.hosting_item = false;
-
-        return new Entry(id, spell, title, description, null);
     }
 }

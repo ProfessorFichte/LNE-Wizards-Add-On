@@ -35,9 +35,15 @@
   "impacts": [
     {
       "action": {
-        "type": "CUSTOM",
-        "custom": {
-          "handler": "more_rpg_classes:forward_dash_range"
+        "type": "VELOCITY",
+        "apply_to_caster": true,
+        "velocity": {
+          "push": {
+            "x": 0.0,
+            "y": 0.3,
+            "z": 2.0
+          },
+          "reset_velocity": true
         }
       }
     },

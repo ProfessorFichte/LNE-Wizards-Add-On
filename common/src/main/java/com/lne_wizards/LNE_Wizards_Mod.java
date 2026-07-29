@@ -34,6 +34,9 @@ public class LNE_Wizards_Mod {
 			.sanitize(true)
 			.build();
 
+	public static final String ELEMENTAL_WIZARDS_MOD_ID = "elemental_wizards_rpg";
+	public static final String ELEMENTAL_WIZARDS_COMPAT_PACK_PATH = "resourcepacks/elemental_wizards_compat";
+
 	public static void init() {
 		tweaksConfig.refresh();
 		effectConfig.refresh();

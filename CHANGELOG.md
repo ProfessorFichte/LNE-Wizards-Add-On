@@ -1,3 +1,8 @@
+# 1.1.4 - 1.21.1
+- fixed the issue, where Elemental Wizards is not installed but the spell books get created with only the additional spells
+- Converted Explosive Bubbles to a Spell Cloud instead of a custom Entity
+- Flamerush now uses the Velocity Impact of Spell Engine for the Dash
+
 # 1.1.3 - 1.21.1
 - Adapt to Spell Engine 1.9.10+ API Changes
 **Balancing & Internal Changes:**
