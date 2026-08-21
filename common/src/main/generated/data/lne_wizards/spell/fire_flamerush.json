@@ -8,26 +8,36 @@
     "animation": {
       "id": "spell_engine:dual_handed_ground_release"
     },
-    "particles": [
-      {
-        "particle_id": "spell_engine:flame_medium_a",
-        "origin": "FEET",
-        "shape": "PILLAR",
-        "count": 5.0,
-        "min_speed": 0.02,
-        "max_speed": 0.3,
-        "extent": 1.0
-      },
-      {
-        "particle_id": "spell_engine:flame_medium_b",
-        "origin": "FEET",
-        "shape": "PILLAR",
-        "count": 5.0,
-        "min_speed": 0.02,
-        "max_speed": 0.35,
-        "extent": 3.0
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:flame_medium_a",
+          "appearance": {},
+          "batch": {
+            "count": 5.0,
+            "shape": "PILLAR",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.02,
+            "max_speed": 0.3,
+            "extent": 1.0
+          }
+        },
+        {
+          "id": "spell_engine:flame_medium_b",
+          "appearance": {},
+          "batch": {
+            "count": 5.0,
+            "shape": "PILLAR",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.02,
+            "max_speed": 0.35,
+            "extent": 3.0
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "spell_engine:generic_fire_release"
     }

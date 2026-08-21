@@ -14,20 +14,28 @@
       },
       "particles": [
         {
-          "particle_id": "more_rpg_classes:small_gust",
-          "origin": "FEET",
-          "shape": "SPHERE",
-          "count": 20.0,
-          "min_speed": 0.2,
-          "max_speed": 0.5
+          "id": "more_rpg_classes:small_gust",
+          "appearance": {},
+          "batch": {
+            "count": 20.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.2,
+            "max_speed": 0.5
+          }
         },
         {
-          "particle_id": "more_rpg_classes:small_gust",
-          "origin": "FEET",
-          "shape": "CIRCLE",
-          "count": 5.0,
-          "min_speed": 0.05,
-          "max_speed": 0.2
+          "id": "more_rpg_classes:small_gust",
+          "appearance": {},
+          "batch": {
+            "count": 5.0,
+            "shape": "CIRCLE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.05,
+            "max_speed": 0.2
+          }
         }
       ]
     }
@@ -36,46 +44,64 @@
     "animation": {
       "id": "more_rpg_classes:two_handed_ground_release"
     },
-    "particles": [
-      {
-        "particle_id": "spell_engine:smoke_medium",
-        "origin": "FEET",
-        "shape": "CIRCLE",
-        "count": 50.0,
-        "min_speed": 0.6,
-        "max_speed": 2.0,
-        "extent": 2.0,
-        "invert": true
-      },
-      {
-        "particle_id": "more_rpg_classes:water_mist",
-        "origin": "FEET",
-        "shape": "CIRCLE",
-        "count": 100.0,
-        "min_speed": 0.6,
-        "max_speed": 2.0,
-        "extent": 2.0,
-        "invert": true
-      },
-      {
-        "particle_id": "spell_engine:smoke_medium",
-        "origin": "FEET",
-        "shape": "CIRCLE",
-        "count": 50.0,
-        "min_speed": 1.0,
-        "max_speed": 2.4,
-        "extent": 4.0
-      },
-      {
-        "particle_id": "spell_engine:smoke_medium",
-        "origin": "FEET",
-        "shape": "CIRCLE",
-        "count": 50.0,
-        "min_speed": 1.4,
-        "max_speed": 3.0,
-        "extent": 6.0
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:smoke_medium",
+          "appearance": {},
+          "batch": {
+            "count": 50.0,
+            "shape": "CIRCLE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.6,
+            "max_speed": 2.0,
+            "extent": 2.0,
+            "invert": true
+          }
+        },
+        {
+          "id": "more_rpg_classes:water_mist",
+          "appearance": {},
+          "batch": {
+            "count": 100.0,
+            "shape": "CIRCLE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.6,
+            "max_speed": 2.0,
+            "extent": 2.0,
+            "invert": true
+          }
+        },
+        {
+          "id": "spell_engine:smoke_medium",
+          "appearance": {},
+          "batch": {
+            "count": 50.0,
+            "shape": "CIRCLE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 1.0,
+            "max_speed": 2.4,
+            "extent": 4.0
+          }
+        },
+        {
+          "id": "spell_engine:smoke_medium",
+          "appearance": {},
+          "batch": {
+            "count": 50.0,
+            "shape": "CIRCLE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 1.4,
+            "max_speed": 3.0,
+            "extent": 6.0
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "more_rpg_classes:air_explosion"
     }

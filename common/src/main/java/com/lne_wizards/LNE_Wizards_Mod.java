@@ -9,7 +9,7 @@ import com.lne_wizards.entity.ModSpawnEggs;
 import com.lne_wizards.item.WeaponRegister;
 import com.lne_wizards.spell.CustomSpellImpacts;
 import net.fabricmc.loader.api.FabricLoader;
-import net.spell_engine.api.config.ConfigFile;
+import net.spell_engine.rpg_series.config.ConfigFile;
 import com.lne_wizards.config.TweaksConfig;
 import net.tiny_config.ConfigManager;
 public class LNE_Wizards_Mod {

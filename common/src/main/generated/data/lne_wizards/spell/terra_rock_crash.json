@@ -14,12 +14,16 @@
       },
       "particles": [
         {
-          "particle_id": "more_rpg_classes:stone_particle",
-          "origin": "FEET",
-          "shape": "PIPE",
-          "count": 3.0,
-          "min_speed": 0.01,
-          "max_speed": 0.05
+          "id": "more_rpg_classes:stone_particle",
+          "appearance": {},
+          "batch": {
+            "count": 3.0,
+            "shape": "PIPE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.01,
+            "max_speed": 0.05
+          }
         }
       ]
     }
@@ -48,22 +52,27 @@
         "client_data": {
           "travel_particles": [
             {
-              "particle_id": "smoke",
-              "origin": "CENTER",
-              "shape": "CIRCLE",
-              "rotation": "LOOK",
-              "count": 10.0,
-              "min_speed": 0.1,
-              "max_speed": 0.5
+              "id": "smoke",
+              "appearance": {},
+              "batch": {
+                "count": 10.0,
+                "shape": "CIRCLE",
+                "anchor": "ENTITY",
+                "alignment": "LOOK",
+                "min_speed": 0.1,
+                "max_speed": 0.5
+              }
             },
             {
-              "particle_id": "spell_engine:smoke_large",
-              "origin": "CENTER",
-              "shape": "CIRCLE",
-              "rotation": "LOOK",
-              "count": 10.0,
-              "min_speed": 0.1,
-              "max_speed": 0.0
+              "id": "spell_engine:smoke_large",
+              "appearance": {},
+              "batch": {
+                "count": 10.0,
+                "shape": "CIRCLE",
+                "anchor": "ENTITY",
+                "alignment": "LOOK",
+                "min_speed": 0.1
+              }
             }
           ],
           "composite_model": {
@@ -88,16 +97,21 @@
           "knockback": 3.5
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:smoke_large",
-          "origin": "CENTER",
-          "shape": "CIRCLE",
-          "count": 5.0,
-          "min_speed": 0.5,
-          "max_speed": 3.0
-        }
-      ],
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:smoke_large",
+            "appearance": {},
+            "batch": {
+              "count": 5.0,
+              "shape": "CIRCLE",
+              "anchor": "ENTITY",
+              "min_speed": 0.5,
+              "max_speed": 3.0
+            }
+          }
+        ]
+      },
       "sound": {
         "id": "more_rpg_classes:earth_magic_impact1"
       }
@@ -108,16 +122,21 @@
     "area": {
       "distance_dropoff": "SQUARED"
     },
-    "particles": [
-      {
-        "particle_id": "smoke",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 90.0,
-        "min_speed": 1.0,
-        "max_speed": 3.0
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "smoke",
+          "appearance": {},
+          "batch": {
+            "count": 90.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY",
+            "min_speed": 1.0,
+            "max_speed": 3.0
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "more_rpg_classes:earth_magic_impact3"
     }
