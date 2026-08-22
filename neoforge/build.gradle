@@ -96,7 +96,7 @@ dependencies {
 
     modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
     modImplementation "maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}"
-    modImplementation("net.rpg_series:runes-${platform}:${project.runes_version}") { transitive = false }
+    modImplementation("maven.modrinth:runes:${project.runes_version}-${platform}")
     modImplementation("maven.modrinth:wizards:${project.wizards_version}-${platform}")
     // runtime cannot start. Dev-classpath only - not shipped, not in the mod manifests.
 
