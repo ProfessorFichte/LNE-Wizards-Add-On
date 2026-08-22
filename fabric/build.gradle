@@ -37,12 +37,6 @@ configurations {
 }
 
 repositories {
-    maven {
-        url = "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
     maven { url 'https://maven.fabricmc.net' }
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
@@ -86,10 +80,8 @@ dependencies {
 
     modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
     modImplementation "maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}"
-    modImplementation("net.rpg_series:wizards-${platform}:${project.wizards_version}") { transitive = false }
-    // Wizards 3.1.1 declares armor_model_api; transitive=false strips it, so the dev
+    modImplementation("maven.modrinth:wizards:${project.wizards_version}-${platform}")
     // runtime cannot start. Dev-classpath only - not shipped, not in the mod manifests.
-    modRuntimeOnly("curse.maven:armor-model-api-1659764:${project.armor_model_api_fabric_file}")
 
     ///OPTIONAL
     modImplementation("com.example:Loot-N-Explore:${project.loot_n_explore_version}") { transitive = false }
