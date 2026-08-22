@@ -33,7 +33,7 @@
   "spell.lne_wizards.aqua_explosive_bubbles.name": "Explosive Bubbles",
   "spell.lne_wizards.arcane_starfall.description": "Calls a falling astral star, causing {damage} arcane spell damage. Consumes all Arcane Charges.",
   "spell.lne_wizards.arcane_starfall.name": "Falling Star",
-  "spell.lne_wizards.fire_flamerush.description": "Rushes forward and leaves flame clouds on the trail that deals {flamecloud_damage} damage. Also increasing movement speed by {bonus2} and fire spell power by {bonus} for {effect_duration}.",
+  "spell.lne_wizards.fire_flamerush.description": "Rushes forward and leaves flame clouds on the trail that deals {flamecloud_damage} damage. Also increasing movement speed by {effect|lne_wizards:flame_rush|0|minecraft:generic.movement_speed} and fire spell power by {effect|lne_wizards:flame_rush|0|spell_power:fire} for {effect_duration}.",
   "spell.lne_wizards.fire_flamerush.name": "Flamerush",
   "spell.lne_wizards.frost_ray.description": "Casts a cold beam, causing {damage} damage and slowly freezes the target.",
   "spell.lne_wizards.frost_ray.name": "Ray of Frost",

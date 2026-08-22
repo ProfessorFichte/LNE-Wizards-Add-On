@@ -8,16 +8,14 @@ import com.lne_wizards.spell.LneWizardSpells;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.RenderLayer;
-import net.spell_engine.client.gui.SpellTooltip;
 
 public class LneWizardsClient {
 
     public static void init() {
-        for (var entry : LneWizardSpells.entries) {
-            if (entry.mutator() != null) {
-                SpellTooltip.addDescriptionMutator(entry.id(), entry.mutator());
-            }
-        }
+        // Description values that aren't expressible as declarative `{token}`s. `TooltipTokens` is
+        // server-safe; it is registered here simply because the tooltip is a client concern.
+        LneWizardSpells.registerTooltipTokens();
+
         registerEntityRenderers();
         for(var entry : ModBlocks.all){
             if (entry.name().contains("magic_orb")) {

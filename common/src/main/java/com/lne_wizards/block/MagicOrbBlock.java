@@ -15,11 +15,14 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.ParticleGroup;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
 import net.spell_engine.fx.ParticleHelper;
 import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_power.api.SpellSchool;
 import org.joml.Vector3f;
+
+import java.util.List;
 
 public class MagicOrbBlock extends Block {
 
@@ -41,17 +44,16 @@ public class MagicOrbBlock extends Block {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        ParticleBatch burst = new ParticleBatch(
-                SpellEngineParticles.MagicParticles.get(
-                        SpellEngineParticles.MagicParticles.Shape.SPELL,
-                        SpellEngineParticles.MagicParticles.Motion.BURST).id().toString(),
-                ParticleBatch.Shape.SPHERE,
-                ParticleBatch.Origin.CENTER,
-                null, 50, 0.5f, 0.8f, 0
-        );
-        burst.color_rgba = colorToRgba(spellSchool.color);
-        burst.scale = 0.9f;
-        burst.max_age = 1.5f;
+        // V1 baked the motion into the particle id (`magic_spell_burst`); in 1.10 motion is an
+        // appearance payload, so it is chosen here instead. `max_age = 1.5` is a lifetime multiplier,
+        // and `playback_speed` is its reciprocal.
+        ParticleGroup burst = ParticleGroupBuilder
+                .magic(SpellEngineParticles.magic_spell, ParticleGroup.Motion.BURST)
+                .color(colorToRgba(spellSchool.color))
+                .scale(0.9f)
+                .playbackSpeed(1f / 1.5f)
+                .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+                        .count(50).speed(0.5f, 0.8f));
         if (world.isClient()) return ActionResult.SUCCESS;
         if (spellSchool.ownedBoostEffect == null) return ActionResult.PASS;
 
@@ -66,7 +68,7 @@ public class MagicOrbBlock extends Block {
 
         player.addStatusEffect(new StatusEffectInstance(effectEntry, EFFECT_DURATION_TICKS, EFFECT_AMPLIFIER, false, false, true));
         if(!world.isClient){
-            ParticleHelper.sendBatches(player, new ParticleBatch[]{burst});
+            ParticleHelper.sendBatches(player, List.of(burst));
         }
         return ActionResult.SUCCESS;
     }

@@ -19,14 +19,17 @@
       },
       "particles": [
         {
-          "particle_id": "spell_engine:snowflake",
-          "origin": "LAUNCH_POINT",
-          "shape": "CONE",
-          "rotation": "LOOK",
-          "count": 4.0,
-          "min_speed": 1.0,
-          "max_speed": 3.0,
-          "angle": 3.0
+          "id": "spell_engine:snowflake",
+          "appearance": {},
+          "batch": {
+            "count": 4.0,
+            "shape": "CONE",
+            "anchor": "LAUNCH_POINT",
+            "alignment": "LOOK",
+            "min_speed": 1.0,
+            "max_speed": 3.0,
+            "angle": 3.0
+          }
         }
       ]
     }
@@ -37,17 +40,22 @@
       "texture_id": "lne_wizards:textures/entity/frost_ray.png",
       "width": 0.02,
       "flow": 200.0,
-      "block_hit_particles": [
-        {
-          "particle_id": "lne_wizards:frost_ray",
-          "origin": "CENTER",
-          "shape": "CIRCLE",
-          "rotation": "LOOK",
-          "count": 13.0,
-          "min_speed": 0.1,
-          "max_speed": 0.3
-        }
-      ]
+      "block_hit": {
+        "particles": [
+          {
+            "id": "lne_wizards:frost_ray",
+            "appearance": {},
+            "batch": {
+              "count": 13.0,
+              "shape": "CIRCLE",
+              "anchor": "ENTITY",
+              "alignment": "LOOK",
+              "min_speed": 0.1,
+              "max_speed": 0.3
+            }
+          }
+        ]
+      }
     }
   },
   "impacts": [
@@ -78,24 +86,34 @@
         "type": "DAMAGE",
         "damage": {}
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:magic_frost_impact_burst",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 40.0,
-          "min_speed": 0.2,
-          "max_speed": 0.7
-        },
-        {
-          "particle_id": "spell_engine:snowflake",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 20.0,
-          "min_speed": 0.1,
-          "max_speed": 0.4
-        }
-      ],
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:magic_frost",
+            "appearance": {
+              "motion": "BURST"
+            },
+            "batch": {
+              "count": 40.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.2,
+              "max_speed": 0.7
+            }
+          },
+          {
+            "id": "spell_engine:snowflake",
+            "appearance": {},
+            "batch": {
+              "count": 20.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.1,
+              "max_speed": 0.4
+            }
+          }
+        ]
+      },
       "sound": {
         "id": "more_rpg_classes:frost_crackle",
         "volume": 0.4

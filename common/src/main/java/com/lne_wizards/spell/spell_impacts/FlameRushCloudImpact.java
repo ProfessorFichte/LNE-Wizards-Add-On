@@ -7,7 +7,8 @@ import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.event.SpellHandlers;
 import net.spell_engine.api.spell.registry.SpellRegistry;
-import net.spell_engine.internals.SpellHelper;
+import net.spell_engine.internals.SpellExecution;
+import net.spell_engine.internals.delivery.CloudPlacer;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchools;
 
@@ -21,10 +22,15 @@ public class FlameRushCloudImpact implements SpellHandlers.CustomImpact {
             SpellPower.Result powerResult,
             LivingEntity caster,
             Entity target,
-            SpellHelper.ImpactContext context
+            SpellExecution.ImpactContext context
     ) {
         RegistryEntry<Spell> flamerush_cloud = SpellRegistry.from(caster.getWorld()).getEntry(Identifier.of(MOD_ID, "helper/flamerush_cloud")).get();
-        SpellHelper.placeCloud(caster.getWorld(), caster, null, caster.getPos(), flamerush_cloud , new SpellHelper.ImpactContext().power(SpellPower.getSpellPower(SpellSchools.FIRE, caster)).position(caster.getPos()));
+        // `SpellHelper` was split in 1.10: cloud placement moved to `CloudPlacer`, `ImpactContext` to
+        // `SpellExecution` (now a record, but the no-arg ctor and the fluent setters survived).
+        CloudPlacer.placeCloud(caster.getWorld(), caster, null, caster.getPos(), flamerush_cloud,
+                new SpellExecution.ImpactContext()
+                        .power(SpellPower.getSpellPower(SpellSchools.FIRE, caster))
+                        .position(caster.getPos()));
 
         return new SpellHandlers.ImpactResult(true, false);
     }

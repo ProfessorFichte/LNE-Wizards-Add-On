@@ -4,22 +4,29 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
-import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.ParticleGroup;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
 import net.spell_engine.fx.ParticleHelper;
 import net.spell_engine.fx.SpellEngineParticles;
+
+import java.util.List;
 
 public class FlameRushStatusEffect extends StatusEffect {
     protected FlameRushStatusEffect(StatusEffectCategory category, int color) {
         super(category, color);
     }
-    private static final ParticleBatch particles = new ParticleBatch(
-            SpellEngineParticles.flame.id().toString(),
-            ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET, null,
-            20, 0.05F, 0.1F, 0, 0.25F);
+
+    /// V1: `new ParticleBatch(flame, Shape.CIRCLE, Origin.FEET, null, 20, 0.05F, 0.1F, 0, 0.25F)`
+    /// — the 9-arg form, i.e. angle 0 and extent 0.25.
+    private static final ParticleGroup particles = ParticleGroupBuilder.of(SpellEngineParticles.flame)
+            .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
+                    .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
+                    .count(20).speed(0.05F, 0.1F)
+                    .extent(0.25F));
 
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         if(entity instanceof PlayerEntity playerEntity && !playerEntity.getWorld().isClient()) {
-            ParticleHelper.sendBatches(playerEntity, new ParticleBatch[]{particles});
+            ParticleHelper.sendBatches(playerEntity, List.of(particles));
         }
         return true;
     }
