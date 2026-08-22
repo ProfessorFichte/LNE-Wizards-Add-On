@@ -28,16 +28,23 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.lne_wizards]]
+modId = "spell_engine"
+type = "required"
+versionRange = "[${spell_engine_version},)"
+ordering = "BEFORE"
+side = "BOTH"
+
+[[dependencies.lne_wizards]]
 modId = "wizards"
 type = "required"
-versionRange = "*"
+versionRange = "[${wizards_version},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.lne_wizards]]
 modId = "more_rpg_classes"
 type = "required"
-versionRange = "*"
+versionRange = "[${more_rpg_library_version},)"
 ordering = "NONE"
 side = "BOTH"
 
