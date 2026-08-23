@@ -12,8 +12,6 @@ import net.minecraft.client.render.RenderLayer;
 public class LneWizardsClient {
 
     public static void init() {
-        // Description values that aren't expressible as declarative `{token}`s. `TooltipTokens` is
-        // server-safe; it is registered here simply because the tooltip is a client concern.
         LneWizardSpells.registerTooltipTokens();
 
         registerEntityRenderers();

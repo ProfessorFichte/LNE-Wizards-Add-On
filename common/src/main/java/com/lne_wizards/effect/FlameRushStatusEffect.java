@@ -16,8 +16,6 @@ public class FlameRushStatusEffect extends StatusEffect {
         super(category, color);
     }
 
-    /// V1: `new ParticleBatch(flame, Shape.CIRCLE, Origin.FEET, null, 20, 0.05F, 0.1F, 0, 0.25F)`
-    /// — the 9-arg form, i.e. angle 0 and extent 0.25.
     private static final ParticleGroup particles = ParticleGroupBuilder.of(SpellEngineParticles.flame)
             .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
                     .verticalOrigin(ParticleGroupBuilder.Batches.FEET)

@@ -46,9 +46,6 @@ public class LneWizardSpells {
         return entry;
     }
 
-    /// The registry id of an attribute, for naming a specific modifier inside an `{effect|...}`
-    /// tooltip token. Needed because an effect's modifier map is unordered, so a multi-modifier
-    /// effect can only be read unambiguously by attribute, never by list position.
     private static Identifier attributeId(RegistryEntry<EntityAttribute> attribute) {
         return Identifier.of(attribute.getIdAsString());
     }
@@ -117,13 +114,6 @@ public class LneWizardSpells {
         var id = Identifier.of(MOD_ID, "fire_flamerush");
         var effect = LNE_WizardsEffects.FLAME_RUSH;
         var title = "Flamerush";
-        // `{flamecloud_damage}` reads the damage of a DIFFERENT spell (`helper/flamerush_cloud`), which no
-        // declarative token can express — it stays a `TooltipTokens.registerCustom`, see below.
-        // The two bonuses were previously read positionally off `effect.config().attributes()` and were
-        // bound the WRONG WAY ROUND: `{bonus}` took index 1 (movement speed, 75%) but the prose spent it on
-        // "fire spell power", and `{bonus2}` took index 0 (fire power, 10%) but the prose spent it on
-        // "movement speed". Both are now named by attribute, which is also the only safe read: the
-        // registered effect keeps its modifiers in an unordered map.
         var description = "Rushes forward and leaves flame clouds on the trail that deals {flamecloud_damage} damage. "
                 + "Also increasing movement speed by "
                 + TooltipTokens.effect(effect.id, 0, attributeId(EntityAttributes.GENERIC_MOVEMENT_SPEED))
@@ -185,7 +175,6 @@ public class LneWizardSpells {
         SpellBuilder.Casting.channel(spell, 7, 8);
         spell.active.cast.animation = PlayerAnimation.of("more_rpg_classes:left_handed_channeling");
         spell.active.cast.sound = Sound.withVolume(Identifier.of("more_rpg_classes:frost_crackle_long"), 1.3F);
-        // Continuous casting FX — stays a plain list, not an `Fx.Visuals`.
         spell.active.cast.particles = List.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.CONE)
@@ -219,10 +208,6 @@ public class LneWizardSpells {
         var damage = SpellBuilder.Impacts.damage(1.0F);
         damage.target_modifiers = List.of(frozenHurts, frozenImmune);
         damage.visuals = Fx.Visuals.of(
-                // V1 id was `spell_engine:magic_frost_impact_burst`, which was never registered in 1.9
-                // either (magic ids are `magic_<shape>_<float|ascend|decelerate|burst>`; there is no
-                // `impact_burst` motion), so this batch rendered nothing. Repaired to the evidently
-                // intended frost burst — a behaviour change: it starts rendering.
                 ParticleGroupBuilder.magic(SpellEngineParticles.magic_frost, ParticleGroup.Motion.BURST)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(40).speed(0.2F, 0.7F)),
@@ -244,12 +229,8 @@ public class LneWizardSpells {
         return new Entry(id, spell, title, description);
     }
 
-    /// The violet the whole Falling Star effect is tinted with.
     private static final long STARFALL_COLOR = 4284940287L;
 
-    /// V1 `spell_engine:magic_arcane_impact_burst` — an id that has never been registered in either
-    /// version (there is no `impact_burst` motion), so every batch using it rendered nothing. This is the
-    /// effect it was evidently reaching for. Repairing it is a behaviour change.
     private static ParticleGroupBuilder starfallArcaneBurst() {
         return ParticleGroupBuilder.magic(SpellEngineParticles.magic_arcane, ParticleGroup.Motion.BURST)
                 .color(STARFALL_COLOR);
@@ -272,7 +253,6 @@ public class LneWizardSpells {
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.magic(SpellEngineParticles.magic_spell, ParticleGroup.Motion.ASCEND)
                         .color(STARFALL_COLOR)
-                        // V1 WIDE_PIPE = PIPE at double the entity radius
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE).widthFactor(2F)
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
                                 .count(1).speed(0.05F, 0.1F)));
@@ -291,14 +271,12 @@ public class LneWizardSpells {
         var meteorProjectile = new Spell.ProjectileData();
         meteorProjectile.client_data = new Spell.ProjectileData.Client();
         meteorProjectile.client_data.light_level = 12;
-        // Continuous projectile trail — stays a plain list.
         meteorProjectile.client_data.travel_particles = List.of(
                 ParticleGroupBuilder.magic(SpellEngineParticles.magic_spell, ParticleGroup.Motion.ASCEND)
                         .color(STARFALL_COLOR)
                         .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
                                 .alignment(ParticleGroup.Alignment.LOOK)
                                 .count(10).speed(0.0F, 0.1F)),
-                // Unnamespaced in V1, i.e. `minecraft:dragon_breath` — kept verbatim.
                 ParticleGroupBuilder.of("dragon_breath")
                         .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
                                 .alignment(ParticleGroup.Alignment.LOOK)
@@ -358,7 +336,6 @@ public class LneWizardSpells {
         SpellBuilder.Casting.channel(spell, 7.5F, 15);
         spell.active.cast.animation = PlayerAnimation.of("more_rpg_classes:floating_spawn_channel");
         spell.active.cast.sound = new Sound (Identifier.of("more_rpg_classes:water_bubbles"));
-        // Continuous casting FX — stays a plain list.
         spell.active.cast.particles = List.of(
                 ParticleGroupBuilder.of(MoreParticles.BUBBLE)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
@@ -396,9 +373,6 @@ public class LneWizardSpells {
                 cloud.spawn_ticks, 32, activeTicks / 32, Easing.EASE_IN_OUT_SINE);
         cloud.client_data.model_fx = List.of(bubbleFx);
         cloud.client_data.light_level = 8;
-        // Continuous cloud presence FX — stays a plain list. V1 read `count = 0.4` on the per-tick path as
-        // a 40% spawn probability; V2 reads a sub-1 count as an emission *period*, so it becomes
-        // `count(1).chance(0.4)` (§9).
         cloud.client_data.particles = List.of(
                 ParticleGroupBuilder.of(MoreParticles.BUBBLE)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
@@ -456,7 +430,6 @@ public class LneWizardSpells {
         spell.active.cast.duration = 1.25F;
         spell.active.cast.animation = PlayerAnimation.of("more_rpg_classes:two_handed_sky_channeling");
         spell.active.cast.sound = new Sound("spell_engine:generic_wind_charging");
-        // Continuous casting FX — stays a plain list.
         spell.active.cast.particles = List.of(
                 ParticleGroupBuilder.of(MoreParticles.SMALL_GUST)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
@@ -498,7 +471,6 @@ public class LneWizardSpells {
                                 .extent(6F)));
 
         var damage = SpellBuilder.Impacts.damage(0.8F, 10.0F);
-        // V1 assigned an EMPTY ParticleBatch[] here; the V2 default is already an empty bundle.
         damage.sound = Sound.withVolume(Identifier.of("more_rpg_classes:air_magic_impact2"), 0.4F);
 
         spell.impacts = List.of(damage);
@@ -525,7 +497,6 @@ public class LneWizardSpells {
         spell.active.cast.duration = 1.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_sky_charge");
         spell.active.cast.sound = new Sound(MRPGLibSounds.EARTH_MAGIC_CAST_1.id());
-        // Continuous casting FX — stays a plain list.
         spell.active.cast.particles = List.of(
                 ParticleGroupBuilder.of(MoreParticles.STONE_PARTICLE)
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
@@ -548,9 +519,7 @@ public class LneWizardSpells {
 
         var projectile = new Spell.ProjectileData();
         projectile.client_data = new Spell.ProjectileData.Client();
-        // Continuous projectile trail — stays a plain list.
         projectile.client_data.travel_particles = List.of(
-                // Unnamespaced in V1, i.e. `minecraft:smoke` — kept verbatim.
                 ParticleGroupBuilder.of("smoke")
                         .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
                                 .alignment(ParticleGroup.Alignment.LOOK)
@@ -574,7 +543,6 @@ public class LneWizardSpells {
         spell.area_impact.radius = 10;
         spell.area_impact.area.distance_dropoff = Spell.Target.Area.DropoffCurve.SQUARED;
         spell.area_impact.visuals = Fx.Visuals.of(
-                // Unnamespaced in V1, i.e. `minecraft:smoke` — kept verbatim.
                 ParticleGroupBuilder.of("smoke")
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(90).speed(1.0F, 3.0F)));
@@ -614,7 +582,6 @@ public class LneWizardSpells {
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
                                 .count(5).speed(0.05F, 0.1F)));
         cloud.client_data.light_level = 15;
-        // Continuous cloud presence FX — stays a plain list.
         cloud.client_data.particles = List.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.flame_ground)
                         .batch(b -> b.shape(ParticleGroup.Shape.PILLAR)
@@ -628,8 +595,6 @@ public class LneWizardSpells {
                         .batch(b -> b.shape(ParticleGroup.Shape.PILLAR)
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
                                 .count(4).speed(0.05F, 0.1F)),
-                // Unnamespaced in V1, i.e. `minecraft:campfire_cosy_smoke` — kept verbatim.
-                // V1 `count = 0.1` on the per-tick path was a 10% spawn chance, not a period (§9).
                 ParticleGroupBuilder.of("campfire_cosy_smoke")
                         .batch(b -> b.shape(ParticleGroup.Shape.PILLAR)
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
@@ -649,8 +614,6 @@ public class LneWizardSpells {
 
         var damage = SpellBuilder.Impacts.damage(0.35F, 0.0F);
         damage.visuals = Fx.Visuals.of(
-                // Both unnamespaced in V1, i.e. `minecraft:smoke` / `minecraft:flame` — kept verbatim.
-                // (Note the sibling batches above deliberately use the `spell_engine:` flame entries.)
                 ParticleGroupBuilder.of("smoke")
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(15).speed(0.01F, 0.1F)),
@@ -665,13 +628,7 @@ public class LneWizardSpells {
         return new Entry(id, spell, name, description);
     }
 
-    /// Description values that no declarative `{token}` expresses, registered through the server-safe
-    /// `TooltipTokens` (the deprecated, client-only `SpellTooltip.DescriptionMutator` is gone). Called
-    /// from client init; every other tooltip value in this mod is a plain token.
     public static void registerTooltipTokens() {
-        // `{flamecloud_damage}` is the damage of a *different* spell — the `helper/flamerush_cloud` this
-        // spell places behind the caster. No built-in token can reach across spells, and `{damage}` on
-        // `fire_flamerush` itself would be empty: it has no DAMAGE impact of its own.
         TooltipTokens.registerCustom(fire_flamerush.id(), args -> {
             var description = args.description();
             var world = args.player().getWorld();
@@ -685,8 +642,6 @@ public class LneWizardSpells {
         });
     }
 
-    /// `SpellTooltip.formattedRange` is client-only and `TooltipTokens` deliberately carries no client
-    /// references, so the two-value form is reproduced here (`formattedNumber` did move over).
     private static String formattedRange(double min, double max) {
         if (min == max) {
             return TooltipTokens.formattedNumber((float) min);

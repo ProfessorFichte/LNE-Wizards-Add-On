@@ -44,9 +44,6 @@ public class MagicOrbBlock extends Block {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        // V1 baked the motion into the particle id (`magic_spell_burst`); in 1.10 motion is an
-        // appearance payload, so it is chosen here instead. `max_age = 1.5` is a lifetime multiplier,
-        // and `playback_speed` is its reciprocal.
         ParticleGroup burst = ParticleGroupBuilder
                 .magic(SpellEngineParticles.magic_spell, ParticleGroup.Motion.BURST)
                 .color(colorToRgba(spellSchool.color))

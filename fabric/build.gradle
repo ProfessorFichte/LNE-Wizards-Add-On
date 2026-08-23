@@ -76,7 +76,7 @@ dependencies {
     modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
     modImplementation("maven.modrinth:runes:${project.runes_version}-${platform}")
 
-    modImplementation("net.more_rpg_classes:more_rpg_library-${platform}:${project.more_rpg_library_version}") { transitive = false }
+    modImplementation("maven.modrinth:more-rpg-library:${project.more_rpg_library_version}-${platform}")
 
     modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
     modImplementation "maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}"
@@ -84,8 +84,8 @@ dependencies {
     // runtime cannot start. Dev-classpath only - not shipped, not in the mod manifests.
 
     ///OPTIONAL
-    modImplementation("com.example:Loot-N-Explore:${project.loot_n_explore_version}") { transitive = false }
-    modImplementation("com.elemental_wizards:elemental_wizards_rpg-${platform}:${project.elemental_wizards_version}") { transitive = false }
+    modImplementation("maven.modrinth:loot-n-explore:${project.loot_n_explore_version}") { transitive = false }
+    modImplementation("maven.modrinth:elemental-wizards-rpg:${project.elemental_wizards_version}-${platform}") { transitive = false }
 
     // Trinkets
     modImplementation("maven.modrinth:trinkets:${project.trinkets_version}")
@@ -158,7 +158,7 @@ publishMods {
 
     modrinth {
         environment = me.modmuss50.mpp.platforms.modrinth.ModrinthEnvironment.CLIENT_AND_SERVER
-        projectId = providers.environmentVariable("MODRINTH_PROJECT_ID")
+        projectId = providers.environmentVariable("MODRINTH_PROJECT_ID").orElse(providers.environmentVariable("MODRINTH_PROJECT_RAW_ID"))
         accessToken = providers.environmentVariable("MODRINTH_API_KEY")
         minecraftVersions.add(project.minecraft_version)
         requires { slug = "spell-engine" }

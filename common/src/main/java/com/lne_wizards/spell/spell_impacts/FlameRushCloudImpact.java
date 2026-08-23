@@ -25,8 +25,6 @@ public class FlameRushCloudImpact implements SpellHandlers.CustomImpact {
             SpellExecution.ImpactContext context
     ) {
         RegistryEntry<Spell> flamerush_cloud = SpellRegistry.from(caster.getWorld()).getEntry(Identifier.of(MOD_ID, "helper/flamerush_cloud")).get();
-        // `SpellHelper` was split in 1.10: cloud placement moved to `CloudPlacer`, `ImpactContext` to
-        // `SpellExecution` (now a record, but the no-arg ctor and the fluent setters survived).
         CloudPlacer.placeCloud(caster.getWorld(), caster, null, caster.getPos(), flamerush_cloud,
                 new SpellExecution.ImpactContext()
                         .power(SpellPower.getSpellPower(SpellSchools.FIRE, caster))

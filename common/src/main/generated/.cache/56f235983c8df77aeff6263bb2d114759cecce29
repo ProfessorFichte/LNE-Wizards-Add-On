@@ -1,8 +1,8 @@
-// 1.21.1	2026-08-21T21:55:40.221518	L&E Wizards-Add On/Spell Generator
-20ae9420dbb9cbe063245585582e8d95552a5083 data/lne_wizards/spell/frost_ray.json
-9e3759452da0a8d8c655146fde89abffa7497615 data/lne_wizards/spell/helper/flamerush_cloud.json
-33226a48911a120ae1e8f789c50cc33fb58f442e data/lne_wizards/spell/wind_aeroburst.json
-d8e8a87b8bc6e97ace85d894702560459c174428 data/lne_wizards/spell/arcane_starfall.json
-8e47531efccc586b3f0bb96cb9f94839b561f2f2 data/lne_wizards/spell/aqua_explosive_bubbles.json
-a515d92f3ed9bbee74d4f7b0a23f475a2e538e62 data/lne_wizards/spell/fire_flamerush.json
-8c74825dd48f9cab7945c0a0854bbbde6be3769f data/lne_wizards/spell/terra_rock_crash.json
+// 1.21.1	2026-08-23T01:59:23.8449426	L&E Wizards-Add On/Spell Generator
+a515d92f3ed9bbee74d4f7b0a23f475a2e538e62 data\lne_wizards\spell\fire_flamerush.json
+33226a48911a120ae1e8f789c50cc33fb58f442e data\lne_wizards\spell\wind_aeroburst.json
+20ae9420dbb9cbe063245585582e8d95552a5083 data\lne_wizards\spell\frost_ray.json
+8c74825dd48f9cab7945c0a0854bbbde6be3769f data\lne_wizards\spell\terra_rock_crash.json
+8e47531efccc586b3f0bb96cb9f94839b561f2f2 data\lne_wizards\spell\aqua_explosive_bubbles.json
+9e3759452da0a8d8c655146fde89abffa7497615 data\lne_wizards\spell\helper\flamerush_cloud.json
+d8e8a87b8bc6e97ace85d894702560459c174428 data\lne_wizards\spell\arcane_starfall.json
