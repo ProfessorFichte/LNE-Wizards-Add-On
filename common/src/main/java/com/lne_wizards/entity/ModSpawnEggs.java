@@ -13,21 +13,18 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Every egg is created inside {@link #register()} rather than from a {@code static final} initialiser:
+ * the {@code EntityType}s they wrap only exist after {@link ModEntities#create()} has run, and on Forge
+ * the {@code ITEM} registry is the only one unlocked while this runs.
+ */
 public class ModSpawnEggs {
 
     @Nullable public static SpawnEggItem AIR_EVOKER_SPAWN_EGG = null;
-
-    public static final SpawnEggItem ARCANE_EVOKER_SPAWN_EGG = register(
-            "arcane_evoker_spawn_egg", ModEntities.ARCANE_EVOKER, 0x5C0F8B, 0xC074F3);
-
+    @Nullable public static SpawnEggItem ARCANE_EVOKER_SPAWN_EGG = null;
     @Nullable public static SpawnEggItem EARTH_EVOKER_SPAWN_EGG = null;
-
-    public static final SpawnEggItem FIRE_EVOKER_SPAWN_EGG = register(
-            "fire_evoker_spawn_egg", ModEntities.FIRE_EVOKER, 0x8B0000, 0xFF6A00);
-
-    public static final SpawnEggItem FROST_EVOKER_SPAWN_EGG = register(
-            "frost_evoker_spawn_egg", ModEntities.FROST_EVOKER, 0x4FC3F7, 0xF0F8FF);
-
+    @Nullable public static SpawnEggItem FIRE_EVOKER_SPAWN_EGG = null;
+    @Nullable public static SpawnEggItem FROST_EVOKER_SPAWN_EGG = null;
     @Nullable public static SpawnEggItem WATER_EVOKER_SPAWN_EGG = null;
 
     public static final List<SpawnEggItem> ALL_FOR_TAB = new ArrayList<>();
@@ -36,12 +33,18 @@ public class ModSpawnEggs {
     private static SpawnEggItem register(String id, EntityType<?> type, int primaryColor, int secondaryColor) {
         return Registry.register(
                 Registries.ITEM,
-                Identifier.of(LNE_Wizards_Mod.MOD_ID, id),
+                new Identifier(LNE_Wizards_Mod.MOD_ID, id),
                 new SpawnEggItem((EntityType<? extends MobEntity>) type, primaryColor, secondaryColor, new Item.Settings())
         );
     }
 
-    public static void registerItemGroup() {
+    public static void register() {
+        ModEntities.create();
+
+        ARCANE_EVOKER_SPAWN_EGG = register("arcane_evoker_spawn_egg", ModEntities.ARCANE_EVOKER, 0x5C0F8B, 0xC074F3);
+        FIRE_EVOKER_SPAWN_EGG = register("fire_evoker_spawn_egg", ModEntities.FIRE_EVOKER, 0x8B0000, 0xFF6A00);
+        FROST_EVOKER_SPAWN_EGG = register("frost_evoker_spawn_egg", ModEntities.FROST_EVOKER, 0x4FC3F7, 0xF0F8FF);
+
         if (ModEntities.AIR_EVOKER != null) {
             AIR_EVOKER_SPAWN_EGG = register("air_evoker_spawn_egg", ModEntities.AIR_EVOKER, 0xA8D8EA, 0xFFFFFF);
         }

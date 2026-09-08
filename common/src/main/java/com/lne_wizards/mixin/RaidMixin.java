@@ -56,7 +56,8 @@ public abstract class RaidMixin {
                     pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
                     world.getRandom().nextFloat() * 360f, 0f
             );
-            evoker.initialize(world, world.getLocalDifficulty(pos), SpawnReason.EVENT, null);
+            // 1.20.1 `MobEntity#initialize` still carries the trailing NbtCompound parameter.
+            evoker.initialize(world, world.getLocalDifficulty(pos), SpawnReason.EVENT, null, null);
             world.spawnEntity(evoker);
             addRaider(wave, evoker, pos, false);
         }

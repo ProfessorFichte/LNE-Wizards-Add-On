@@ -22,13 +22,15 @@ public class FlameRushStatusEffect extends StatusEffect {
                     .count(20).speed(0.05F, 0.1F)
                     .extent(0.25F));
 
-    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
+    // 1.20.1: `applyUpdateEffect` returns void (it became `boolean` in 1.21).
+    @Override
+    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         if(entity instanceof PlayerEntity playerEntity && !playerEntity.getWorld().isClient()) {
             ParticleHelper.sendBatches(playerEntity, List.of(particles));
         }
-        return true;
     }
 
+    @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
         int i;
         i = 5;

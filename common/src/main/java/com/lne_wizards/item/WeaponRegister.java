@@ -1,6 +1,6 @@
 package com.lne_wizards.item;
 
-import more_rpg_loot.item.Group;
+import com.lne_wizards.compat.LootNExplore;
 import net.spell_engine.Platform;
 import net.minecraft.client.render.entity.EvokerEntityRenderer;
 import net.minecraft.entity.mob.EvokerEntity;
@@ -39,7 +39,7 @@ public class WeaponRegister {
     }
 
     private static Supplier<Ingredient> ingredient(String idString, boolean requirement, Item fallback) {
-        var id = Identifier.of(idString);
+        var id = new Identifier(idString);
         if (requirement) {
             return () -> {
                 return Ingredient.ofItems(fallback);
@@ -104,6 +104,6 @@ public class WeaponRegister {
                     .spellContainer(SpellContainers.forMagicWeapon().withSpellId(zephyrs_speed));
         }
         entries.forEach(entry -> entry.rarity = Rarity.RARE);
-        Weapon.register(configs, entries, Group.RPG_LOOT_KEY);
+        Weapon.register(configs, entries, LootNExplore.itemGroupKey());
     }
 }

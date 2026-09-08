@@ -2,6 +2,7 @@ package com.lne_wizards.effect;
 
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.registry.Registries;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
@@ -27,7 +28,7 @@ public class LNE_WizardsEffects {
         return entry;
     }
 
-    public static Effects.Entry FLAME_RUSH = add(new Effects.Entry(Identifier.of(MOD_ID, "flame_rush"),
+    public static Effects.Entry FLAME_RUSH = add(new Effects.Entry(new Identifier(MOD_ID, "flame_rush"),
             "Flamerush",
             "Increases movement speed and fire spell power.",
             new FlameRushStatusEffect(StatusEffectCategory.BENEFICIAL, SpellSchools.FIRE.color),
@@ -36,18 +37,18 @@ public class LNE_WizardsEffects {
                             new AttributeModifier(
                                     SpellSchools.FIRE.id.toString(),
                                     0.1F,
-                                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                                    EntityAttributeModifier.Operation.MULTIPLY_BASE
                             ),
                             new AttributeModifier(
-                                    EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                                    Registries.ATTRIBUTE.getId(EntityAttributes.GENERIC_MOVEMENT_SPEED).toString(),
                                     0.75F,
-                                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                                    EntityAttributeModifier.Operation.MULTIPLY_BASE
                             )
                     )
             )
     ));
 
-    public static Effects.Entry ARCANE_PRECISION = add(new Effects.Entry(Identifier.of(MOD_ID, "arcane_precision"),
+    public static Effects.Entry ARCANE_PRECISION = add(new Effects.Entry(new Identifier(MOD_ID, "arcane_precision"),
             "Arcane Precision",
             "Makes targets more vulnerable to Arcane Spell Damage & Crits",
             new ArcanePrecisionEffect(StatusEffectCategory.HARMFUL, SpellSchools.ARCANE.color)
@@ -58,7 +59,7 @@ public class LNE_WizardsEffects {
                     )
             )
     ));
-    public static Effects.Entry ZEPHYRS_SPEED = add(new Effects.Entry(Identifier.of(MOD_ID, "zephyrs_speed"),
+    public static Effects.Entry ZEPHYRS_SPEED = add(new Effects.Entry(new Identifier(MOD_ID, "zephyrs_speed"),
             "Zephyrs Speed",
             "Increasing the Crit Chance & Movement Speed of the caster.",
             new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, MoreSpellSchools.AIR.color),
@@ -67,12 +68,12 @@ public class LNE_WizardsEffects {
                             new AttributeModifier(
                                     SpellPowerMechanics.CRITICAL_CHANCE.id.toString(),
                                     0.03F,
-                                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                                    EntityAttributeModifier.Operation.MULTIPLY_BASE
                             ),
                             new AttributeModifier(
-                                    EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                                    Registries.ATTRIBUTE.getId(EntityAttributes.GENERIC_MOVEMENT_SPEED).toString(),
                                     0.05F,
-                                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                                    EntityAttributeModifier.Operation.MULTIPLY_BASE
                             )
                     )
             )

@@ -19,6 +19,7 @@ public final class FabricMod implements ModInitializer {
     public void onInitialize() {
         LNE_Wizards_Mod.init();
         LNE_Wizards_Mod.registerBlocks();
+        LNE_Wizards_Mod.registerBlockItems();
         LNE_Wizards_Mod.registerEntities();
         LNE_Wizards_Mod.registerEntityAttributes(FabricDefaultAttributeRegistry::register);
         LNE_Wizards_Mod.registerItems();
@@ -43,7 +44,7 @@ public final class FabricMod implements ModInitializer {
         }
         FabricLoader.getInstance().getModContainer(LNE_Wizards_Mod.MOD_ID).ifPresent(container ->
                 ResourceManagerHelper.registerBuiltinResourcePack(
-                        Identifier.of(LNE_Wizards_Mod.MOD_ID, "elemental_wizards_compat"),
+                        new Identifier(LNE_Wizards_Mod.MOD_ID, "elemental_wizards_compat"),
                         container,
                         ResourcePackActivationType.ALWAYS_ENABLED));
     }

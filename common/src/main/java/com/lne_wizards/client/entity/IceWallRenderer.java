@@ -15,7 +15,7 @@ import net.spell_engine.api.render.CustomModels;
 public class IceWallRenderer extends EntityRenderer<IceWallEntity> {
 
     private final ItemRenderer itemRenderer;
-    private static final Identifier MODEL_ID = Identifier.of("lne_wizards", "spell_effect/ice_wall");
+    private static final Identifier MODEL_ID = new Identifier("lne_wizards", "spell_effect/ice_wall");
     private static final RenderLayer RENDER_LAYER = RenderLayer.getEntityTranslucent(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
     private static final float WALL_HEIGHT = 3.0F;
 

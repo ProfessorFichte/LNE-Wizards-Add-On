@@ -4,7 +4,8 @@ import com.lne_wizards.effect.LNE_WizardsEffects;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.client.particle.MoreParticles;
 import net.more_rpg_classes.custom.MoreSpellSchools;
@@ -46,8 +47,9 @@ public class LneWizardSpells {
         return entry;
     }
 
-    private static Identifier attributeId(RegistryEntry<EntityAttribute> attribute) {
-        return Identifier.of(attribute.getIdAsString());
+    // 1.20.1: `EntityAttribute` is a raw object with no id accessor (`RegistryEntry#getIdAsString` is 1.21-only).
+    private static Identifier attributeId(EntityAttribute attribute) {
+        return Registries.ATTRIBUTE.getId(attribute);
     }
 
     private static Spell.Impact.TargetModifier createImpactModifier(String entityType) {
@@ -67,7 +69,7 @@ public class LneWizardSpells {
                 ParticleGroupBuilder.of(MoreParticles.BUBBLE)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(10.0F).speed(0.001F, 0.1F)));
-        damage.sound = Sound.withVolume(Identifier.of(MRPGLibSounds.WATER_BUBBLE_EXPLODE.id().toString()), 2.0F);
+        damage.sound = Sound.withVolume(new Identifier(MRPGLibSounds.WATER_BUBBLE_EXPLODE.id().toString()), 2.0F);
 
         var soaked = SpellBuilder.Impacts.effectSet("more_rpg_classes:soaked", 4, 1);
         soaked.action.status_effect.show_particles = false;
@@ -111,7 +113,7 @@ public class LneWizardSpells {
     // ACTIVE SPELLS
     public static Entry fire_flamerush = add(fire_flamerush());
     private static Entry fire_flamerush() {
-        var id = Identifier.of(MOD_ID, "fire_flamerush");
+        var id = new Identifier(MOD_ID, "fire_flamerush");
         var effect = LNE_WizardsEffects.FLAME_RUSH;
         var title = "Flamerush";
         var description = "Rushes forward and leaves flame clouds on the trail that deals {flamecloud_damage} damage. "
@@ -128,7 +130,7 @@ public class LneWizardSpells {
         spell.target.type = Spell.Target.Type.CASTER;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_ground_release");
-        spell.release.sound = Sound.withVolume(Identifier.of("spell_engine:generic_fire_release"), 1.0F);
+        spell.release.sound = Sound.withVolume(new Identifier("spell_engine:generic_fire_release"), 1.0F);
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.flame_medium_a)
                         .batch(b -> b.shape(ParticleGroup.Shape.PILLAR)
@@ -163,7 +165,7 @@ public class LneWizardSpells {
     }
     public static Entry frost_ray = add(frost_ray());
     private static Entry frost_ray() {
-        var id = Identifier.of(MOD_ID, "frost_ray");
+        var id = new Identifier(MOD_ID, "frost_ray");
         var title = "Ray of Frost";
         var description = "Casts a cold beam, causing {damage} damage and slowly freezes the target.";
 
@@ -174,7 +176,7 @@ public class LneWizardSpells {
 
         SpellBuilder.Casting.channel(spell, 7, 8);
         spell.active.cast.animation = PlayerAnimation.of("more_rpg_classes:left_handed_channeling");
-        spell.active.cast.sound = Sound.withVolume(Identifier.of("more_rpg_classes:frost_crackle_long"), 1.3F);
+        spell.active.cast.sound = Sound.withVolume(new Identifier("more_rpg_classes:frost_crackle_long"), 1.3F);
         spell.active.cast.particles = List.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.CONE)
@@ -214,7 +216,7 @@ public class LneWizardSpells {
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(20).speed(0.1F, 0.4F)));
-        damage.sound = Sound.withVolume(Identifier.of("more_rpg_classes:frost_crackle"), 0.4F);
+        damage.sound = Sound.withVolume(new Identifier("more_rpg_classes:frost_crackle"), 0.4F);
 
         var frosted = SpellBuilder.Impacts.effectAdd("more_rpg_classes:frosted", 5, 1, 5);
         frosted.action.status_effect.show_particles = false;
@@ -238,7 +240,7 @@ public class LneWizardSpells {
 
     public static Entry arcane_starfall = add(arcane_starfall());
     private static Entry arcane_starfall() {
-        var id = Identifier.of(MOD_ID, "arcane_starfall");
+        var id = new Identifier(MOD_ID, "arcane_starfall");
         var title = "Falling Star";
         var description = "Calls a falling astral star, causing {damage} arcane spell damage. Consumes all Arcane Charges.";
 
@@ -256,7 +258,7 @@ public class LneWizardSpells {
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE).widthFactor(2F)
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
                                 .count(1).speed(0.05F, 0.1F)));
-        spell.release.sound = new Sound(Identifier.of("wizards:arcane_missile_release").toString());
+        spell.release.sound = new Sound(new Identifier("wizards:arcane_missile_release").toString());
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
@@ -305,7 +307,7 @@ public class LneWizardSpells {
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
                                 .count(20).speed(0.1F, 0.4F)
                                 .extent(2.0F)));
-        damage.sound = new Sound(Identifier.of("more_rpg_classes:arcane_strong_impact").toString());
+        damage.sound = new Sound(new Identifier("more_rpg_classes:arcane_strong_impact").toString());
 
         spell.impacts = List.of(damage);
 
@@ -313,7 +315,7 @@ public class LneWizardSpells {
         spell.area_impact.radius = 4.0F;
         spell.area_impact.area = new Spell.Target.Area();
         spell.area_impact.area.distance_dropoff = Spell.Target.Area.DropoffCurve.SQUARED;
-        spell.area_impact.sound = Sound.withVolume(Identifier.of("wizards:arcane_blast_impact"), 1.5F);
+        spell.area_impact.sound = Sound.withVolume(new Identifier("wizards:arcane_blast_impact"), 1.5F);
 
         spell.cost.exhaust = 0.5F;
         spell.cost.effect_id = "wizards:arcane_charge";
@@ -324,7 +326,7 @@ public class LneWizardSpells {
     }
     public static final Entry aqua_explosive_bubbles = add(aqua_explosive_bubbles());
     private static Entry aqua_explosive_bubbles() {
-        var id = Identifier.of(MOD_ID, "aqua_explosive_bubbles");
+        var id = new Identifier(MOD_ID, "aqua_explosive_bubbles");
         var title = "Explosive Bubbles";
         var description = "Spawns explosive Bubbles behind the caster that deal {damage} damage or heal allies by {heal} when they explode on contact.";
 
@@ -335,7 +337,7 @@ public class LneWizardSpells {
 
         SpellBuilder.Casting.channel(spell, 7.5F, 15);
         spell.active.cast.animation = PlayerAnimation.of("more_rpg_classes:floating_spawn_channel");
-        spell.active.cast.sound = new Sound (Identifier.of("more_rpg_classes:water_bubbles"));
+        spell.active.cast.sound = new Sound (new Identifier("more_rpg_classes:water_bubbles"));
         spell.active.cast.particles = List.of(
                 ParticleGroupBuilder.of(MoreParticles.BUBBLE)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
@@ -346,7 +348,7 @@ public class LneWizardSpells {
 
         spell.deliver.type = Spell.Delivery.Type.CLOUD;
 
-        var bubbleModelId = Identifier.of("elemental_wizards_rpg", "spell_projectile/big_bubble").toString();
+        var bubbleModelId = new Identifier("elemental_wizards_rpg", "spell_projectile/big_bubble").toString();
         var bubbleColor = Color.from(0xa7ffed).toRGBA();
 
         var cloud = new Spell.Delivery.Cloud();
@@ -390,7 +392,7 @@ public class LneWizardSpells {
                                 .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
                                         .count(10.0F).speed(0.01F, 0.2F))))
                 .models(popFx);
-        cloud.despawn.sound = new Sound(Identifier.ofVanilla("block.bubble_column.bubble_pop").toString());
+        cloud.despawn.sound = new Sound(new Identifier("block.bubble_column.bubble_pop").toString());
 
         cloud.impact = Fx.Visuals.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.area_effect_293)
@@ -418,7 +420,7 @@ public class LneWizardSpells {
     }
     public static final Entry wind_aeroburst = add(wind_aeroburst());
     private static Entry wind_aeroburst() {
-        var id = Identifier.of(MOD_ID, "wind_aeroburst");
+        var id = new Identifier(MOD_ID, "wind_aeroburst");
         var title = "Aeroburst";
         var description = "Release an explosive burst of air in all directions, knocking back all nearby enemies with tremendous force and dealing {damage} damage.";
 
@@ -471,7 +473,7 @@ public class LneWizardSpells {
                                 .extent(6F)));
 
         var damage = SpellBuilder.Impacts.damage(0.8F, 10.0F);
-        damage.sound = Sound.withVolume(Identifier.of("more_rpg_classes:air_magic_impact2"), 0.4F);
+        damage.sound = Sound.withVolume(new Identifier("more_rpg_classes:air_magic_impact2"), 0.4F);
 
         spell.impacts = List.of(damage);
 
@@ -484,7 +486,7 @@ public class LneWizardSpells {
     }
     public static Entry terra_rock_crash = add(terra_rock_crash());
     private static Entry terra_rock_crash() {
-        var id = Identifier.of(MOD_ID, "terra_rock_crash");
+        var id = new Identifier(MOD_ID, "terra_rock_crash");
         var spell = SpellBuilder.createSpellActive();
         var title = "Rock Crash";
         var description = "Summons a giant rock above the target with a large area impact dealing {damage} damage.";
@@ -557,7 +559,7 @@ public class LneWizardSpells {
     // FUNCTIONAL ACTIVE HELPER
     public static Entry flamerush_cloud = add(flamerush_cloud());
     private static Entry flamerush_cloud() {
-        var id = Identifier.of(MOD_ID, "helper/flamerush_cloud");
+        var id = new Identifier(MOD_ID, "helper/flamerush_cloud");
         var name = "";
         var description = "";
 
@@ -633,7 +635,7 @@ public class LneWizardSpells {
             var description = args.description();
             var world = args.player().getWorld();
             if (world == null) return description;
-            var cloudSpell = SpellRegistry.from(world).getEntry(Identifier.of(MOD_ID, "helper/flamerush_cloud"));
+            var cloudSpell = SpellRegistry.from(world).getEntry(RegistryKey.of(SpellRegistry.KEY, new Identifier(MOD_ID, "helper/flamerush_cloud")));
             if (cloudSpell.isEmpty()) return description;
             var estimated = SpellEstimation.estimate(cloudSpell.get().value(), args.player(), ItemStack.EMPTY);
             if (estimated.damage().isEmpty()) return description;

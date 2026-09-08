@@ -2,6 +2,7 @@ package com.lne_wizards.spell.spell_impacts;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.Spell;
@@ -24,7 +25,7 @@ public class FlameRushCloudImpact implements SpellHandlers.CustomImpact {
             Entity target,
             SpellExecution.ImpactContext context
     ) {
-        RegistryEntry<Spell> flamerush_cloud = SpellRegistry.from(caster.getWorld()).getEntry(Identifier.of(MOD_ID, "helper/flamerush_cloud")).get();
+        RegistryEntry<Spell> flamerush_cloud = SpellRegistry.from(caster.getWorld()).getEntry(RegistryKey.of(SpellRegistry.KEY, new Identifier(MOD_ID, "helper/flamerush_cloud"))).get();
         CloudPlacer.placeCloud(caster.getWorld(), caster, null, caster.getPos(), flamerush_cloud,
                 new SpellExecution.ImpactContext()
                         .power(SpellPower.getSpellPower(SpellSchools.FIRE, caster))

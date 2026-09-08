@@ -7,8 +7,8 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.DustParticleEffect;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -38,12 +38,13 @@ public class MagicOrbBlock extends Block {
     }
 
     @Override
-    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
 
+    // 1.20.1 `AbstractBlock#onUse` carries the `Hand` parameter (dropped in 1.20.5).
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ParticleGroup burst = ParticleGroupBuilder
                 .magic(SpellEngineParticles.magic_spell, ParticleGroup.Motion.BURST)
                 .color(colorToRgba(spellSchool.color))
@@ -52,18 +53,12 @@ public class MagicOrbBlock extends Block {
                 .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                         .count(50).speed(0.5f, 0.8f));
         if (world.isClient()) return ActionResult.SUCCESS;
-        if (spellSchool.ownedBoostEffect == null) return ActionResult.PASS;
+        // 1.20.1 status-effect APIs take the raw `StatusEffect`; there is no `RegistryEntry` round trip.
+        var effect = spellSchool.ownedBoostEffect;
+        if (effect == null) return ActionResult.PASS;
+        if (player.hasStatusEffect(effect)) return ActionResult.PASS;
 
-        var effectId = Registries.STATUS_EFFECT.getId(spellSchool.ownedBoostEffect);
-        if (effectId == null) return ActionResult.PASS;
-
-        var effectEntryOpt = Registries.STATUS_EFFECT.getEntry(effectId);
-        if (effectEntryOpt.isEmpty()) return ActionResult.PASS;
-
-        var effectEntry = effectEntryOpt.get();
-        if (player.hasStatusEffect(effectEntry)) return ActionResult.PASS;
-
-        player.addStatusEffect(new StatusEffectInstance(effectEntry, EFFECT_DURATION_TICKS, EFFECT_AMPLIFIER, false, false, true));
+        player.addStatusEffect(new StatusEffectInstance(effect, EFFECT_DURATION_TICKS, EFFECT_AMPLIFIER, false, false, true));
         if(!world.isClient){
             ParticleHelper.sendBatches(player, List.of(burst));
         }

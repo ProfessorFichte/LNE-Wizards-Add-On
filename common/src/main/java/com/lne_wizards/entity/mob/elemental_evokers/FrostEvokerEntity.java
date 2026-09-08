@@ -26,11 +26,11 @@ public class FrostEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public Identifier getWandItemId() {
-        return Identifier.of("wizards", "wand_frost");
+        return new Identifier("wizards", "wand_frost");
     }
 
     public static DefaultAttributeContainer.Builder createFrostEvokerAttributes() {
         return createElementalEvokerAttributes()
-                .add(SpellSchools.FROST.attributeEntry, LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
+                .add(SpellSchools.FROST.attributeEntry.value(), LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
     }
 }
