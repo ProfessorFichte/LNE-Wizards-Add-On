@@ -3,7 +3,7 @@ package com.lne_wizards.mixin;
 import com.lne_wizards.LNE_Wizards_Mod;
 import com.lne_wizards.entity.ModEntities;
 import com.lne_wizards.entity.mob.elemental_evokers.ElementalEvokerEntity;
-import net.fabricmc.loader.api.FabricLoader;
+import net.spell_engine.Platform;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.raid.RaiderEntity;
@@ -35,7 +35,7 @@ public abstract class RaidMixin {
         int wave = getGroupsSpawned();
         if (wave < 4) return;
 
-        boolean elementalWizardsLoaded = FabricLoader.getInstance().isModLoaded("elemental_wizards_rpg");
+        boolean elementalWizardsLoaded = Platform.util().isModLoaded("elemental_wizards_rpg");
 
         List<EntityType<? extends ElementalEvokerEntity>> pool = new ArrayList<>();
         pool.add(ModEntities.FIRE_EVOKER);

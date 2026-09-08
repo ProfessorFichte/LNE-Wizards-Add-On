@@ -1,12 +1,9 @@
 package com.lne_wizards.entity;
 
 import com.lne_wizards.LNE_Wizards_Mod;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -33,6 +30,8 @@ public class ModSpawnEggs {
 
     @Nullable public static SpawnEggItem WATER_EVOKER_SPAWN_EGG = null;
 
+    public static final List<SpawnEggItem> ALL_FOR_TAB = new ArrayList<>();
+
     @SuppressWarnings("unchecked")
     private static SpawnEggItem register(String id, EntityType<?> type, int primaryColor, int secondaryColor) {
         return Registry.register(
@@ -53,16 +52,12 @@ public class ModSpawnEggs {
             WATER_EVOKER_SPAWN_EGG = register("water_evoker_spawn_egg", ModEntities.WATER_EVOKER, 0x0A3D62, 0x74B9FF);
         }
 
-        List<SpawnEggItem> eggs = new ArrayList<>();
-        if (AIR_EVOKER_SPAWN_EGG != null) eggs.add(AIR_EVOKER_SPAWN_EGG);
-        eggs.add(ARCANE_EVOKER_SPAWN_EGG);
-        if (EARTH_EVOKER_SPAWN_EGG != null) eggs.add(EARTH_EVOKER_SPAWN_EGG);
-        eggs.add(FIRE_EVOKER_SPAWN_EGG);
-        eggs.add(FROST_EVOKER_SPAWN_EGG);
-        if (WATER_EVOKER_SPAWN_EGG != null) eggs.add(WATER_EVOKER_SPAWN_EGG);
-
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries ->
-                entries.addAfter(Items.EVOKER_SPAWN_EGG, eggs.toArray(new SpawnEggItem[0]))
-        );
+        ALL_FOR_TAB.clear();
+        if (AIR_EVOKER_SPAWN_EGG != null) ALL_FOR_TAB.add(AIR_EVOKER_SPAWN_EGG);
+        ALL_FOR_TAB.add(ARCANE_EVOKER_SPAWN_EGG);
+        if (EARTH_EVOKER_SPAWN_EGG != null) ALL_FOR_TAB.add(EARTH_EVOKER_SPAWN_EGG);
+        ALL_FOR_TAB.add(FIRE_EVOKER_SPAWN_EGG);
+        ALL_FOR_TAB.add(FROST_EVOKER_SPAWN_EGG);
+        if (WATER_EVOKER_SPAWN_EGG != null) ALL_FOR_TAB.add(WATER_EVOKER_SPAWN_EGG);
     }
 }

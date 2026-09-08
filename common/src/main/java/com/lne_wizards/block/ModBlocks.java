@@ -1,13 +1,10 @@
 package com.lne_wizards.block;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -36,11 +33,11 @@ public class ModBlocks {
     }
 
     private static AbstractBlock.Settings orbSettings() {
-        return FabricBlockSettings.create()
+        return AbstractBlock.Settings.create()
                 .mapColor(MapColor.PURPLE)
                 .strength(1.5F, 6.0F)
                 .sounds(BlockSoundGroup.GLASS)
-                .luminance(9)
+                .luminance(state -> 9)
                 .nonOpaque();
     }
 
@@ -67,8 +64,5 @@ public class ModBlocks {
             Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, e.name()), e.block());
             Registry.register(Registries.ITEM, Identifier.of(MOD_ID, e.name()), e.item());
         }
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
-            for (var e : all) content.add(e.item());
-        });
     }
 }

@@ -1,26 +1,33 @@
 package com.lne_wizards.entity;
 
 import com.lne_wizards.entity.mob.elemental_evokers.*;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.mob.MobEntity;
 
 public class ModEntityAttributes {
 
-    public static void register() {
+    @FunctionalInterface
+    public interface AttributeRegistrar {
+        void register(EntityType<? extends MobEntity> type, DefaultAttributeContainer.Builder builder);
+    }
+
+    public static void register(AttributeRegistrar registrar) {
         if (ModEntities.AIR_EVOKER != null) {
-            FabricDefaultAttributeRegistry.register(ModEntities.AIR_EVOKER, AirEvokerEntity.createAirEvokerAttributes());
+            registrar.register(ModEntities.AIR_EVOKER, AirEvokerEntity.createAirEvokerAttributes());
         }
 
-        FabricDefaultAttributeRegistry.register(ModEntities.ARCANE_EVOKER, ArcaneEvokerEntity.createArcaneEvokerAttributes());
+        registrar.register(ModEntities.ARCANE_EVOKER, ArcaneEvokerEntity.createArcaneEvokerAttributes());
 
         if (ModEntities.EARTH_EVOKER != null) {
-            FabricDefaultAttributeRegistry.register(ModEntities.EARTH_EVOKER, EarthEvokerEntity.createEarthEvokerAttributes());
+            registrar.register(ModEntities.EARTH_EVOKER, EarthEvokerEntity.createEarthEvokerAttributes());
         }
 
-        FabricDefaultAttributeRegistry.register(ModEntities.FIRE_EVOKER, FireEvokerEntity.createFireEvokerAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.FROST_EVOKER, FrostEvokerEntity.createFrostEvokerAttributes());
+        registrar.register(ModEntities.FIRE_EVOKER, FireEvokerEntity.createFireEvokerAttributes());
+        registrar.register(ModEntities.FROST_EVOKER, FrostEvokerEntity.createFrostEvokerAttributes());
 
         if (ModEntities.WATER_EVOKER != null) {
-            FabricDefaultAttributeRegistry.register(ModEntities.WATER_EVOKER, WaterEvokerEntity.createWaterEvokerAttributes());
+            registrar.register(ModEntities.WATER_EVOKER, WaterEvokerEntity.createWaterEvokerAttributes());
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.lne_wizards.item;
 
 import more_rpg_loot.item.Group;
-import net.fabricmc.loader.api.FabricLoader;
+import net.spell_engine.Platform;
 import net.minecraft.client.render.entity.EvokerEntityRenderer;
 import net.minecraft.entity.mob.EvokerEntity;
 import net.minecraft.item.Item;
@@ -86,7 +86,7 @@ public class WeaponRegister {
                     .attribute(AttributeModifier.bonus(SpellSchools.ARCANE.id, staffSpellPower))
                     .spellContainer(SpellContainers.forMagicWeapon().withSpellId(arcane_precision));
         }
-        if (!tweaksConfig.value.disable_special_lne_weapons && FabricLoader.getInstance().isModLoaded("elemental_wizards_rpg")) {
+        if (!tweaksConfig.value.disable_special_lne_weapons && Platform.util().isModLoaded("elemental_wizards_rpg")) {
             staff("elder_guardian_staff_aqua",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.PRISMARINE_SHARD)))
                     .translatedName("Tidecaller's Staff")

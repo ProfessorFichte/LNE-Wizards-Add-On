@@ -8,7 +8,7 @@ import com.lne_wizards.entity.ModEntityAttributes;
 import com.lne_wizards.entity.ModSpawnEggs;
 import com.lne_wizards.item.WeaponRegister;
 import com.lne_wizards.spell.CustomSpellImpacts;
-import net.fabricmc.loader.api.FabricLoader;
+import net.spell_engine.Platform;
 import net.spell_engine.rpg_series.config.ConfigFile;
 import com.lne_wizards.config.TweaksConfig;
 import net.tiny_config.ConfigManager;
@@ -44,7 +44,7 @@ public class LNE_Wizards_Mod {
 	}
 
 	public static void registerItems(){
-		if(FabricLoader.getInstance().isModLoaded("loot_n_explore")) {
+		if(Platform.util().isModLoaded("loot_n_explore")) {
 			itemConfig.refresh();
 			WeaponRegister.register(itemConfig.value.weapons);
 			itemConfig.save();
@@ -67,7 +67,7 @@ public class LNE_Wizards_Mod {
 		ModEntities.register();
 	}
 
-	public static void registerEntityAttributes() {
-		ModEntityAttributes.register();
+	public static void registerEntityAttributes(ModEntityAttributes.AttributeRegistrar registrar) {
+		ModEntityAttributes.register(registrar);
 	}
 }

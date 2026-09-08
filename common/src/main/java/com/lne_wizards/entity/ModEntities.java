@@ -3,7 +3,7 @@ package com.lne_wizards.entity;
 import com.lne_wizards.LNE_Wizards_Mod;
 import com.lne_wizards.entity.mob.elemental_evokers.*;
 import com.lne_wizards.entity.spell_spawned.IceWallEntity;
-import net.fabricmc.loader.api.FabricLoader;
+import net.spell_engine.Platform;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -57,7 +57,7 @@ public class ModEntities {
     }
 
     public static void register() {
-        if (FabricLoader.getInstance().isModLoaded("elemental_wizards_rpg")) {
+        if (Platform.util().isModLoaded("elemental_wizards_rpg")) {
             AIR_EVOKER = registerType("air_evoker",
                     EntityType.Builder.create(AirEvokerEntity::new, SpawnGroup.MONSTER)
                             .dimensions(0.6F, 1.95F).maxTrackingRange(8));
