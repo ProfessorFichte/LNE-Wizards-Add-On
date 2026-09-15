@@ -83,7 +83,7 @@ dependencies {
 
     // Elemental Wizards + its own hard dependencies: dev runtime only, exercises the compat data pack.
     modLocalRuntime("com.elemental_wizards:elemental_wizards_rpg-${platform}:${rootProject.elemental_wizards_version}") { transitive = false }
-    modLocalRuntime("net.rpg_series:wizards-${platform}:${rootProject.wizards_version}") { transitive = false }
+    modLocalRuntime("maven.modrinth:wizards:${rootProject.wizards_version}-${platform}") { transitive = false }
     modLocalRuntime("maven.modrinth:armor-model-api:${rootProject.armor_model_api_version}-${platform}") { transitive = false }
     modLocalRuntime("maven.modrinth:structure-pool-api:${rootProject.structure_pool_api_version}-${platform}") { transitive = false }
 
@@ -151,7 +151,10 @@ publishMods {
             : me.modmuss50.mpp.ReleaseType.BETA
     version = "${project.version}-${platform}"
     displayName = "${project.version}-${platform}"
+    // NeoForge 1.20.1 is a fork of Forge 47.1 that kept the Forge packages and FML,
+    // so the same jar loads there; both loaders are tagged.
     modLoaders.add("forge")
+    modLoaders.add("neoforge")
 
     curseforge {
         projectId = providers.environmentVariable("CURSEFORGE_PROJECT_ID")

@@ -80,7 +80,7 @@ dependencies {
     // (three EW-gated staves + the air/earth/water evokers and their spawn eggs).
     modLocalRuntime("com.elemental_wizards:elemental_wizards_rpg-${platform}:${rootProject.elemental_wizards_version}") { transitive = false }
     // ...and Elemental Wizards hard-depends on these two.
-    modLocalRuntime("net.rpg_series:wizards-${platform}:${rootProject.wizards_version}") { transitive = false }
+    modLocalRuntime("maven.modrinth:wizards:${rootProject.wizards_version}-${platform}") { transitive = false }
     modLocalRuntime("maven.modrinth:armor-model-api:${rootProject.armor_model_api_version}-${platform}") { transitive = false }
 
     // Runes: dev runtime ONLY - More RPG Library ships `runes:crafting` recipes that fail to parse without it.
