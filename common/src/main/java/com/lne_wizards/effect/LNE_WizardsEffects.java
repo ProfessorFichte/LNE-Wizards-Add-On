@@ -3,6 +3,7 @@ package com.lne_wizards.effect;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.Registries;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
@@ -18,6 +19,7 @@ import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.lne_wizards.LNE_Wizards_Mod.MOD_ID;
 
@@ -79,10 +81,23 @@ public class LNE_WizardsEffects {
             )
     ));
 
-    public static void register(ConfigFile.Effects config) {
+    /// Behaviour attachment, split out of `register` so the Forge path can run it before its own
+    /// registration loop. Operates on the raw effect, so it does not need the registry.
+    public static void configureBehaviours() {
         for (var entry : entries) {
             Synchronized.configure(entry.effect, true);
         }
+    }
+
+    /// Creation half for Forge: the same content `register` writes, keyed by registration id.
+    /// Nothing outside this class reads `Effects.Entry#entry`, so there is no link step.
+    public static Map<Identifier, StatusEffect> effectsToRegister(ConfigFile.Effects config) {
+        configureBehaviours();
+        return Effects.effectsToRegister(entries, config.effects);
+    }
+
+    public static void register(ConfigFile.Effects config) {
+        configureBehaviours();
 
         net.spell_engine.api.effect.Effects.register(entries, config.effects);
     }

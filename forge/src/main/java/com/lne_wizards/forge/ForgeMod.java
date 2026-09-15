@@ -2,7 +2,11 @@ package com.lne_wizards.forge;
 
 import com.lne_wizards.LNE_Wizards_Mod;
 import com.lne_wizards.block.ModBlocks;
+import com.lne_wizards.effect.LNE_WizardsEffects;
+import com.lne_wizards.entity.ModEntities;
 import com.lne_wizards.entity.ModSpawnEggs;
+import com.lne_wizards.item.WeaponRegister;
+import net.spell_engine.Platform;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
@@ -46,30 +50,62 @@ public final class ForgeMod {
     }
 
     /**
-     * Forge 47 fires one {@code RegisterEvent} per registry and unlocks only that one, so every
-     * registration has to sit in its own window. Measured window order on 47.4.22:
+     * Registration goes through the {@code RegisterHelper} that {@code RegisterEvent} hands out, NOT
+     * through {@code Registry.register}. Forge only clears the vanilla {@code NamespacedWrapper}'s lock
+     * from 47.4.0 onward; on 47.0-47.3 and NeoForge 1.20.1 it stays locked even inside the correct
+     * window, so a plain {@code Registry.register} there throws
+     * {@code Can not register to a locked registry}. {@code mods.toml} declares {@code [47,)}, so those
+     * are supported configurations.
+     *
+     * <p>The loops below duplicate what {@code common} runs on Fabric, on purpose - the whole workaround
+     * stays inside {@code forge/} and the Fabric path is untouched.
+     *
+     * <p>Forge fires one {@code RegisterEvent} per registry and only accepts writes into the registry
+     * whose window is open. Measured window order on 47.4.22:
      * {@code sound_event -> fluid -> block -> attribute -> mob_effect -> particle_type -> item -> entity_type}.
-     * Note {@code item} runs BEFORE {@code entity_type}, which is why {@link com.lne_wizards.entity.ModEntities}
-     * separates building an {@code EntityType} from registering it: the spawn eggs are created in the
-     * {@code item} window and each one needs its type instance.
+     * Note {@code item} runs BEFORE {@code entity_type}, which is why {@link ModEntities} separates
+     * building an {@code EntityType} from registering it: the spawn eggs are created in the {@code item}
+     * window and each one needs its type instance.
      */
     public static void register(RegisterEvent event) {
-        event.register(RegistryKeys.BLOCK, reg -> {
+        event.register(RegistryKeys.BLOCK, helper -> {
             // `new EntityType(...)` calls `Registries.ENTITY_TYPE.createEntry(this)` on Forge-patched
             // vanilla, so building a type needs the ENTITY_TYPE wrapper unfrozen. Forge unfreezes every
             // vanilla registry for the whole RegisterEvent phase (but only lets you *register* into the
             // one whose window is open), so building here - in the first window this mod uses - is fine,
             // while doing it in the mod constructor dies with "Registry is already frozen".
             LNE_Wizards_Mod.createEntities();
-            LNE_Wizards_Mod.registerBlocks();
+            // Touching `ModBlocks` runs its <clinit>, which constructs each block's BlockItem. That is
+            // construction, not registration, and the RegisterEvent sequence has begun - so it is fine.
+            for (var e : ModBlocks.all) {
+                helper.register(new Identifier(LNE_Wizards_Mod.MOD_ID, e.name()), e.block());
+            }
         });
-        event.register(RegistryKeys.STATUS_EFFECT, reg -> LNE_Wizards_Mod.registerEffects());
-        event.register(RegistryKeys.ITEM, reg -> {
-            LNE_Wizards_Mod.registerBlockItems();
-            LNE_Wizards_Mod.registerItems();
-            LNE_Wizards_Mod.registerSpawnEggs();
+
+        // `LNE_Wizards_Mod.init()` already refreshed `effectConfig`, and `registerEffects()` does not
+        // save it - so this block mirrors it exactly.
+        event.register(RegistryKeys.STATUS_EFFECT, helper ->
+                LNE_WizardsEffects.effectsToRegister(LNE_Wizards_Mod.effectConfig.value)
+                        .forEach(helper::register));
+
+        event.register(RegistryKeys.ITEM, helper -> {
+            for (var e : ModBlocks.all) {
+                helper.register(new Identifier(LNE_Wizards_Mod.MOD_ID, e.name()), e.item());
+            }
+            // Loot & Explore is Fabric-only, so this branch is never taken on Forge today - it mirrors
+            // `LNE_Wizards_Mod.registerItems()` exactly (config refresh and save included) so it stays
+            // correct if that ever changes.
+            if (Platform.util().isModLoaded("loot_n_explore")) {
+                LNE_Wizards_Mod.itemConfig.refresh();
+                WeaponRegister.itemsToRegister(LNE_Wizards_Mod.itemConfig.value.weapons)
+                        .forEach(helper::register);
+                LNE_Wizards_Mod.itemConfig.save();
+            }
+            ModSpawnEggs.itemsToRegister().forEach(helper::register);
         });
-        event.register(RegistryKeys.ENTITY_TYPE, reg -> LNE_Wizards_Mod.registerEntities());
+
+        event.register(RegistryKeys.ENTITY_TYPE, helper ->
+                ModEntities.typesToRegister().forEach(helper::register));
     }
 
     public static void registerAttributes(EntityAttributeCreationEvent event) {

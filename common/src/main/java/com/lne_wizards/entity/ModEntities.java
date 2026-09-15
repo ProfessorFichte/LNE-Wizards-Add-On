@@ -12,8 +12,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Entity types are <b>built</b> ({@link #create()}) and <b>registered</b> ({@link #register()}) in two
@@ -34,13 +34,15 @@ public class ModEntities {
     @Nullable public static EntityType<WaterEvokerEntity> WATER_EVOKER = null;
     @Nullable public static EntityType<IceWallEntity> ICE_WALL = null;
 
-    private static final List<Runnable> pendingRegistrations = new ArrayList<>();
+    /// Every built type, keyed by the id it registers under. Insertion-ordered so both loaders write
+    /// the types in the same order.
+    private static final Map<Identifier, EntityType<?>> built = new LinkedHashMap<>();
     private static boolean created = false;
+    private static boolean registered = false;
 
     private static <T extends Entity> EntityType<T> build(String id, EntityType.Builder<T> builder) {
         var type = builder.build(id);
-        pendingRegistrations.add(() ->
-                Registry.register(Registries.ENTITY_TYPE, new Identifier(LNE_Wizards_Mod.MOD_ID, id), type));
+        built.put(new Identifier(LNE_Wizards_Mod.MOD_ID, id), type);
         return type;
     }
 
@@ -77,10 +79,20 @@ public class ModEntities {
         }
     }
 
-    /** Writes the built types into {@code Registries.ENTITY_TYPE}. Forge: the {@code entity_type} window. */
-    public static void register() {
+    /**
+     * Creation half: every built type keyed by its registration id, writing nothing. Forge iterates this
+     * from its {@code entity_type} window and registers through the {@code RegisterEvent} helper, because
+     * a plain {@code Registry.register} is refused by the locked vanilla wrapper before Forge 47.4.0.
+     */
+    public static Map<Identifier, EntityType<?>> typesToRegister() {
         create();
-        pendingRegistrations.forEach(Runnable::run);
-        pendingRegistrations.clear();
+        return built;
+    }
+
+    /** Writes the built types into {@code Registries.ENTITY_TYPE}. Fabric path. */
+    public static void register() {
+        if (registered) return;
+        registered = true;
+        typesToRegister().forEach((id, type) -> Registry.register(Registries.ENTITY_TYPE, id, type));
     }
 }

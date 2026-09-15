@@ -71,10 +71,10 @@ dependencies {
     modImplementation("dev.kosmx.player-anim:player-animation-lib-forge:${rootProject.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${rootProject.cloth_config_version}")
 
-    // Ecosystem libraries from mavenLocal (published by their 1.20.1-modern ports).
-    modImplementation("net.tiny_config:tiny_config-${platform}:${rootProject.tiny_config_version}") { transitive = false }
-    modImplementation("net.spell_power:spell_power-${platform}:${rootProject.spell_power_version}") { transitive = false }
-    modImplementation("net.spell_engine:spell_engine-${platform}:${rootProject.spell_engine_version}") { transitive = false }
+    // Ecosystem libraries: Modrinth releases, except More RPG Library (no 1.20.1 project there - mavenLocal).
+    modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}") { transitive = false }
+    modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}") { transitive = false }
+    modImplementation("maven.modrinth:spell-engine:${rootProject.spell_engine_version}-${platform}") { transitive = false }
     modImplementation("net.more_rpg_classes:more_rpg_library-${platform}:${rootProject.more_rpg_library_version}") { transitive = false }
 
     // NOTE: Loot & Explore is deliberately ABSENT here. It has no Forge build on either version line,
@@ -84,12 +84,12 @@ dependencies {
     // Elemental Wizards + its own hard dependencies: dev runtime only, exercises the compat data pack.
     modLocalRuntime("com.elemental_wizards:elemental_wizards_rpg-${platform}:${rootProject.elemental_wizards_version}") { transitive = false }
     modLocalRuntime("net.rpg_series:wizards-${platform}:${rootProject.wizards_version}") { transitive = false }
-    modLocalRuntime("net.rpg_foundation:armor_model_api-${platform}:${rootProject.armor_model_api_version}") { transitive = false }
-    modLocalRuntime("net.foundation:structure_pool_api-${platform}:${rootProject.structure_pool_api_version}") { transitive = false }
+    modLocalRuntime("maven.modrinth:armor-model-api:${rootProject.armor_model_api_version}-${platform}") { transitive = false }
+    modLocalRuntime("maven.modrinth:structure-pool-api:${rootProject.structure_pool_api_version}-${platform}") { transitive = false }
 
     // Runes: dev runtime ONLY - More RPG Library ships `runes:crafting` recipes that fail to parse without it.
     // Use the *production* jar (Loom remaps it); the `dev-shadow` classifier still carries SRG references.
-    modLocalRuntime("net.rpg_series:runes-${platform}:${rootProject.runes_version}") { transitive = false }
+    modLocalRuntime("maven.modrinth:runes:${rootProject.runes_version}-${platform}") { transitive = false }
 
     // Curios 5.x (1.20.1) - SpellEngine's Forge trinket-slot backend.
     modLocalRuntime("top.theillusivec4.curios:curios-forge:${rootProject.curios_version}")
