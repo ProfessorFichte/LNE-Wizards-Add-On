@@ -16,8 +16,6 @@ repositories {
         }
     }
     maven { url 'https://maven.fabricmc.net' }
-
-    mavenLocal()
 }
 
 dependencies {
@@ -31,14 +29,16 @@ dependencies {
     modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${rootProject.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${rootProject.cloth_config_version}")
 
-    // Ecosystem libraries: Modrinth releases, except More RPG Library (no 1.20.1 project there - mavenLocal).
+    // Ecosystem libraries: Modrinth releases. More RPG Library resolves once Fichte's release tier 1
+    // publishes it.
     modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-engine:${rootProject.spell_engine_version}-${platform}") { transitive = false }
-    modImplementation("net.more_rpg_classes:more_rpg_library-${platform}:${rootProject.more_rpg_library_version}") { transitive = false }
+    modImplementation("maven.modrinth:more-rpg-library:${rootProject.more_rpg_library_version}-${platform}") { transitive = false }
 
     // Loot & Explore is Fabric-only on this line (no Forge build exists on either version line).
     // Compile-only here; every call site sits behind `compat/LootNExplore`, which is only touched
     // when `isModLoaded("loot_n_explore")` is true.
-    modCompileOnly("com.example:Loot-N-Explore:${rootProject.loot_n_explore_version}") { transitive = false }
+    // Resolves once Fichte's release tier 2 publishes it.
+    modCompileOnly("maven.modrinth:loot-n-explore:${rootProject.loot_n_explore_version}") { transitive = false }
 }

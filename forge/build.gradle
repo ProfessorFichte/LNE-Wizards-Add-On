@@ -59,8 +59,6 @@ repositories {
 
     // For Curios
     maven { url 'https://maven.theillusivec4.top/' }
-
-    mavenLocal()
 }
 
 dependencies {
@@ -71,18 +69,19 @@ dependencies {
     modImplementation("dev.kosmx.player-anim:player-animation-lib-forge:${rootProject.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${rootProject.cloth_config_version}")
 
-    // Ecosystem libraries: Modrinth releases, except More RPG Library (no 1.20.1 project there - mavenLocal).
+    // Ecosystem libraries: Modrinth releases. More RPG Library resolves once Fichte's release tier 1
+    // publishes it.
     modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-engine:${rootProject.spell_engine_version}-${platform}") { transitive = false }
-    modImplementation("net.more_rpg_classes:more_rpg_library-${platform}:${rootProject.more_rpg_library_version}") { transitive = false }
+    modImplementation("maven.modrinth:more-rpg-library:${rootProject.more_rpg_library_version}-${platform}") { transitive = false }
 
     // NOTE: Loot & Explore is deliberately ABSENT here. It has no Forge build on either version line,
     // which is exactly why every `more_rpg_loot` call site sits behind `compat/LootNExplore`.
     // This dev runtime is the proof that the guard works.
 
     // Elemental Wizards + its own hard dependencies: dev runtime only, exercises the compat data pack.
-    modLocalRuntime("com.elemental_wizards:elemental_wizards_rpg-${platform}:${rootProject.elemental_wizards_version}") { transitive = false }
+    modLocalRuntime("maven.modrinth:elemental-wizards-rpg:${rootProject.elemental_wizards_version}-${platform}") { transitive = false }
     modLocalRuntime("maven.modrinth:wizards:${rootProject.wizards_version}-${platform}") { transitive = false }
     modLocalRuntime("maven.modrinth:armor-model-api:${rootProject.armor_model_api_version}-${platform}") { transitive = false }
     modLocalRuntime("maven.modrinth:structure-pool-api:${rootProject.structure_pool_api_version}-${platform}") { transitive = false }

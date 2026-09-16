@@ -51,8 +51,6 @@ repositories {
         name = "Ladysnake Libs"
         url = 'https://maven.ladysnake.org/releases'
     }
-
-    mavenLocal()
 }
 
 dependencies {
@@ -64,21 +62,23 @@ dependencies {
     modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${rootProject.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${rootProject.cloth_config_version}")
 
-    // Ecosystem libraries: Modrinth releases, except More RPG Library (no 1.20.1 project there - mavenLocal).
+    // Ecosystem libraries: Modrinth releases. More RPG Library resolves once Fichte's release tier 1
+    // publishes it.
     modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-engine:${rootProject.spell_engine_version}-${platform}") { transitive = false }
-    modImplementation("net.more_rpg_classes:more_rpg_library-${platform}:${rootProject.more_rpg_library_version}") { transitive = false }
+    modImplementation("maven.modrinth:more-rpg-library:${rootProject.more_rpg_library_version}-${platform}") { transitive = false }
 
     // Loot & Explore - Fabric-only, and the source of `more_rpg_loot:*` smithing ingredients + the
-    // `RPG_LOOT_KEY` creative tab this mod's staves are inserted into.
-    modImplementation("com.example:Loot-N-Explore:${rootProject.loot_n_explore_version}") { transitive = false }
+    // `RPG_LOOT_KEY` creative tab this mod's staves are inserted into. Resolves once Fichte's release
+    // tier 2 publishes it.
+    modImplementation("maven.modrinth:loot-n-explore:${rootProject.loot_n_explore_version}") { transitive = false }
     // ...which in turn needs StructurePoolAPI at runtime.
     modLocalRuntime("maven.modrinth:structure-pool-api:${rootProject.structure_pool_api_version}-${platform}") { transitive = false }
 
     // Elemental Wizards: no Java references it, but datagen output DEPENDS on it being loaded
     // (three EW-gated staves + the air/earth/water evokers and their spawn eggs).
-    modLocalRuntime("com.elemental_wizards:elemental_wizards_rpg-${platform}:${rootProject.elemental_wizards_version}") { transitive = false }
+    modLocalRuntime("maven.modrinth:elemental-wizards-rpg:${rootProject.elemental_wizards_version}-${platform}") { transitive = false }
     // ...and Elemental Wizards hard-depends on these two.
     modLocalRuntime("maven.modrinth:wizards:${rootProject.wizards_version}-${platform}") { transitive = false }
     modLocalRuntime("maven.modrinth:armor-model-api:${rootProject.armor_model_api_version}-${platform}") { transitive = false }
