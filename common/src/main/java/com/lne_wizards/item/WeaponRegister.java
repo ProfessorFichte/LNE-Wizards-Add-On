@@ -1,6 +1,6 @@
 package com.lne_wizards.item;
 
-import more_rpg_loot.item.Group;
+import com.lne_wizards.compat.LootNExplore;
 import net.spell_engine.Platform;
 import net.minecraft.client.render.entity.EvokerEntityRenderer;
 import net.minecraft.entity.mob.EvokerEntity;
@@ -39,7 +39,7 @@ public class WeaponRegister {
     }
 
     private static Supplier<Ingredient> ingredient(String idString, boolean requirement, Item fallback) {
-        var id = Identifier.of(idString);
+        var id = new Identifier(idString);
         if (requirement) {
             return () -> {
                 return Ingredient.ofItems(fallback);
@@ -68,7 +68,16 @@ public class WeaponRegister {
     public static Identifier obsidian_shards = MrpgLibSpells.obsidian_shards.id();
     public static Identifier zephyrs_speed = MrpgLibSpells.zephyrs_speed.id();
 
-    public static void register(Map<String, WeaponConfig> configs) {
+    private static boolean conditionalEntriesCreated = false;
+
+    /// The conditional entry building that `register` used to do inline. Idempotent: the Forge path and
+    /// the Fabric path must not both append to `entries`, and calling a Spell Engine helper directly
+    /// without running this first would silently register an empty list.
+    public static void createConditionalEntries() {
+        if (conditionalEntriesCreated) {
+            return;
+        }
+        conditionalEntriesCreated = true;
         if (!tweaksConfig.value.disable_special_lne_weapons) {
             staff("glacial_staff_frost",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.ICE)))
@@ -104,6 +113,16 @@ public class WeaponRegister {
                     .spellContainer(SpellContainers.forMagicWeapon().withSpellId(zephyrs_speed));
         }
         entries.forEach(entry -> entry.rarity = Rarity.RARE);
-        Weapon.register(configs, entries, Group.RPG_LOOT_KEY);
+    }
+
+    /// Creation half for Forge: the same items `register` writes, keyed by registration id.
+    public static Map<Identifier, Item> itemsToRegister(Map<String, WeaponConfig> configs) {
+        createConditionalEntries();
+        return Weapon.itemsToRegister(configs, entries, LootNExplore.itemGroupKey());
+    }
+
+    public static void register(Map<String, WeaponConfig> configs) {
+        createConditionalEntries();
+        Weapon.register(configs, entries, LootNExplore.itemGroupKey());
     }
 }

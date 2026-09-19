@@ -25,7 +25,7 @@ public class ElementalEvokerRenderer extends IllagerEntityRenderer<SpellcastingI
     }
 
     private static Identifier getTextureForElement(ElementType elementType) {
-        return Identifier.of("lne_wizards", "textures/entity/evoker/" + elementType.name().toLowerCase() + "_evoker.png");
+        return new Identifier("lne_wizards", "textures/entity/evoker/" + elementType.name().toLowerCase() + "_evoker.png");
     }
 
     static final class EvokerModel extends IllagerEntityModel<SpellcastingIllagerEntity> {

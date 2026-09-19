@@ -13,6 +13,8 @@ public class ModEntityAttributes {
     }
 
     public static void register(AttributeRegistrar registrar) {
+        ModEntities.create();
+
         if (ModEntities.AIR_EVOKER != null) {
             registrar.register(ModEntities.AIR_EVOKER, AirEvokerEntity.createAirEvokerAttributes());
         }

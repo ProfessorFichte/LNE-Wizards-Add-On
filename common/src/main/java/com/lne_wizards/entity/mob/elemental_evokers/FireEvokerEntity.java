@@ -26,11 +26,11 @@ public class FireEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public Identifier getWandItemId() {
-        return Identifier.of("wizards", "wand_fire");
+        return new Identifier("wizards", "wand_fire");
     }
 
     public static DefaultAttributeContainer.Builder createFireEvokerAttributes() {
         return createElementalEvokerAttributes()
-                .add(SpellSchools.FIRE.attributeEntry, LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
+                .add(SpellSchools.FIRE.attributeEntry.value(), LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
     }
 }

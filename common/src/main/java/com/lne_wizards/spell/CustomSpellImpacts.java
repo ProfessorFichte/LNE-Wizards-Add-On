@@ -9,7 +9,7 @@ import static com.lne_wizards.LNE_Wizards_Mod.MOD_ID;
 public class CustomSpellImpacts {
     public static void registerCustomImpacts(){
         SpellHandlers.registerCustomImpact(
-                Identifier.of(MOD_ID, "flamerush_cloud"),
+                new Identifier(MOD_ID, "flamerush_cloud"),
                 new FlameRushCloudImpact()
         );
     }

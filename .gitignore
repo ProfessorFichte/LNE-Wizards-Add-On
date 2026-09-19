@@ -5,6 +5,10 @@ build/
 out/
 classes/
 
+# architectury
+
+.architectury-transformer/
+
 # eclipse
 
 *.launch

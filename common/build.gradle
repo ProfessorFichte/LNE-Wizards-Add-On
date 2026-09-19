@@ -9,61 +9,36 @@ repositories {
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
     maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-    }
-    maven {
         name = 'Modrinth'
         url = 'https://api.modrinth.com/maven'
         content {
             includeGroup 'maven.modrinth'
         }
     }
-    maven {
-        name = "Ladysnake Libs"
-        url = 'https://maven.ladysnake.org/releases'
-    }
-
-    // For Accessories:
-    maven { url 'https://maven.wispforest.io/releases' }
-    maven { url 'https://maven.su5ed.dev/releases' }
     maven { url 'https://maven.fabricmc.net' }
-
-    mavenLocal()
 }
 
 dependencies {
     // We depend on Fabric Loader here to use the Fabric @Environment annotations,
     // which get remapped to the correct annotations on each platform.
     // Do NOT use other classes from Fabric Loader.
-    modImplementation "net.fabricmc:fabric-loader:$project.fabric_loader_version"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:$project.fabric_api_version"
+    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    // No Fabric API in common: there is no Forgified Fabric API on the 1.20.1 line, so loader API
+    // usage stays in the platform modules. The datagen providers moved to `fabric/` for that reason.
 
-    modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${project.player_anim_version}")
-    modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${project.cloth_config_version}")
-    modImplementation("maven.modrinth:armor-model-api:${project.armor_model_api_version}-${platform}")
-    modImplementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
+    modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${rootProject.player_anim_version}")
+    modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${rootProject.cloth_config_version}")
 
-    modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
-    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
-    modImplementation("maven.modrinth:runes:${project.runes_version}-${platform}")
+    // Ecosystem libraries: Modrinth releases. More RPG Library resolves once Fichte's release tier 1
+    // publishes it.
+    modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}") { transitive = false }
+    modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}") { transitive = false }
+    modImplementation("maven.modrinth:spell-engine:${rootProject.spell_engine_version}-${platform}") { transitive = false }
+    modImplementation("maven.modrinth:more-rpg-library:${rootProject.more_rpg_library_version}-${platform}") { transitive = false }
 
-    modImplementation("maven.modrinth:more-rpg-library:${project.more_rpg_library_version}-${platform}")
-
-    modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
-    modImplementation "maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}"
-    modImplementation("maven.modrinth:wizards:${project.wizards_version}-${platform}")
-    // runtime cannot start. Dev-classpath only - not shipped, not in the mod manifests.
-
-    ///OPTIONAL
-    modImplementation("maven.modrinth:loot-n-explore:${project.loot_n_explore_version}") { transitive = false }
-    modImplementation("maven.modrinth:elemental-wizards-rpg:${project.elemental_wizards_version}-${platform}") { transitive = false }
-
-
-    modCompileOnly "org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cca_version}"
-
-    // Compatibility
-    // Fabric specific
-    modCompileOnly "io.wispforest:owo-lib:${project.owo_version}" // Accessories needs this
-    modImplementation("io.wispforest:accessories-common:${project.accessories_version}")
+    // Loot & Explore is Fabric-only on this line (no Forge build exists on either version line).
+    // Compile-only here; every call site sits behind `compat/LootNExplore`, which is only touched
+    // when `isModLoaded("loot_n_explore")` is true.
+    // Resolves once Fichte's release tier 2 publishes it.
+    modCompileOnly("maven.modrinth:loot-n-explore:${rootProject.loot_n_explore_version}") { transitive = false }
 }

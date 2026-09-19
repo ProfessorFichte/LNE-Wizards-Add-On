@@ -26,11 +26,11 @@ public class EarthEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public Identifier getWandItemId() {
-        return Identifier.of("elemental_wizards_rpg", "wand_terra");
+        return new Identifier("elemental_wizards_rpg", "wand_terra");
     }
 
     public static DefaultAttributeContainer.Builder createEarthEvokerAttributes() {
         return createElementalEvokerAttributes()
-                .add(MoreSpellSchools.EARTH.attributeEntry, LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
+                .add(MoreSpellSchools.EARTH.attributeEntry.value(), LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
     }
 }

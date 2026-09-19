@@ -59,10 +59,20 @@ public class ModBlocks {
     public static final Entry WATER_MAGIC_ORB = entry("water_magic_orb",
             new MagicOrbBlock(MoreSpellSchools.WATER, orbSettings()), "Water Magic Orb");
 
-    public static void register() {
+    /**
+     * Blocks and their {@code BlockItem}s register in two steps: on Forge 47 each {@code RegisterEvent}
+     * window unlocks exactly one registry, so a single loop touching both dies on the locked {@code ITEM}
+     * registry while the {@code block} window is open.
+     */
+    public static void registerBlocks() {
         for (var e : all) {
-            Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, e.name()), e.block());
-            Registry.register(Registries.ITEM, Identifier.of(MOD_ID, e.name()), e.item());
+            Registry.register(Registries.BLOCK, new Identifier(MOD_ID, e.name()), e.block());
+        }
+    }
+
+    public static void registerBlockItems() {
+        for (var e : all) {
+            Registry.register(Registries.ITEM, new Identifier(MOD_ID, e.name()), e.item());
         }
     }
 }

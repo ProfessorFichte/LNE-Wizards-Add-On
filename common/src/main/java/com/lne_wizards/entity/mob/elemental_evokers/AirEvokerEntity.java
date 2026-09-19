@@ -26,11 +26,11 @@ public class AirEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public Identifier getWandItemId() {
-        return Identifier.of("elemental_wizards_rpg", "wand_wind");
+        return new Identifier("elemental_wizards_rpg", "wand_wind");
     }
 
     public static DefaultAttributeContainer.Builder createAirEvokerAttributes() {
         return createElementalEvokerAttributes()
-                .add(MoreSpellSchools.AIR.attributeEntry, LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
+                .add(MoreSpellSchools.AIR.attributeEntry.value(), LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
     }
 }

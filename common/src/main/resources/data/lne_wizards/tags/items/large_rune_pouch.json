@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "runes:large_rune_pouch",
+      "required": false
+    }
+  ]
+}

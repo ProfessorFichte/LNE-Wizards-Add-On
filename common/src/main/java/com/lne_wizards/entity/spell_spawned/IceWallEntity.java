@@ -3,7 +3,6 @@ package com.lne_wizards.entity.spell_spawned;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.data.DataTracker;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
@@ -41,8 +40,9 @@ public class IceWallEntity extends Entity implements SpellEntity.Spawned {
         this.maxTimeToLive = this.timeToLive;
     }
 
+    // 1.20.1: `initDataTracker()` takes no builder.
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {}
+    protected void initDataTracker() {}
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {

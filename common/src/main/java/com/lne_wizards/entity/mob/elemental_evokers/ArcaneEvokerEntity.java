@@ -26,11 +26,11 @@ public class ArcaneEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public Identifier getWandItemId() {
-        return Identifier.of("wizards", "wand_arcane");
+        return new Identifier("wizards", "wand_arcane");
     }
 
     public static DefaultAttributeContainer.Builder createArcaneEvokerAttributes() {
         return createElementalEvokerAttributes()
-                .add(SpellSchools.ARCANE.attributeEntry, LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
+                .add(SpellSchools.ARCANE.attributeEntry.value(), LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
     }
 }

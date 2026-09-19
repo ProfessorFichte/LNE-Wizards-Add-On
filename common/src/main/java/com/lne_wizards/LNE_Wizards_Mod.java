@@ -43,6 +43,12 @@ public class LNE_Wizards_Mod {
 		CustomSpellImpacts.registerCustomImpacts();
 	}
 
+	/**
+	 * The LNE staves only exist when Loot &amp; Explore does: they are smithing upgrades of its items and
+	 * they live in its creative tab. Loot &amp; Explore is Fabric-only, so on Forge this branch is never
+	 * taken and {@code com.lne_wizards.compat.LootNExplore} - the single class that names a
+	 * {@code more_rpg_loot} type - is never loaded.
+	 */
 	public static void registerItems(){
 		if(Platform.util().isModLoaded("loot_n_explore")) {
 			itemConfig.refresh();
@@ -56,11 +62,20 @@ public class LNE_Wizards_Mod {
 	}
 
 	public static void registerBlocks() {
-		ModBlocks.register();
+		ModBlocks.registerBlocks();
+	}
+
+	public static void registerBlockItems() {
+		ModBlocks.registerBlockItems();
 	}
 
 	public static void registerSpawnEggs() {
-		ModSpawnEggs.registerItemGroup();
+		ModSpawnEggs.register();
+	}
+
+	/** Builds the entity types without touching any registry (see {@link ModEntities}). */
+	public static void createEntities() {
+		ModEntities.create();
 	}
 
 	public static void registerEntities() {

@@ -1,0 +1,54 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+#issueTrackerURL = ""
+license = "ARR"
+
+[[mods]]
+modId = "lne_wizards"
+version = "${version}"
+displayName = "LNE Wizards"
+authors = "Fichte"
+description = '''
+Loot & Explore Add-On with Wizards RPG-Series Content.
+'''
+logoFile = "icon.png"
+
+# Every dependency block MUST carry a `versionRange` on Forge 47 - without it the whole
+# mods.toml fails to parse, FML drops the mod file, and Mixin then reports the mod's own
+# mixin config as "invalid or could not be read".
+
+[[dependencies.lne_wizards]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lne_wizards]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lne_wizards]]
+modId = "spell_engine"
+mandatory = true
+versionRange = "[1.10.5,)"
+# AFTER, not BEFORE: this mod's constructor reads Spell Engine / More RPG Library statics.
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.lne_wizards]]
+modId = "wizards"
+mandatory = true
+versionRange = "[3.1.2,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.lne_wizards]]
+modId = "more_rpg_classes"
+mandatory = true
+versionRange = "[2.7.2,)"
+ordering = "AFTER"
+side = "BOTH"

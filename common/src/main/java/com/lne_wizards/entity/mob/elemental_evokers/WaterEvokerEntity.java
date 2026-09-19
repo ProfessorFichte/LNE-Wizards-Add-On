@@ -26,7 +26,7 @@ public class WaterEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public Identifier getWandItemId() {
-        return Identifier.of("elemental_wizards_rpg", "wand_aqua");
+        return new Identifier("elemental_wizards_rpg", "wand_aqua");
     }
 
     @Override
@@ -39,6 +39,6 @@ public class WaterEvokerEntity extends ElementalEvokerEntity {
 
     public static DefaultAttributeContainer.Builder createWaterEvokerAttributes() {
         return createElementalEvokerAttributes()
-                .add(MoreSpellSchools.WATER.attributeEntry, LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
+                .add(MoreSpellSchools.WATER.attributeEntry.value(), LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power);
     }
 }
