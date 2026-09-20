@@ -23,22 +23,16 @@ dependencies {
     // which get remapped to the correct annotations on each platform.
     // Do NOT use other classes from Fabric Loader.
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
-    // No Fabric API in common: there is no Forgified Fabric API on the 1.20.1 line, so loader API
-    // usage stays in the platform modules. The datagen providers moved to `fabric/` for that reason.
 
     modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${rootProject.player_anim_version}")
+// Don't add transitive = false here, cloth-config is what puts Fabric API on the remap classpath.
+// Without it runDatagen crashes with a NoSuchMethodError.
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${rootProject.cloth_config_version}")
 
-    // Ecosystem libraries: Modrinth releases. More RPG Library resolves once Fichte's release tier 1
-    // publishes it.
     modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-engine:${rootProject.spell_engine_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:more-rpg-library:${rootProject.more_rpg_library_version}-${platform}") { transitive = false }
 
-    // Loot & Explore is Fabric-only on this line (no Forge build exists on either version line).
-    // Compile-only here; every call site sits behind `compat/LootNExplore`, which is only touched
-    // when `isModLoaded("loot_n_explore")` is true.
-    // Resolves once Fichte's release tier 2 publishes it.
     modCompileOnly("maven.modrinth:loot-n-explore:${rootProject.loot_n_explore_version}") { transitive = false }
 }

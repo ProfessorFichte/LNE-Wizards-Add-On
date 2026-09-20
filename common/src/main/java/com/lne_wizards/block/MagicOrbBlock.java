@@ -42,7 +42,6 @@ public class MagicOrbBlock extends Block {
         return SHAPE;
     }
 
-    // 1.20.1 `AbstractBlock#onUse` carries the `Hand` parameter (dropped in 1.20.5).
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ParticleGroup burst = ParticleGroupBuilder
@@ -53,7 +52,6 @@ public class MagicOrbBlock extends Block {
                 .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                         .count(50).speed(0.5f, 0.8f));
         if (world.isClient()) return ActionResult.SUCCESS;
-        // 1.20.1 status-effect APIs take the raw `StatusEffect`; there is no `RegistryEntry` round trip.
         var effect = spellSchool.ownedBoostEffect;
         if (effect == null) return ActionResult.PASS;
         if (player.hasStatusEffect(effect)) return ActionResult.PASS;

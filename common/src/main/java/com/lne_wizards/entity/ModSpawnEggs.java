@@ -15,14 +15,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Every egg is created inside {@link #create()} rather than from a {@code static final} initialiser:
- * the {@code EntityType}s they wrap only exist after {@link ModEntities#create()} has run.
- *
- * <p>Creation and registration are separate, like {@link ModEntities}: Forge registers through the
- * helper {@code RegisterEvent} hands out (the vanilla wrapper stays locked before Forge 47.4.0), so it
- * needs the built eggs without them being written to the registry.
- */
 public class ModSpawnEggs {
 
     @Nullable public static SpawnEggItem AIR_EVOKER_SPAWN_EGG = null;
@@ -34,7 +26,6 @@ public class ModSpawnEggs {
 
     public static final List<SpawnEggItem> ALL_FOR_TAB = new ArrayList<>();
 
-    /// Every built egg, keyed by the id it registers under.
     private static final Map<Identifier, Item> built = new LinkedHashMap<>();
     private static boolean created = false;
     private static boolean registered = false;
@@ -46,11 +37,6 @@ public class ModSpawnEggs {
         return egg;
     }
 
-    /**
-     * Builds every egg and fills {@link #ALL_FOR_TAB}, writing nothing to the registry. Constructing an
-     * {@code Item} still needs the {@code RegisterEvent} sequence to have begun (intrusive holder), which
-     * on Forge it has - this runs from the {@code item} window.
-     */
     public static void create() {
         if (created) return;
         created = true;
@@ -80,13 +66,11 @@ public class ModSpawnEggs {
         if (WATER_EVOKER_SPAWN_EGG != null) ALL_FOR_TAB.add(WATER_EVOKER_SPAWN_EGG);
     }
 
-    /** Creation half for Forge: every built egg keyed by its registration id. */
     public static Map<Identifier, Item> itemsToRegister() {
         create();
         return built;
     }
 
-    /** Writes the built eggs into {@code Registries.ITEM}. Fabric path. */
     public static void register() {
         if (registered) return;
         registered = true;

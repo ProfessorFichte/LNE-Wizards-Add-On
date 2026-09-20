@@ -13,7 +13,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import static com.lne_wizards.LNE_Wizards_Mod.MOD_ID;
 
 public class LangGenerator extends FabricLanguageProvider {
-    // Fabric API 0.92: two-arg constructor, and `generateTranslations` takes no registry lookup.
     public LangGenerator(FabricDataOutput dataOutput) {
         super(dataOutput, "en_us");
     }

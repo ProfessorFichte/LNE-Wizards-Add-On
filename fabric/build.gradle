@@ -62,32 +62,20 @@ dependencies {
     modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${rootProject.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${rootProject.cloth_config_version}")
 
-    // Ecosystem libraries: Modrinth releases. More RPG Library resolves once Fichte's release tier 1
-    // publishes it.
     modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-engine:${rootProject.spell_engine_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:more-rpg-library:${rootProject.more_rpg_library_version}-${platform}") { transitive = false }
 
-    // Loot & Explore - Fabric-only, and the source of `more_rpg_loot:*` smithing ingredients + the
-    // `RPG_LOOT_KEY` creative tab this mod's staves are inserted into. Resolves once Fichte's release
-    // tier 2 publishes it.
     modImplementation("maven.modrinth:loot-n-explore:${rootProject.loot_n_explore_version}") { transitive = false }
-    // ...which in turn needs StructurePoolAPI at runtime.
     modLocalRuntime("maven.modrinth:structure-pool-api:${rootProject.structure_pool_api_version}-${platform}") { transitive = false }
 
-    // Elemental Wizards: no Java references it, but datagen output DEPENDS on it being loaded
-    // (three EW-gated staves + the air/earth/water evokers and their spawn eggs).
     modLocalRuntime("maven.modrinth:elemental-wizards-rpg:${rootProject.elemental_wizards_version}-${platform}") { transitive = false }
-    // ...and Elemental Wizards hard-depends on these two.
     modLocalRuntime("maven.modrinth:wizards:${rootProject.wizards_version}-${platform}") { transitive = false }
     modLocalRuntime("maven.modrinth:armor-model-api:${rootProject.armor_model_api_version}-${platform}") { transitive = false }
 
-    // Runes: dev runtime ONLY - More RPG Library ships `runes:crafting` recipes that fail to parse without it.
     modLocalRuntime("maven.modrinth:runes:${rootProject.runes_version}-${platform}") { transitive = false }
 
-    // Trinkets 3.7.2 comes in with SpellEngine on Fabric; it nests Cardinal Components, but Loom does not
-    // load nested jars of classpath mods, so the dev runtime needs explicit pins.
     modLocalRuntime("maven.modrinth:trinkets:${rootProject.trinkets_version}")
     modLocalRuntime("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${rootProject.cardinal_components_version}")
     modLocalRuntime("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${rootProject.cardinal_components_version}")

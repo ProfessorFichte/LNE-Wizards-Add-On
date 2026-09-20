@@ -47,7 +47,6 @@ public class LneWizardSpells {
         return entry;
     }
 
-    // 1.20.1: `EntityAttribute` is a raw object with no id accessor (`RegistryEntry#getIdAsString` is 1.21-only).
     private static Identifier attributeId(EntityAttribute attribute) {
         return Registries.ATTRIBUTE.getId(attribute);
     }

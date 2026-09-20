@@ -22,7 +22,6 @@ public class FlameRushStatusEffect extends StatusEffect {
                     .count(20).speed(0.05F, 0.1F)
                     .extent(0.25F));
 
-    // 1.20.1: `applyUpdateEffect` returns void (it became `boolean` in 1.21).
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         if(entity instanceof PlayerEntity playerEntity && !playerEntity.getWorld().isClient()) {

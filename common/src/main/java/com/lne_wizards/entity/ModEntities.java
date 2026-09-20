@@ -15,15 +15,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Entity types are <b>built</b> ({@link #create()}) and <b>registered</b> ({@link #register()}) in two
- * separate steps.
- *
- * <p>That split exists for Forge 47: its {@code RegisterEvent} unlocks exactly one registry per window,
- * and the measured window order puts {@code item} <em>before</em> {@code entity_type}. The spawn eggs have
- * to be created in the {@code item} window and each one needs its {@code EntityType} instance, so building
- * the types must not touch {@code Registries.ENTITY_TYPE}. On Fabric both steps just run back to back.
- */
 public class ModEntities {
 
     @Nullable public static EntityType<AirEvokerEntity> AIR_EVOKER = null;
@@ -34,8 +25,6 @@ public class ModEntities {
     @Nullable public static EntityType<WaterEvokerEntity> WATER_EVOKER = null;
     @Nullable public static EntityType<IceWallEntity> ICE_WALL = null;
 
-    /// Every built type, keyed by the id it registers under. Insertion-ordered so both loaders write
-    /// the types in the same order.
     private static final Map<Identifier, EntityType<?>> built = new LinkedHashMap<>();
     private static boolean created = false;
     private static boolean registered = false;
@@ -52,7 +41,6 @@ public class ModEntities {
                 .maxTrackingRange(8);
     }
 
-    /** Builds every entity type. Writes nothing to the registry, so it is safe to call at any time. */
     @SuppressWarnings("unchecked")
     public static void create() {
         if (created) return;
@@ -79,17 +67,11 @@ public class ModEntities {
         }
     }
 
-    /**
-     * Creation half: every built type keyed by its registration id, writing nothing. Forge iterates this
-     * from its {@code entity_type} window and registers through the {@code RegisterEvent} helper, because
-     * a plain {@code Registry.register} is refused by the locked vanilla wrapper before Forge 47.4.0.
-     */
     public static Map<Identifier, EntityType<?>> typesToRegister() {
         create();
         return built;
     }
 
-    /** Writes the built types into {@code Registries.ENTITY_TYPE}. Fabric path. */
     public static void register() {
         if (registered) return;
         registered = true;

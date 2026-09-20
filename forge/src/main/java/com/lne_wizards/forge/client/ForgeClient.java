@@ -12,10 +12,6 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.spell_engine.client.gui.ConfigMenuScreen;
 
-/**
- * No {@code @EventBusSubscriber} here on purpose: the class is only ever touched from
- * {@code ForgeMod} behind a {@code Dist.CLIENT} guard, so a dedicated server never classloads it.
- */
 public class ForgeClient {
 
     public static void register(IEventBus modBus) {

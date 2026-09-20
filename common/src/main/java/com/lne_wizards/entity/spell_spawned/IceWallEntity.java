@@ -40,7 +40,6 @@ public class IceWallEntity extends Entity implements SpellEntity.Spawned {
         this.maxTimeToLive = this.timeToLive;
     }
 
-    // 1.20.1: `initDataTracker()` takes no builder.
     @Override
     protected void initDataTracker() {}
 

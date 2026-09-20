@@ -70,9 +70,6 @@ public class WeaponRegister {
 
     private static boolean conditionalEntriesCreated = false;
 
-    /// The conditional entry building that `register` used to do inline. Idempotent: the Forge path and
-    /// the Fabric path must not both append to `entries`, and calling a Spell Engine helper directly
-    /// without running this first would silently register an empty list.
     public static void createConditionalEntries() {
         if (conditionalEntriesCreated) {
             return;
@@ -115,7 +112,6 @@ public class WeaponRegister {
         entries.forEach(entry -> entry.rarity = Rarity.RARE);
     }
 
-    /// Creation half for Forge: the same items `register` writes, keyed by registration id.
     public static Map<Identifier, Item> itemsToRegister(Map<String, WeaponConfig> configs) {
         createConditionalEntries();
         return Weapon.itemsToRegister(configs, entries, LootNExplore.itemGroupKey());
