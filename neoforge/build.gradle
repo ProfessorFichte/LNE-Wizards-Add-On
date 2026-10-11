@@ -38,6 +38,10 @@ configurations {
 }
 
 repositories {
+    mavenLocal {
+        content { excludeModule('maven.modrinth', 'more-rpg-library') }
+    }
+
     maven {
         name = 'NeoForged'
         url = 'https://maven.neoforged.net/releases'
@@ -64,8 +68,6 @@ repositories {
     maven { url 'https://maven.wispforest.io/releases' }
     maven { url 'https://maven.su5ed.dev/releases' }
     maven { url 'https://maven.fabricmc.net' }
-
-    mavenLocal()
 }
 
 dependencies {

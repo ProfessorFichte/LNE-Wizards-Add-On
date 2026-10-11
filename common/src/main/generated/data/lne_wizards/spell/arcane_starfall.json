@@ -6,7 +6,7 @@
   "active": {},
   "release": {
     "animation": {
-      "id": "more_rpg_classes:two_handed_jump_release"
+      "id": "mrpg_lib:two_handed_jump_release"
     },
     "visuals": {
       "particles": [
@@ -163,7 +163,7 @@
         ]
       },
       "sound": {
-        "id": "more_rpg_classes:arcane_strong_impact"
+        "id": "mrpg_lib:arcane_strong_impact"
       }
     }
   ],

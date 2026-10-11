@@ -24,7 +24,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "more_rpg_classes:aqua_stone",
+          "name": "mrpg_lib:aqua_stone",
           "weight": 3,
           "functions": [
             {
@@ -66,27 +66,27 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:wand_aqua",
           "weight": 2
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:elemental_head",
           "weight": 1
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:elemental_chest",
           "weight": 1
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:elemental_legs",
           "weight": 1
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:elemental_feet",
           "weight": 1
         },
@@ -114,7 +114,7 @@
           "name": "spell_engine:spell_scroll",
           "functions": [
             {
-              "function": "more_rpg_classes:specific_spell_scroll_pool",
+              "function": "mrpg_lib:specific_spell_scroll_pool",
               "spell_pools": ["#elemental_wizards_rpg:spell_scroll/aqua"],
               "spell_tier_min": 2,
               "spell_tier_max": 2,
@@ -136,19 +136,19 @@
           "weight": 10
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "additional_rpg_jewelry:aquamarine_ring"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "additional_rpg_jewelry:aquamarine_necklace"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "more_relics:jewel_figurine_aquamarine"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "loot_n_explore:orange_juice"
         }
       ]

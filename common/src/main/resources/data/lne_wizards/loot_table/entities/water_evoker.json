@@ -21,7 +21,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "more_rpg_classes:aqua_stone",
+          "name": "mrpg_lib:aqua_stone",
           "weight": 3,
           "functions": [
             {
@@ -56,7 +56,7 @@
           "name": "spell_engine:spell_scroll",
           "functions": [
             {
-              "function": "more_rpg_classes:specific_spell_scroll_pool",
+              "function": "mrpg_lib:specific_spell_scroll_pool",
               "spell_pools": ["#elemental_wizards_rpg:spell_scroll/aqua"],
               "spell_tier_min": 2,
               "spell_tier_max": 3,

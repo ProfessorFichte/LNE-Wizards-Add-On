@@ -6,6 +6,10 @@ architectury {
 def platform = "fabric";
 
 repositories {
+    mavenLocal {
+        content { excludeModule('maven.modrinth', 'more-rpg-library') }
+    }
+
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
     maven {
@@ -28,8 +32,6 @@ repositories {
     maven { url 'https://maven.wispforest.io/releases' }
     maven { url 'https://maven.su5ed.dev/releases' }
     maven { url 'https://maven.fabricmc.net' }
-
-    mavenLocal()
 }
 
 dependencies {
@@ -56,7 +58,7 @@ dependencies {
     // runtime cannot start. Dev-classpath only - not shipped, not in the mod manifests.
 
     ///OPTIONAL
-    modImplementation("maven.modrinth:loot-n-explore:${project.loot_n_explore_version}") { transitive = false }
+    modCompileOnly("maven.modrinth:loot-n-explore:${project.loot_n_explore_version}") { transitive = false }
     modImplementation("maven.modrinth:elemental-wizards-rpg:${project.elemental_wizards_version}-${platform}") { transitive = false }
 
 

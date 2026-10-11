@@ -1,13 +1,19 @@
 package com.lne_wizards.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.more_rpg_classes.datagen.SmithingRecipeGenerator;
+import com.mrpg_lib.datagen.SmithingRecipeGenerator;
 
 public class ModRecipeProvider extends SmithingRecipeGenerator {
     public ModRecipeProvider(FabricDataOutput output) {
         super(output, "lne_wizards");
+    }
+
+    private static Item item(Identifier id) {
+        return Registries.ITEM.getOrEmpty(id)
+                .orElseThrow(() -> new IllegalStateException("Smithing recipe item not registered during datagen: " + id));
     }
 
     @Override
@@ -31,50 +37,50 @@ public class ModRecipeProvider extends SmithingRecipeGenerator {
 
         createSmithingTransformRecipe(
             "glacial_staff_frost_smithing",
-            Registries.ITEM.get(staffNetheriteFrost),
+            item(staffNetheriteFrost),
             frostMonarchTemplate,
             frozenSoul,
-            Registries.ITEM.get(Identifier.of("lne_wizards", "glacial_staff_frost")),
+            item(Identifier.of("lne_wizards", "glacial_staff_frost")),
             new String[]{"loot_n_explore"}
         );
         createSmithingTransformRecipe(
             "wither_staff_fire_smithing",
-            Registries.ITEM.get(staffNetheriteFire),
+            item(staffNetheriteFire),
             witherTemplate,
             witherSpine,
-            Registries.ITEM.get(Identifier.of("lne_wizards", "wither_staff_fire")),
+            item(Identifier.of("lne_wizards", "wither_staff_fire")),
             new String[]{"loot_n_explore"}
         );
         createSmithingTransformRecipe(
             "ender_dragon_staff_arcane_smithing",
-            Registries.ITEM.get(staffNetheriteArcane),
+            item(staffNetheriteArcane),
             dragonTemplate,
             dragonScales,
-            Registries.ITEM.get(Identifier.of("lne_wizards", "ender_dragon_staff_arcane")),
+            item(Identifier.of("lne_wizards", "ender_dragon_staff_arcane")),
             new String[]{"loot_n_explore"}
         );
         createSmithingTransformRecipe(
             "elder_guardian_staff_aqua_smithing",
-            Registries.ITEM.get(staffNetheriteAqua),
+            item(staffNetheriteAqua),
             guardianTemplate,
             guardianEye,
-            Registries.ITEM.get(Identifier.of("lne_wizards", "elder_guardian_staff_aqua")),
+            item(Identifier.of("lne_wizards", "elder_guardian_staff_aqua")),
             new String[]{"loot_n_explore", "elemental_wizards_rpg"}
         );
         createSmithingTransformRecipe(
             "wither_staff_terra_smithing",
-            Registries.ITEM.get(staffNetheriteTerra),
+            item(staffNetheriteTerra),
             witherTemplate,
             witherSpine,
-            Registries.ITEM.get(Identifier.of("lne_wizards", "wither_staff_terra")),
+            item(Identifier.of("lne_wizards", "wither_staff_terra")),
             new String[]{"loot_n_explore", "elemental_wizards_rpg"}
         );
         createSmithingTransformRecipe(
             "ender_dragon_staff_wind_smithing",
-            Registries.ITEM.get(staffNetheriteWind),
+            item(staffNetheriteWind),
             dragonTemplate,
             dragonScales,
-            Registries.ITEM.get(Identifier.of("lne_wizards", "ender_dragon_staff_wind")),
+            item(Identifier.of("lne_wizards", "ender_dragon_staff_wind")),
             new String[]{"loot_n_explore", "elemental_wizards_rpg"}
         );
     }

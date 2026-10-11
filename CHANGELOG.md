@@ -1,3 +1,14 @@
+# 1.3.0 - 1.21.1
+- Adopt Spell Engine 1.10.9 & More RPG Library 2.8.0
+- **BREAKING for modpack/datapack developers:** More RPG Library's namespace was renamed `more_rpg_classes` -> `mrpg_lib` (and its advancement root moved to `mrpg_lib:root`). If you have any data files, loot tables, tags or advancements that reference the old `more_rpg_classes:`/`more_rpg_content:` ids from this mod or MRPGL, update them to `mrpg_lib:`
+- Updated internal advancement parents, mod dependency declarations (fabric.mod.json, neoforge.mods.toml)
+- **Elemental Evokers Changes:** 
+- now perform the same spell casting animations like a player
+- now hold their wand as a real main-hand item
+- attributes and items are configurable under `equipment` in `config/lne_wizards/entity_attributes_v1.json`.
+- default base spell power is now -2.5 so that, together with their wand's +5, they keep a total spell power of 2.5
+- only show their Spell Engine spell visuals while casting, without the vanilla Evoker spell particles
+
 # 1.2.1 - 1.21.1
 - Drop Forgified Fabric API (FFAPI) as a required dependency
 

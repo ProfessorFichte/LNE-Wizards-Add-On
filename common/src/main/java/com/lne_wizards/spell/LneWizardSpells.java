@@ -6,9 +6,9 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
-import net.more_rpg_classes.client.particle.MoreParticles;
-import net.more_rpg_classes.custom.MoreSpellSchools;
-import net.more_rpg_classes.sounds.MRPGLibSounds;
+import com.mrpg_lib.compat.spell_engine.particle.MoreSpellParticles;
+import com.mrpg_lib.compat.spell_power.MoreSpellSchools;
+import com.mrpg_lib.sounds.MRPGLibSounds;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.Spell;
@@ -61,23 +61,23 @@ public class LneWizardSpells {
     private static List<Spell.Impact> explosiveBubbleImpacts() {
         var damage = SpellBuilder.Impacts.damage(0.85F, 0.5F);
         damage.visuals = Fx.Visuals.of(
-                ParticleGroupBuilder.of(MoreParticles.BUBBLE_POP)
+                ParticleGroupBuilder.of(MoreSpellParticles.BUBBLE_POP)
                         .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
                                 .count(10.0F).speed(0.05F, 0.2F)),
-                ParticleGroupBuilder.of(MoreParticles.BUBBLE)
+                ParticleGroupBuilder.of(MoreSpellParticles.BUBBLE)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(10.0F).speed(0.001F, 0.1F)));
         damage.sound = Sound.withVolume(Identifier.of(MRPGLibSounds.WATER_BUBBLE_EXPLODE.id().toString()), 2.0F);
 
-        var soaked = SpellBuilder.Impacts.effectSet("more_rpg_classes:soaked", 4, 1);
+        var soaked = SpellBuilder.Impacts.effectSet("mrpg_lib:soaked", 4, 1);
         soaked.action.status_effect.show_particles = false;
-        var soakedModifier = createImpactModifier("#more_rpg_classes:resistant_to_water");
+        var soakedModifier = createImpactModifier("#mrpg_lib:resistant_to_water");
         soakedModifier.execute = TriState.DENY;
         soaked.target_modifiers = List.of(soakedModifier);
 
         var heal = SpellBuilder.Impacts.heal(0.5F);
         heal.visuals = Fx.Visuals.of(
-                ParticleGroupBuilder.of(MoreParticles.WATER_HEAL)
+                ParticleGroupBuilder.of(MoreSpellParticles.WATER_HEAL)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(10).speed(0.05F, 0.1F)));
         heal.sound = new Sound("spell_engine:generic_healing_impact_1");
@@ -173,8 +173,8 @@ public class LneWizardSpells {
         spell.tier = 5;
 
         SpellBuilder.Casting.channel(spell, 7, 8);
-        spell.active.cast.animation = PlayerAnimation.of("more_rpg_classes:left_handed_channeling");
-        spell.active.cast.sound = Sound.withVolume(Identifier.of("more_rpg_classes:frost_crackle_long"), 1.3F);
+        spell.active.cast.animation = PlayerAnimation.of("mrpg_lib:left_handed_channeling");
+        spell.active.cast.sound = Sound.withVolume(Identifier.of("mrpg_lib:frost_crackle_long"), 1.3F);
         spell.active.cast.particles = List.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.CONE)
@@ -214,9 +214,9 @@ public class LneWizardSpells {
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(20).speed(0.1F, 0.4F)));
-        damage.sound = Sound.withVolume(Identifier.of("more_rpg_classes:frost_crackle"), 0.4F);
+        damage.sound = Sound.withVolume(Identifier.of("mrpg_lib:frost_crackle"), 0.4F);
 
-        var frosted = SpellBuilder.Impacts.effectAdd("more_rpg_classes:frosted", 5, 1, 5);
+        var frosted = SpellBuilder.Impacts.effectAdd("mrpg_lib:frosted", 5, 1, 5);
         frosted.action.status_effect.show_particles = false;
 
         spell.impacts = List.of(damage, frosted);
@@ -249,7 +249,7 @@ public class LneWizardSpells {
 
         SpellBuilder.Casting.instant(spell);
 
-        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_jump_release");
+        spell.release.animation = PlayerAnimation.of("mrpg_lib:two_handed_jump_release");
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.magic(SpellEngineParticles.magic_spell, ParticleGroup.Motion.ASCEND)
                         .color(STARFALL_COLOR)
@@ -305,7 +305,7 @@ public class LneWizardSpells {
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
                                 .count(20).speed(0.1F, 0.4F)
                                 .extent(2.0F)));
-        damage.sound = new Sound(Identifier.of("more_rpg_classes:arcane_strong_impact").toString());
+        damage.sound = new Sound(Identifier.of("mrpg_lib:arcane_strong_impact").toString());
 
         spell.impacts = List.of(damage);
 
@@ -334,10 +334,10 @@ public class LneWizardSpells {
         spell.tier = 5;
 
         SpellBuilder.Casting.channel(spell, 7.5F, 15);
-        spell.active.cast.animation = PlayerAnimation.of("more_rpg_classes:floating_spawn_channel");
-        spell.active.cast.sound = new Sound (Identifier.of("more_rpg_classes:water_bubbles"));
+        spell.active.cast.animation = PlayerAnimation.of("mrpg_lib:floating_spawn_channel");
+        spell.active.cast.sound = new Sound (Identifier.of("mrpg_lib:water_bubbles"));
         spell.active.cast.particles = List.of(
-                ParticleGroupBuilder.of(MoreParticles.BUBBLE)
+                ParticleGroupBuilder.of(MoreSpellParticles.BUBBLE)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(1.0F).speed(0.001F, 0.1F)));
         spell.active.cast.movement_speed = 1.0F;
@@ -374,7 +374,7 @@ public class LneWizardSpells {
         cloud.client_data.model_fx = List.of(bubbleFx);
         cloud.client_data.light_level = 8;
         cloud.client_data.particles = List.of(
-                ParticleGroupBuilder.of(MoreParticles.BUBBLE)
+                ParticleGroupBuilder.of(MoreSpellParticles.BUBBLE)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(1F).chance(0.4F).speed(0.01F, 0.15F)));
         cloud.client_data.particle_spawn_interval = 15;
@@ -386,7 +386,7 @@ public class LneWizardSpells {
                 .scaleOut(0, cloud.despawn_ticks, Easing.EASE_IN_BACK)
                 .build();
         cloud.despawn.visuals = Fx.Visuals.ofParticles(List.of(
-                        ParticleGroupBuilder.of(MoreParticles.BUBBLE)
+                        ParticleGroupBuilder.of(MoreSpellParticles.BUBBLE)
                                 .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
                                         .count(10.0F).speed(0.01F, 0.2F))))
                 .models(popFx);
@@ -398,7 +398,7 @@ public class LneWizardSpells {
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .anchor(ParticleGroup.Anchor.GROUND)
                                 .count(1).speed(0F, 0F)),
-                ParticleGroupBuilder.of(MoreParticles.BUBBLE)
+                ParticleGroupBuilder.of(MoreSpellParticles.BUBBLE)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(50.0F).speed(0.3F, 1.0F)));
 
@@ -412,7 +412,7 @@ public class LneWizardSpells {
         SpellBuilder.Cost.exhaust(spell, 0.4F);
         SpellBuilder.Cost.cooldown(spell, 32);
         spell.cost.cooldown.haste_affected = true;
-        SpellBuilder.Cost.item(spell, "more_rpg_classes:aqua_stone", 1);
+        SpellBuilder.Cost.item(spell, "mrpg_lib:aqua_stone", 1);
 
         return new Entry(id, spell, title, description);
     }
@@ -428,14 +428,14 @@ public class LneWizardSpells {
         spell.tier = 5;
 
         spell.active.cast.duration = 1.25F;
-        spell.active.cast.animation = PlayerAnimation.of("more_rpg_classes:two_handed_sky_channeling");
+        spell.active.cast.animation = PlayerAnimation.of("mrpg_lib:two_handed_sky_channeling");
         spell.active.cast.sound = new Sound("spell_engine:generic_wind_charging");
         spell.active.cast.particles = List.of(
-                ParticleGroupBuilder.of(MoreParticles.SMALL_GUST)
+                ParticleGroupBuilder.of(MoreSpellParticles.SMALL_GUST)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
                                 .count(20).speed(0.2F, 0.5F)),
-                ParticleGroupBuilder.of(MoreParticles.SMALL_GUST)
+                ParticleGroupBuilder.of(MoreSpellParticles.SMALL_GUST)
                         .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
                                 .count(5.0F).speed(0.05F, 0.2F)));
@@ -446,15 +446,15 @@ public class LneWizardSpells {
         spell.target.area.angle_degrees = 360.0F;
 
         spell.release = new Spell.Release();
-        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_ground_release");
-        spell.release.sound = new Sound("more_rpg_classes:air_explosion");
+        spell.release.animation = PlayerAnimation.of("mrpg_lib:two_handed_ground_release");
+        spell.release.sound = new Sound("mrpg_lib:air_explosion");
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.smoke_medium)
                         .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
                                 .count(50.0F).speed(0.6F, 2.0F)
                                 .extent(2F).invert(true)),
-                ParticleGroupBuilder.of(MoreParticles.WATER_MIST)
+                ParticleGroupBuilder.of(MoreSpellParticles.WATER_MIST)
                         .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
                                 .count(100.0F).speed(0.6F, 2.0F)
@@ -471,14 +471,14 @@ public class LneWizardSpells {
                                 .extent(6F)));
 
         var damage = SpellBuilder.Impacts.damage(0.8F, 10.0F);
-        damage.sound = Sound.withVolume(Identifier.of("more_rpg_classes:air_magic_impact2"), 0.4F);
+        damage.sound = Sound.withVolume(Identifier.of("mrpg_lib:air_magic_impact2"), 0.4F);
 
         spell.impacts = List.of(damage);
 
         SpellBuilder.Cost.exhaust(spell, 0.4F);
         SpellBuilder.Cost.cooldown(spell, 25);
         spell.cost.cooldown.haste_affected = true;
-        SpellBuilder.Cost.item(spell, "more_rpg_classes:storm_stone", 1);
+        SpellBuilder.Cost.item(spell, "mrpg_lib:storm_stone", 1);
 
         return new Entry(id, spell, title, description);
     }
@@ -498,7 +498,7 @@ public class LneWizardSpells {
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_sky_charge");
         spell.active.cast.sound = new Sound(MRPGLibSounds.EARTH_MAGIC_CAST_1.id());
         spell.active.cast.particles = List.of(
-                ParticleGroupBuilder.of(MoreParticles.STONE_PARTICLE)
+                ParticleGroupBuilder.of(MoreSpellParticles.STONE_PARTICLE)
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
                                 .verticalOrigin(ParticleGroupBuilder.Batches.FEET)
                                 .count(3.0F).speed(0.01F, 0.05F)));
@@ -536,7 +536,7 @@ public class LneWizardSpells {
                 ParticleGroupBuilder.of(SpellEngineParticles.smoke_large)
                         .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
                                 .count(5).speed(0.5F, 3F)));
-        damage.sound = new Sound("more_rpg_classes:earth_magic_impact1");
+        damage.sound = new Sound("mrpg_lib:earth_magic_impact1");
         spell.impacts = List.of(damage);
 
         spell.area_impact = new Spell.AreaImpact();
@@ -546,10 +546,10 @@ public class LneWizardSpells {
                 ParticleGroupBuilder.of("smoke")
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(90).speed(1.0F, 3.0F)));
-        spell.area_impact.sound = new Sound("more_rpg_classes:earth_magic_impact3");
+        spell.area_impact.sound = new Sound("mrpg_lib:earth_magic_impact3");
 
         SpellBuilder.Cost.exhaust(spell, 0.3F);
-        SpellBuilder.Cost.item(spell, "more_rpg_classes:terra_stone", 1);
+        SpellBuilder.Cost.item(spell, "mrpg_lib:terra_stone", 1);
         SpellBuilder.Cost.cooldown(spell, 32);
 
         return new Entry(id, spell, title, description);

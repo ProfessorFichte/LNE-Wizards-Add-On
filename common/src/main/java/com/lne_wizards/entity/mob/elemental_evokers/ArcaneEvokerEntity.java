@@ -7,8 +7,10 @@ import net.minecraft.entity.mob.EvokerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.spell_power.api.SpellSchools;
+import com.mrpg_lib.entity.config.EntityAttributeConfig;
 
 public class ArcaneEvokerEntity extends ElementalEvokerEntity {
+    public static final Identifier WAND = Identifier.of("wizards", "wand_arcane");
 
     public ArcaneEvokerEntity(EntityType<? extends EvokerEntity> entityType, World world) {
         super(entityType, world);
@@ -26,7 +28,13 @@ public class ArcaneEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public Identifier getWandItemId() {
-        return Identifier.of("wizards", "wand_arcane");
+        return WAND;
+    }
+
+    @Override
+    protected EntityAttributeConfig.Entry spellPowerAttributes() {
+        return new EntityAttributeConfig.Entry()
+                .set(SpellSchools.ARCANE.attributeEntry.getIdAsString(), spellPowerBase(LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power), 1.0, 1.0);
     }
 
     public static DefaultAttributeContainer.Builder createArcaneEvokerAttributes() {

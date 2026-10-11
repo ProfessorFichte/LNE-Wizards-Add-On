@@ -25,7 +25,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "more_rpg_classes:aqua_stone",
+          "name": "mrpg_lib:aqua_stone",
           "weight": 4,
           "functions": [
             {
@@ -67,7 +67,7 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:wand_aqua",
           "weight": 3,
           "functions": [
@@ -88,7 +88,7 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:staff_elemental",
           "weight": 3,
           "functions": [
@@ -109,7 +109,7 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:elemental_head",
           "weight": 2,
           "functions": [
@@ -130,7 +130,7 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:elemental_chest",
           "weight": 2,
           "functions": [
@@ -151,7 +151,7 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:elemental_legs",
           "weight": 2,
           "functions": [
@@ -172,7 +172,7 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:elemental_feet",
           "weight": 2,
           "functions": [
@@ -193,7 +193,7 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:staff_aqua",
           "weight": 1,
           "functions": [
@@ -214,7 +214,7 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:kelp_head",
           "weight": 1,
           "functions": [
@@ -235,7 +235,7 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:kelp_chest",
           "weight": 1,
           "functions": [
@@ -256,7 +256,7 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:kelp_legs",
           "weight": 1,
           "functions": [
@@ -277,7 +277,7 @@
           ]
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "elemental_wizards_rpg:kelp_feet",
           "weight": 1,
           "functions": [
@@ -321,7 +321,7 @@
           "name": "spell_engine:spell_scroll",
           "functions": [
             {
-              "function": "more_rpg_classes:specific_spell_scroll_pool",
+              "function": "mrpg_lib:specific_spell_scroll_pool",
               "spell_pools": ["#elemental_wizards_rpg:spell_scroll/aqua"],
               "spell_tier_min": 2,
               "spell_tier_max": 3,
@@ -343,43 +343,43 @@
           "weight": 8
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "additional_rpg_jewelry:aquamarine_ring"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "additional_rpg_jewelry:aquamarine_necklace"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "relics_rpgs:lesser_use_spell_power"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "relics_rpgs:lesser_use_spell_haste"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "relics_rpgs:lesser_proc_spell_crit"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "relics_rpgs:lesser_proc_crit_damage"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "more_relics:lesser_proc_air_water"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "loot_n_explore:sweet_chilli"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "loot_n_explore:enchanted_ale"
         },
         {
-          "type": "more_rpg_classes:conditional_item",
+          "type": "mrpg_lib:conditional_item",
           "item": "loot_n_explore:watermelon_drink"
         }
       ]

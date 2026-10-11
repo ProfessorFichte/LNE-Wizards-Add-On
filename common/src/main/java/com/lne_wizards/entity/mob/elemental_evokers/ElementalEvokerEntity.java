@@ -1,6 +1,7 @@
 package com.lne_wizards.entity.mob.elemental_evokers;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
@@ -16,17 +17,26 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.more_rpg_classes.entity.ISpellCasterEntity;
-import net.more_rpg_classes.entity.goal.BackAwayGoal;
-import net.more_rpg_classes.entity.goal.IConditionalFleeEntity;
-import net.more_rpg_classes.entity.goal.LowHealthFleeGoal;
-import net.more_rpg_classes.entity.goal.MobSpellCastGoal;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
+import com.mrpg_lib.entity.ISpellCasterEntity;
+import com.mrpg_lib.entity.config.EntityAttributeApplier;
+import com.mrpg_lib.entity.config.EntityAttributeConfig;
+import com.mrpg_lib.entity.goal.BackAwayGoal;
+import com.mrpg_lib.entity.goal.IConditionalFleeEntity;
+import com.mrpg_lib.entity.goal.LowHealthFleeGoal;
+import com.mrpg_lib.compat.spell_engine.MobSpellCastGoal;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public abstract class ElementalEvokerEntity extends EvokerEntity implements ISpellCasterEntity, IConditionalFleeEntity {
+    public static final String WAND_FALLBACK = "minecraft:stick";
+    public static final double WAND_SPELL_POWER = 5.0;
 
     private List<MobSpellCastGoal> mobCastGoals;
 
@@ -73,29 +83,17 @@ public abstract class ElementalEvokerEntity extends EvokerEntity implements ISpe
     @Override
     public void startSpellCast(int ticks) {
         this.setSpell(net.minecraft.entity.mob.SpellcastingIllagerEntity.Spell.SUMMON_VEX);
-        try {
-            java.lang.reflect.Field spellTicksField = net.minecraft.entity.mob.SpellcastingIllagerEntity.class
-                    .getDeclaredField("spellTicks");
-            spellTicksField.setAccessible(true);
-            spellTicksField.setInt(this, ticks);
-        } catch (Exception ignored) {
-        }
+        this.spellTicks = ticks;
     }
 
     @Override
     public void stopSpellCast() {
         this.setSpell(net.minecraft.entity.mob.SpellcastingIllagerEntity.Spell.NONE);
-        try {
-            java.lang.reflect.Field spellTicksField = net.minecraft.entity.mob.SpellcastingIllagerEntity.class
-                    .getDeclaredField("spellTicks");
-            spellTicksField.setAccessible(true);
-            spellTicksField.setInt(this, 0);
-        } catch (Exception ignored) {
-        }
+        this.spellTicks = 0;
     }
 
     @Override
-    public boolean isCastingSpell() {
+    public boolean isMobCasting() {
         return this.getSpell() != net.minecraft.entity.mob.SpellcastingIllagerEntity.Spell.NONE;
     }
 
@@ -105,21 +103,13 @@ public abstract class ElementalEvokerEntity extends EvokerEntity implements ISpe
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        for (MobSpellCastGoal goal : getMobCastGoals()) {
-            goal.updateCooldown();
-        }
-    }
-
-    @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new LowHealthFleeGoal<>(this));
         this.goalSelector.add(2, new BackAwayGoal<>(this, getFleeDistance(), 1.2));
 
-        MobSpellCastGoal primary   = new MobSpellCastGoal(this, getPrimarySpell(),    getMobCastGoals());
-        MobSpellCastGoal secondary = new MobSpellCastGoal(this, getSecondarySpells(), getMobCastGoals());
+        MobSpellCastGoal primary   = new MobSpellCastGoal(this, getPrimarySpell(),    getMobCastGoals()).withAnimations(true);
+        MobSpellCastGoal secondary = new MobSpellCastGoal(this, getSecondarySpells(), getMobCastGoals()).withAnimations(true);
         this.goalSelector.add(3, secondary);
         this.goalSelector.add(4, primary);
         getMobCastGoals().add(primary);
@@ -131,6 +121,31 @@ public abstract class ElementalEvokerEntity extends EvokerEntity implements ISpe
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, MerchantEntity.class, false));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
+    }
+
+    @Nullable
+    @Override
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
+        EntityData data = super.initialize(world, difficulty, spawnReason, entityData);
+        EntityAttributeApplier.apply(this,
+                com.lne_wizards.LNE_Wizards_Mod.entityAttributeConfig != null ? com.lne_wizards.LNE_Wizards_Mod.entityAttributeConfig.value : null,
+                withWand(spellPowerAttributes(), getWandItemId()));
+        return data;
+    }
+
+    protected EntityAttributeConfig.Entry spellPowerAttributes() {
+        return new EntityAttributeConfig.Entry();
+    }
+
+    public static double spellPowerBase(double totalSpellPower) {
+        return totalSpellPower - WAND_SPELL_POWER;
+    }
+
+    public static EntityAttributeConfig.Entry withWand(EntityAttributeConfig.Entry entry, Identifier wandId) {
+        return entry.setEquipment(EquipmentSlot.MAINHAND, EntityAttributeConfig.EquipmentValue.of(wandId.toString())
+                .requiresAnyMod(wandId.getNamespace())
+                .fallback(WAND_FALLBACK)
+                .dropChance(0.0));
     }
 
     public static DefaultAttributeContainer.Builder createElementalEvokerAttributes() {

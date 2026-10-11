@@ -10,8 +10,6 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.mob.SpellcastingIllagerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 
 public class EvokerCastingWandFeatureRenderer extends FeatureRenderer<SpellcastingIllagerEntity, IllagerEntityModel<SpellcastingIllagerEntity>> {
@@ -32,8 +30,8 @@ public class EvokerCastingWandFeatureRenderer extends FeatureRenderer<Spellcasti
 
         if (!(entity instanceof ElementalEvokerEntity evoker) || !evoker.isSpellcasting()) return;
 
-        Identifier wandId = evoker.getWandItemId();
-        if (!Registries.ITEM.containsId(wandId)) return;
+        ItemStack wand = evoker.getMainHandStack();
+        if (wand.isEmpty()) return;
 
         matrices.push();
         ((ElementalEvokerRenderer.EvokerModel) getContextModel()).getRightArm().rotate(matrices);
@@ -41,7 +39,7 @@ public class EvokerCastingWandFeatureRenderer extends FeatureRenderer<Spellcasti
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(360.0F));
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-360.0F));
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90.0F));
-        heldItemRenderer.renderItem(entity, new ItemStack(Registries.ITEM.get(wandId)),
+        heldItemRenderer.renderItem(entity, wand,
                 ModelTransformationMode.THIRD_PERSON_RIGHT_HAND, false, matrices, vertexConsumers, light);
         matrices.pop();
     }

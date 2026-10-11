@@ -37,6 +37,10 @@ configurations {
 }
 
 repositories {
+    mavenLocal {
+        content { excludeModule('maven.modrinth', 'more-rpg-library') }
+    }
+
     maven { url 'https://maven.fabricmc.net' }
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
@@ -56,8 +60,6 @@ repositories {
         url = 'https://maven.ladysnake.org/releases'
     }
     maven { url 'https://maven.wispforest.io/releases' }
-
-    mavenLocal()
 }
 
 dependencies {
@@ -83,7 +85,7 @@ dependencies {
     // runtime cannot start. Dev-classpath only - not shipped, not in the mod manifests.
 
     ///OPTIONAL
-    modImplementation("maven.modrinth:loot-n-explore:${project.loot_n_explore_version}") { transitive = false }
+    modCompileOnly("maven.modrinth:loot-n-explore:${project.loot_n_explore_version}") { transitive = false }
     modImplementation("maven.modrinth:elemental-wizards-rpg:${project.elemental_wizards_version}-${platform}") { transitive = false }
 
     // Trinkets
@@ -162,6 +164,9 @@ publishMods {
         minecraftVersions.add(project.minecraft_version)
         requires { slug = "spell-engine" }
         requires { slug = "spell-power" }
+        requires { slug = "more-rpg-library" }
+        optional { slug = "loot-n-explore" }
+        optional { slug = "elemental-wizards-rpg" }
     }
 
     github {

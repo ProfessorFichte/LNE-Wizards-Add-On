@@ -6,9 +6,11 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.mob.EvokerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.more_rpg_classes.custom.MoreSpellSchools;
+import com.mrpg_lib.compat.spell_power.MoreSpellSchools;
+import com.mrpg_lib.entity.config.EntityAttributeConfig;
 
 public class WaterEvokerEntity extends ElementalEvokerEntity {
+    public static final Identifier WAND = Identifier.of("elemental_wizards_rpg", "wand_aqua");
 
     public WaterEvokerEntity(EntityType<? extends EvokerEntity> entityType, World world) {
         super(entityType, world);
@@ -26,7 +28,7 @@ public class WaterEvokerEntity extends ElementalEvokerEntity {
 
     @Override
     public Identifier getWandItemId() {
-        return Identifier.of("elemental_wizards_rpg", "wand_aqua");
+        return WAND;
     }
 
     @Override
@@ -35,6 +37,12 @@ public class WaterEvokerEntity extends ElementalEvokerEntity {
         if (this.isSubmergedInWater()) {
             this.setAir(this.getMaxAir());
         }
+    }
+
+    @Override
+    protected EntityAttributeConfig.Entry spellPowerAttributes() {
+        return new EntityAttributeConfig.Entry()
+                .set(MoreSpellSchools.WATER.attributeEntry.getIdAsString(), spellPowerBase(LNE_Wizards_Mod.tweaksConfig.value.elemental_evoker_default_spell_power), 1.0, 1.0);
     }
 
     public static DefaultAttributeContainer.Builder createWaterEvokerAttributes() {

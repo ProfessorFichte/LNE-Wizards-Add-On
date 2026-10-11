@@ -1,6 +1,8 @@
 package com.lne_wizards.item;
 
-import more_rpg_loot.item.Group;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.spell_engine.Platform;
 import net.minecraft.client.render.entity.EvokerEntityRenderer;
 import net.minecraft.entity.mob.EvokerEntity;
@@ -11,8 +13,8 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import net.more_rpg_classes.custom.MoreSpellSchools;
-import net.more_rpg_classes.custom.MrpgLibSpells;
+import com.mrpg_lib.compat.spell_power.MoreSpellSchools;
+import com.mrpg_lib.compat.spell_engine.MrpgLibSpells;
 import net.spell_engine.rpg_series.config.AttributeModifier;
 import net.spell_engine.rpg_series.config.WeaponConfig;
 import net.spell_engine.api.spell.container.SpellContainers;
@@ -30,6 +32,7 @@ import static com.lne_wizards.LNE_Wizards_Mod.tweaksConfig;
 
 public class WeaponRegister {
     public static final ArrayList<Weapon.Entry> entries = new ArrayList<>();
+    private static final RegistryKey<ItemGroup> LOOT_N_EXPLORE_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of("loot_n_explore", "loot.general"));
 
     private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Weapon.Factory factory, WeaponConfig defaults, Equipment.WeaponType type) {
         var entry = new Weapon.Entry(MOD_ID, name, material, factory, defaults, type);
@@ -61,9 +64,6 @@ public class WeaponRegister {
     private static final float staffAttackSpeed = -3F;
     private static final float staffSpellPower = 8F;
 
-    public static Identifier rimefrost = MrpgLibSpells.rimefrost.id();
-    public static Identifier pyromaniac = MrpgLibSpells.pyromaniac.id();
-    public static Identifier arcane_precision = MrpgLibSpells.arcane_precision.id();
     public static Identifier water_flow = MrpgLibSpells.water_flow.id();
     public static Identifier obsidian_shards = MrpgLibSpells.obsidian_shards.id();
     public static Identifier zephyrs_speed = MrpgLibSpells.zephyrs_speed.id();
@@ -74,36 +74,42 @@ public class WeaponRegister {
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.ICE)))
                     .translatedName("Everfrost Staff")
                     .attribute(AttributeModifier.bonus(SpellSchools.FROST.id, staffSpellPower))
-                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(rimefrost));
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpell("wizards:frostbolt"))
+                    .withAdditionalSpell(MrpgLibSpells.rimefrost.id().toString());
             staff("wither_staff_fire",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.BONE)))
                     .translatedName("Netherflame Staff")
                     .attribute(AttributeModifier.bonus(SpellSchools.FIRE.id, staffSpellPower))
-                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(pyromaniac));
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpell("wizards:fire_blast"))
+                    .withAdditionalSpell(MrpgLibSpells.pyromaniac.id().toString());
             staff("ender_dragon_staff_arcane",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.AMETHYST_SHARD)))
                     .translatedName("Arcane Dragon Staff")
                     .attribute(AttributeModifier.bonus(SpellSchools.ARCANE.id, staffSpellPower))
-                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(arcane_precision));
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpell("wizards:arcane_blast"))
+                    .withAdditionalSpell(MrpgLibSpells.arcane_precision.id().toString());
         }
         if (!tweaksConfig.value.disable_special_lne_weapons && Platform.util().isModLoaded("elemental_wizards_rpg")) {
             staff("elder_guardian_staff_aqua",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.PRISMARINE_SHARD)))
                     .translatedName("Tidecaller's Staff")
                     .attribute(AttributeModifier.bonus(MoreSpellSchools.WATER.id, staffSpellPower))
-                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(water_flow));
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpell("elemental_wizards_rpg:aqua_water_whip"))
+                    .withAdditionalSpell(MrpgLibSpells.water_flow.id().toString());
             staff("wither_staff_terra",
-                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.BONE)))
+                    Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.OBSIDIAN)))
                     .translatedName("Seismic Staff")
                     .attribute(AttributeModifier.bonus(MoreSpellSchools.EARTH.id, staffSpellPower))
-                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(obsidian_shards));
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpell("elemental_wizards_rpg:terra_stone_spear"))
+                    .withAdditionalSpell(MrpgLibSpells.obsidian_shards.id().toString());
             staff("ender_dragon_staff_wind",
                     Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.AMETHYST_SHARD)))
                     .translatedName("Zephyrwing Staff")
                     .attribute(AttributeModifier.bonus(MoreSpellSchools.AIR.id, staffSpellPower))
-                    .spellContainer(SpellContainers.forMagicWeapon().withSpellId(zephyrs_speed));
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpell("elemental_wizards_rpg:wind_air_cutter"))
+                    .withAdditionalSpell(MrpgLibSpells.zephyrs_speed.id().toString());
         }
         entries.forEach(entry -> entry.rarity = Rarity.RARE);
-        Weapon.register(configs, entries, Group.RPG_LOOT_KEY);
+        Weapon.register(configs, entries, LOOT_N_EXPLORE_GROUP);
     }
 }

@@ -11,10 +11,10 @@
         "ticks": 8
       },
       "animation": {
-        "id": "more_rpg_classes:left_handed_channeling"
+        "id": "mrpg_lib:left_handed_channeling"
       },
       "sound": {
-        "id": "more_rpg_classes:frost_crackle_long",
+        "id": "mrpg_lib:frost_crackle_long",
         "volume": 1.3
       },
       "particles": [
@@ -115,7 +115,7 @@
         ]
       },
       "sound": {
-        "id": "more_rpg_classes:frost_crackle",
+        "id": "mrpg_lib:frost_crackle",
         "volume": 0.4
       }
     },
@@ -123,7 +123,7 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "more_rpg_classes:frosted",
+          "effect_id": "mrpg_lib:frosted",
           "duration": 5.0,
           "amplifier": 1,
           "amplifier_cap": 5,

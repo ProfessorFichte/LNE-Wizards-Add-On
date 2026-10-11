@@ -11,15 +11,15 @@
         "ticks": 15
       },
       "animation": {
-        "id": "more_rpg_classes:floating_spawn_channel"
+        "id": "mrpg_lib:floating_spawn_channel"
       },
       "movement_speed": 1.0,
       "sound": {
-        "id": "more_rpg_classes:water_bubbles"
+        "id": "mrpg_lib:water_bubbles"
       },
       "particles": [
         {
-          "id": "more_rpg_classes:bubble",
+          "id": "mrpg_lib:bubble",
           "appearance": {},
           "batch": {
             "count": 1.0,
@@ -59,7 +59,7 @@
               }
             },
             {
-              "id": "more_rpg_classes:bubble",
+              "id": "mrpg_lib:bubble",
               "appearance": {},
               "batch": {
                 "count": 50.0,
@@ -81,7 +81,7 @@
           "light_level": 8,
           "particles": [
             {
-              "id": "more_rpg_classes:bubble",
+              "id": "mrpg_lib:bubble",
               "appearance": {},
               "batch": {
                 "count": 1.0,
@@ -297,7 +297,7 @@
           "visuals": {
             "particles": [
               {
-                "id": "more_rpg_classes:bubble",
+                "id": "mrpg_lib:bubble",
                 "appearance": {},
                 "batch": {
                   "count": 10.0,
@@ -358,7 +358,7 @@
       "visuals": {
         "particles": [
           {
-            "id": "more_rpg_classes:bubble_pop",
+            "id": "mrpg_lib:bubble_pop",
             "appearance": {},
             "batch": {
               "count": 10.0,
@@ -369,7 +369,7 @@
             }
           },
           {
-            "id": "more_rpg_classes:bubble",
+            "id": "mrpg_lib:bubble",
             "appearance": {},
             "batch": {
               "count": 10.0,
@@ -382,7 +382,7 @@
         ]
       },
       "sound": {
-        "id": "more_rpg_classes:water_bubble_explode",
+        "id": "mrpg_lib:water_bubble_explode",
         "volume": 2.0
       }
     },
@@ -391,7 +391,7 @@
         {
           "conditions": [
             {
-              "entity_type": "#more_rpg_classes:resistant_to_water"
+              "entity_type": "#mrpg_lib:resistant_to_water"
             }
           ],
           "execute": "DENY"
@@ -400,7 +400,7 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "more_rpg_classes:soaked",
+          "effect_id": "mrpg_lib:soaked",
           "duration": 4.0,
           "amplifier": 1
         }
@@ -416,7 +416,7 @@
       "visuals": {
         "particles": [
           {
-            "id": "more_rpg_classes:water_heal",
+            "id": "mrpg_lib:water_heal",
             "appearance": {},
             "batch": {
               "count": 10.0,
@@ -442,7 +442,7 @@
       "duration": 32.0
     },
     "item": {
-      "id": "more_rpg_classes:aqua_stone"
+      "id": "mrpg_lib:aqua_stone"
     }
   }
 }
