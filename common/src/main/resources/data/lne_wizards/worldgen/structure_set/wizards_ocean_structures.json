@@ -12,7 +12,7 @@
   "placement": {
     "exclusion_zone": {
       "other_set": "minecraft:ocean_monuments",
-      "chunk_count": 15
+      "chunk_count": 4
     },
     "type": "minecraft:random_spread",
     "spacing": 40,

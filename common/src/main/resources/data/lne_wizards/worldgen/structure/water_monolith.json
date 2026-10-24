@@ -1,7 +1,7 @@
 {
   "type": "minecraft:jigsaw",
   "start_pool": "lne_wizards:water_monolith",
-  "biomes": "#lne_wizards:has_structure/wizards_water_tower",
+  "biomes": "#lne_wizards:has_structure/wizards_water_monolith",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin",
   "size": 1,
