@@ -147,7 +147,7 @@ publishMods {
         server = true
         changelogType = "markdown"
         requires("spell-engine", "spell-power", "more-rpg-library")
-        optional("loot-n-explore", "elemental-wizards-rpg")
+        optional("loot-n-explore", "elemental-wizards-rpg-class")
     }
 
     modrinth {
