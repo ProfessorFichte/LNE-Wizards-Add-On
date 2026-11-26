@@ -2,13 +2,15 @@
 	"schemaVersion": 1,
 	"id": "lne_wizards",
 	"version": "${version}",
-	"name": "L&E Wizards-Add On",
+	"name": "LNE Wizards Add-On",
 	"description": "Loot & Explore Add-On with Wizards RPG-Series Content.",
 	"authors": [
 		"Fichte"
 	],
 	"contact": {
-		"sources": "https://github.com/ProfessorFichte/LNE-Wizards-Add-On"
+		"homepage": "https://modrinth.com/mod/lne-wizards",
+		"sources": "https://github.com/ProfessorFichte/LNE-Wizards-Add-On",
+		"issues": "https://github.com/ProfessorFichte/LNE-Wizards-Add-On/issues"
 	},
 	"license": "ARR",
 	"icon": "icon.png",
@@ -30,13 +32,23 @@
 	"depends": {
 		"fabricloader": ">=${fabric_loader_compat_version}",
 		"minecraft": "~1.21",
-		"java": ">=17",
+		"java": ">=21",
 		"fabric-api": "*",
 		"spell_engine": ">=${spell_engine_version}",
-		"mrpg_lib": ">=${more_rpg_library_version}"
+		"mrpg_lib": ">=${more_rpg_library_version}",
+		"wizards": ">=${wizards_version}"
 	},
 	"suggests": {
-		"loot_n_explore": ">=1.0.24-1.21.1",
+		"loot_n_explore": ">=${loot_n_explore_version}",
 		"elemental_wizards_rpg": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/AShKd5XrTu",
+				"modmenu.kofi": "https://ko-fi.com/fichteee",
+				"modmenu.modrinth": "https://modrinth.com/mod/lne-wizards"
+			}
+		}
 	}
 }

@@ -37,10 +37,6 @@ configurations {
 }
 
 repositories {
-    mavenLocal {
-        content { excludeModule('maven.modrinth', 'more-rpg-library') }
-    }
-
     maven { url 'https://maven.fabricmc.net' }
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
@@ -85,7 +81,6 @@ dependencies {
     // runtime cannot start. Dev-classpath only - not shipped, not in the mod manifests.
 
     ///OPTIONAL
-    modCompileOnly("maven.modrinth:loot-n-explore:${project.loot_n_explore_version}") { transitive = false }
     modImplementation("maven.modrinth:elemental-wizards-rpg:${project.elemental_wizards_version}-${platform}") { transitive = false }
 
     // Trinkets
@@ -118,20 +113,17 @@ def changelog_last_section() {
     if (!changelogFile.exists()) {
         return "No changelog available"
     }
-
     def content = changelogFile.text
-    def sections = content.split(/(?m)(?=^# )/)
-
-    // Return the first section (most recent) after the split
-    // Remove the first empty element if it exists
-    def recentSection = sections.find { it.trim().startsWith('#') }
-    return recentSection ?: "No changelog available"
+    def releases = content.split(/(?m)(?=^## \[)/).findAll { it.startsWith('## [') && !it.startsWith('## [Unreleased]') }
+    if (releases) {
+        return releases.first().replaceAll(/(?m)^\[[^\]]+\]: .*$/, '').trim()
+    }
+    return "No changelog available"
 }
 
 // Publishing configuration
 def releaseTypeName = (project.findProperty('release_type') ?: 'beta').toString()
 
-// Local convenience alias -- CI invokes the per-destination publish tasks directly.
 tasks.register("publishMod") {
     dependsOn(build)
     finalizedBy(tasks.named("publishMods"))
@@ -139,7 +131,7 @@ tasks.register("publishMod") {
 
 publishMods {
     file = remapJar.archiveFile
-    changelog = providers.provider { changelog_last_section() }
+    changelog = providers.environmentVariable("MOD_CHANGELOG").orElse(providers.provider { changelog_last_section() })
     type = releaseTypeName == "release" ? me.modmuss50.mpp.ReleaseType.STABLE
             : releaseTypeName == "alpha" ? me.modmuss50.mpp.ReleaseType.ALPHA
             : me.modmuss50.mpp.ReleaseType.BETA
@@ -154,7 +146,8 @@ publishMods {
         client = true
         server = true
         changelogType = "markdown"
-        requires("spell-engine", "spell-power")
+        requires("spell-engine", "spell-power", "more-rpg-library")
+        optional("loot-n-explore", "elemental-wizards-rpg")
     }
 
     modrinth {
@@ -178,8 +171,6 @@ publishMods {
     }
 }
 
-// GitHub release last: a failed mod upload aborts the build before the release exists.
-// Ordering only -- unselected tasks are ignored. Must sit after the publishMods block.
 tasks.named("publishGithub") {
     mustRunAfter(tasks.named("publishCurseforge"), tasks.named("publishModrinth"))
 }

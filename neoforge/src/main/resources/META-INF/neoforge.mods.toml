@@ -1,12 +1,13 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
-#issueTrackerURL = ""
+issueTrackerURL = "https://github.com/ProfessorFichte/LNE-Wizards-Add-On/issues"
 license = "ARR"
 
 [[mods]]
 modId = "lne_wizards"
 version = "${version}"
-displayName = "LNE Wizards"
+displayName = "LNE Wizards Add-On"
+displayURL = "https://modrinth.com/mod/lne-wizards"
 authors = "Fichte"
 description = '''
 Loot & Explore Add-On with Wizards RPG-Series Content.
@@ -31,7 +32,7 @@ side = "BOTH"
 modId = "spell_engine"
 type = "required"
 versionRange = "[${spell_engine_version},)"
-ordering = "BEFORE"
+ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.lne_wizards]]
@@ -50,3 +51,10 @@ side = "BOTH"
 
 [[mixins]]
 config = "lne_wizards.mixins.json"
+
+[[dependencies.lne_wizards]]
+modId = "loot_n_explore"
+type = "optional"
+versionRange = "[${loot_n_explore_version},)"
+ordering = "NONE"
+side = "BOTH"

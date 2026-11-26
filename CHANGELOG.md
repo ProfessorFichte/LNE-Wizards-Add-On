@@ -1,7 +1,32 @@
-# 1.3.1 - 1.21.1
+# Changelog
+
+All notable changes to LNE Wizards Add-On are documented in this file.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+## [1.3.2+1.21.1]
+
+### Changed
+
+- Works with Loot & Explore 1.1.0 (the 1.21.1 rewrite) on Fabric and NeoForge
+- Needs More RPG Library 2.8.4 or newer
+- Loot tables are now made by datagen instead of hand-written files, the loot stays the same
+### Fixed
+
+- Elemental Evokers in the wizard towers no longer despawn
+- No more recipe errors in the NeoForge log for the Elemental Wizards staff recipes when Elemental Wizards is not installed
+- Tier 5 chests can drop the Spell Trance relic from Relics RPG again, and Fire tier 3 chests the Arcane Fire relic, the item ids were wrong
+- Terra, Aqua and Storm Stones in the item frames of the Earth, Water and Wind towers show up again (old More RPG Library ids)
+
+## [1.3.1+1.21.1]
+
+### Changed
+
 - Small Fixes for the Water Wizard related Structures
 
-# 1.3.0 - 1.21.1
+## [1.3.0+1.21.1]
+
+### Changed
+
 - Adopt Spell Engine 1.10.9 & More RPG Library 2.8.0
 - **BREAKING for modpack/datapack developers:** More RPG Library's namespace was renamed `more_rpg_classes` -> `mrpg_lib` (and its advancement root moved to `mrpg_lib:root`). If you have any data files, loot tables, tags or advancements that reference the old `more_rpg_classes:`/`more_rpg_content:` ids from this mod or MRPGL, update them to `mrpg_lib:`
 - Updated internal advancement parents, mod dependency declarations (fabric.mod.json, neoforge.mods.toml)
@@ -12,47 +37,85 @@
 - default base spell power is now -2.5 so that, together with their wand's +5, they keep a total spell power of 2.5
 - only show their Spell Engine spell visuals while casting, without the vanilla Evoker spell particles
 
-# 1.2.1 - 1.21.1
+## [1.2.1+1.21.1]
+
+### Changed
+
 - Drop Forgified Fabric API (FFAPI) as a required dependency
 
-# 1.2.0 - 1.21.1
+## [1.2.0+1.21.1]
+
+### Changed
+
 - Adopt Spell Engine 1.10 - Thanks Daedelus for the PR!
 
-# 1.1.4 - 1.21.1
-- fixed the issue, where Elemental Wizards is not installed but the spell books get created with only the additional spells
+## [1.1.4+1.21.1]
+
+### Changed
+
 - Converted Explosive Bubbles to a Spell Cloud instead of a custom Entity
 - Flamerush now uses the Velocity Impact of Spell Engine for the Dash
 
-# 1.1.3 - 1.21.1
-- Adapt to Spell Engine 1.9.10+ API Changes
+### Fixed
+
+- fixed the issue, where Elemental Wizards is not installed but the spell books get created with only the additional spells
+
+## [1.1.3+1.21.1]
+
 **Balancing & Internal Changes:**
+
+### Added
+
+- Added a new magical orb blocks that can be found in LNE Wizard's Structures!
+- Add the Elemental Evokers to the "illager" Entity Type Tag
+
+### Changed
+
+- Adapt to Spell Engine 1.9.10+ API Changes
 - Elemental Evokers can now also use the Tier 2 Spell Expansion Wizard Spells
 - nerfed default spell power from elemental evokers from 6.0 -> 2.5
 - changed casting spell pool-spell tag files & structure from the elemental evokers
-- Removed Updraft and added Aeroblast to the AirEvoker's secondary spell pool
-- Added a new magical orb blocks that can be found in LNE Wizard's Structures!
 - They provide you a long-lasting buff for the according spell power
-- Add the Elemental Evokers to the "illager" Entity Type Tag
 
-# 1.1.2 - 1.21.1
+### Removed
+
+- Removed Updraft and added Aeroblast to the AirEvoker's secondary spell pool
+
+## [1.1.2+1.21.1]
+
+### Changed
+
 - Elemental Evokers stopped casting spells and ran away when they got hit, this was fixed
 - Overall improved the fleeing goals of the Elemental Evokers, to stay in safe distance from the attacker
 
-# 1.1.1 - 1.21.1
-- fixed crash due to elemental evokers ticking
+## [1.1.1+1.21.1]
+
+### Added
+
 - added the damage number tooltip to the Aeroburst Spell
 
-# 1.1.0 - 1.21.1
+### Fixed
+
+- fixed crash due to elemental evokers ticking
+
+## [1.1.0+1.21.1]
+
 **Update to use Spell Engine 1.9.0**
+**New Content**
+
+### Added
+
+- Added a new T5 Extra Spell for the Earth Wizard: Rock Crash (A Giant Meteor Projectile that crashes in the ground)
+- Added 6x Elemental Evoker MobEntities
+
+### Changed
+
 - DISCLAIMER: All spell books and spell scrolls will be reset, due to major API changes.
 - Ray of Frost, Flamerush & Falling Star are now Tier 5 Spells, they got slightly buffed
 - These Spells can now also be learned in the Spell Binding Table
 - Moved the Spells Aeroblast & Explosive Bubbles from Elemental Wizards to this Mod
 - Reworked Explosive Bubbles, its now a channeled spell, that spawns Bubble Entities that Explode on Impact
 - Moved all the structures from loot_n_explore to lne_wizards, so it's clearer that these structures come from this add-on
-**New Content**
-- Added a new T5 Extra Spell for the Earth Wizard: Rock Crash (A Giant Meteor Projectile that crashes in the ground)
-- Added 6x Elemental Evoker MobEntities
 - They are able to cast two Spells from the Wizards and Elemental Wizards Weapons & Spell Books according to their element
 - You now have to fight them, in the LNE-Wizard themed structures!
 - The primary spell that these evokers can cast are hard-coded weapon skills from the elemental wands & staffs
@@ -61,22 +124,43 @@
 - For technical info how these spell casting mobs work, take a look at the More RPG Library Readme!
 - The Evokers can also spawn in Raid's, this can be turned off in the tweaks config
 
-# 1.0.8 - 1.21.1
+## [1.0.8+1.21.1]
+
+### Changed
+
 - Update Staff Spell Power
 
-# 1.0.7 - 1.21.1
+## [1.0.7+1.21.1]
+
+### Added
+
+- Add 1 new Earth Wizard Tower Variant (Builder: Maxi - Thanks!)
+
+### Changed
+
 - Move to Architectury Enviroment for Multiloader
 - NeoForge Beta!
-- Add 1 new Earth Wizard Tower Variant (Builder: Maxi - Thanks!)
 - Air Wizard Tower is no longer a structure that spawns in the air
 - moved the air wizard tower to the Jungle Biome and let it spawn on the ground
 
-# 1.0.6 - 1.21.1
-- Fix Seismic Staff Wizard Item Staff tag
+## [1.0.6+1.21.1]
+
+### Added
+
 - Add LNE Staves to LNE Weapon Theme Item Tag
 
-# 1.0.5 - 1.21.1
+### Fixed
+
+- Fix Seismic Staff Wizard Item Staff tag
+
+## [1.0.5+1.21.1]
+
+### Added
+
 - Add Spell Datagen
+
+### Changed
+
 - Change Flame Rush Spell
 - it's now a small dash that leaves a damaging flame cloud trail, also you still receive the buff
 - improved Flame Rush's Spell Texture
@@ -84,27 +168,45 @@
 - Ray of Frost now can stack the Frosted until the target is Frozen Solid 
 - Increase Arcane Starfall Area Impact Range & slightly increase damage
 
-# 1.0.4 - 1.21.1
+## [1.0.4+1.21.1]
+
+### Changed
+
 - Flame Rush, Ray of Frost & Starfall are now a T4 spell
 - they can now also be looted outside the classes structure
 
-# 1.0.3 - 1.21.1
+## [1.0.3+1.21.1]
+
+### Changed
+
 - Spell Engine 1.7
 - Flame Rush Effect now does not burn nearby enemies (was too unbalanced)
 
-# 1.0.2 - 1.21.1
+## [1.0.2+1.21.1]
+
+### Changed
+
 - Update License
 - Update Mod Icon
 
-# 1.0.1 - 1.21.1
-- fix some recipes
+## [1.0.1+1.21.1]
+
+### Changed
+
 - pyromancers training Passive was renamed to Pyromaniac
 - The Passive was changed to attacking burning targets, the chance was reduced, cooldown reduction nerfed, but additional damage was added
 - Flamerush was changed, it now also damages and burns targets on release, cast time was nerfed
 
-# 1.0.0 - 1.21.1
-# Official 1.21.1 Release!
-# CHANGES
+### Fixed
+
+- fix some recipes
+
+## [1.0.0+1.21.1]
+
+### Changed
+
+**Official 1.21.1 Release!**
+
 - Passive Spells For the Weapons are now handled with the new Spell Engine Passive API
 - The Class related structures will now contain spell scrolls in their loot chests
 - Made some small loot table tweaks
