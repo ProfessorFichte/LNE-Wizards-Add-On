@@ -18,7 +18,7 @@
   "neoforge:conditions": [
     {
       "type": "neoforge:and",
-      "conditions": [
+      "values": [
         {
           "type": "neoforge:mod_loaded",
           "modid": "loot_n_explore"

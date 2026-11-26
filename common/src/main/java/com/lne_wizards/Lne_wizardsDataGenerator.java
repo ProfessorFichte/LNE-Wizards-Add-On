@@ -1,6 +1,7 @@
 package com.lne_wizards;
 
 import com.lne_wizards.datagen.LangGenerator;
+import com.lne_wizards.datagen.ModLootTableProvider;
 import com.lne_wizards.datagen.ModEntityTagProvider;
 import com.lne_wizards.datagen.WeaponAttributesGenerator;
 import com.lne_wizards.datagen.ModModelProvider;
@@ -30,6 +31,9 @@ public class Lne_wizardsDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModModelProvider::new);
 		pack.addProvider(WeaponAttributesGenerator::new);
 		pack.addProvider(ModEntityTagProvider::new);
+		pack.addProvider(ModLootTableProvider.Chests::new);
+		pack.addProvider(ModLootTableProvider.Entities::new);
+		pack.addProvider(ModLootTableProvider.Blocks::new);
 	}
 	public static class SpellGen extends SpellGenerator {
 		public SpellGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {

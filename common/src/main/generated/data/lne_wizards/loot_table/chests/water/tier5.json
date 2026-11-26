@@ -1,0 +1,251 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.75,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 26.0,
+                "min": 15.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "mrpg_lib:aqua_stone",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 7.0,
+                "min": 3.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:gold_ingot",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
+                "min": 3.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:diamond",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 3.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:prismarine_crystals",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:golden_apple"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "chance": 0.75,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 24.0,
+                "min": 13.0
+              }
+            }
+          ],
+          "item": "elemental_wizards_rpg:staff_aqua"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "chance": 0.75,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 24.0,
+                "min": 13.0
+              }
+            }
+          ],
+          "item": "elemental_wizards_rpg:kelp_head"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "chance": 0.75,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 24.0,
+                "min": 13.0
+              }
+            }
+          ],
+          "item": "elemental_wizards_rpg:kelp_chest"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "chance": 0.75,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 24.0,
+                "min": 13.0
+              }
+            }
+          ],
+          "item": "elemental_wizards_rpg:kelp_legs"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "chance": 0.75,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 24.0,
+                "min": 13.0
+              }
+            }
+          ],
+          "item": "elemental_wizards_rpg:kelp_feet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "runes:large_rune_pouch"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 4.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "blacklist_spells": [],
+              "count": 1.0,
+              "function": "mrpg_lib:specific_spell_scroll_pool",
+              "spell_pools": [
+                "#elemental_wizards_rpg:spell_scroll/aqua"
+              ],
+              "spell_tier_max": 5.0,
+              "spell_tier_min": 4.0
+            }
+          ],
+          "name": "spell_engine:spell_scroll"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "additional_rpg_jewelry:netherite_aquamarine_ring"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "additional_rpg_jewelry:netherite_aquamarine_necklace"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "relics_rpgs:greater_proc_spell_trance"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "relics_rpgs:greater_perk_spell_stun"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "loot_n_explore:sweet_chilli"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "loot_n_explore:enchanted_ale"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "loot_n_explore:watermelon_drink"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 1.0
+      }
+    }
+  ]
+}

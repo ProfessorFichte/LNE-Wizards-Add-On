@@ -41,3 +41,4 @@ replay_*.log
 
 .architectury-transformer
 /.architectury-transformer
+.cache/

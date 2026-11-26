@@ -1,0 +1,258 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.5,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 7.0,
+                "min": 3.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:gold_ingot",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 20.0,
+                "min": 10.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "runes:fire_stone",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:blaze_powder",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:diamond",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 18.0,
+                "min": 6.0
+              }
+            }
+          ],
+          "name": "wizards:staff_fire"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 18.0,
+                "min": 6.0
+              }
+            }
+          ],
+          "name": "wizards:fire_robe_head"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 18.0,
+                "min": 6.0
+              }
+            }
+          ],
+          "name": "wizards:fire_robe_chest"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 18.0,
+                "min": 6.0
+              }
+            }
+          ],
+          "name": "wizards:fire_robe_legs"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 18.0,
+                "min": 6.0
+              }
+            }
+          ],
+          "name": "wizards:fire_robe_feet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "runes:medium_rune_pouch"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 4.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:empty"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "blacklist_spells": [],
+              "count": 1.0,
+              "function": "mrpg_lib:specific_spell_scroll_pool",
+              "spell_pools": [
+                "#wizards:spell_scroll/fire"
+              ],
+              "spell_tier_max": 5.0,
+              "spell_tier_min": 3.0
+            }
+          ],
+          "name": "spell_engine:spell_scroll"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 3
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "jewelry:netherite_topaz_ring"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "jewelry:netherite_topaz_necklace"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "relics_rpgs:medium_proc_spell_power"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "relics_rpgs:medium_proc_spell_haste"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "relics_rpgs:medium_proc_fire_power"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "loot_n_explore:sweet_chilli"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "loot_n_explore:enchanted_ale"
+        },
+        {
+          "type": "mrpg_lib:conditional_item",
+          "item": "loot_n_explore:hot_chilli"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 1.0
+      }
+    }
+  ]
+}
